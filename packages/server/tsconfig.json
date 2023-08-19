@@ -1,0 +1,51 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "ts-node": {
+    "require": ["tsconfig-paths/register"],
+    "files": true
+  },
+  "tsc-alias": {
+    "verbose": false,
+    "resolveFullPaths": true
+  },
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+
+    "composite": false,
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": false,
+    "declarationMap": false,
+    "lib": ["DOM", "es2019", "esnext.asynciterable"],
+    "types": ["node", "jest"],
+
+    "baseUrl": "./src",
+    "paths": {
+      "@constants": ["./constants"],
+      "@constants/*": ["./constants/*"],
+
+      "@api": ["./api"],
+      "@api/*": ["./api/*"],
+
+      "@middlewares": ["./middlewares"],
+      "@middlewares/*": ["./middlewares/*"],
+
+      "@routers": ["./routers"],
+      "@routers/*": ["./routers/*"],
+
+      "@app": ["./app"],
+      "@app/*": ["./app/*"],
+
+      "@db": ["./db"],
+      "@db/*": ["./db/*"],
+
+      "@services": ["./services"],
+      "@services/*": ["./services/*"]
+    }
+  },
+  "files": [],
+  "include": ["src"],
+  "exclude": ["dist"]
+}

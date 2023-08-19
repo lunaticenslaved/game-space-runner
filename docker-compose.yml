@@ -1,0 +1,56 @@
+version: '3.9'
+
+volumes:
+  pgadmin-data:
+    name: 'pgadmin-data'
+
+services:
+  server:
+    container_name: prakticum-server
+    image: prakticum-server
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+      args:
+        SERVER_PORT: ${SERVER_PORT}
+    restart: always
+    ports:
+      - '${SERVER_PORT}:${SERVER_PORT}'
+    env_file:
+      - ./.env
+    networks:
+      - prakticum
+    depends_on:
+      - postgres
+    command: ./utils/wait-for.sh postgres:${POSTGRES_PORT} -- node /app/packages/server/dist/index.js
+
+  postgres:
+    container_name: prakticum-database
+    image: postgres:14
+    ports:
+      - '${POSTGRES_PORT}:${POSTGRES_PORT}'
+    env_file:
+      - ./.env
+    volumes:
+      - ./tmp/pgdata:/var/lib/postgresql/data
+    networks:
+      - prakticum
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:7.4
+    restart: always
+    env_file:
+      - ./.env
+    ports:
+      - '8080:80'
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    networks:
+      - prakticum
+
+networks:
+  prakticum:
+    driver: bridge

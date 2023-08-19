@@ -1,0 +1,21 @@
+@import '@styles/variables.scss';
+
+.textarea {
+  width: 100%;
+  border: none;
+  background: $darkPurple;
+  border: 1px solid $primaryColor;
+  border-radius: $baseBorderRadius;
+  padding: 0.3rem 0;
+  color: $white;
+  padding: 16px;
+}
+
+.textarea:focus {
+  outline: none;
+}
+
+.error {
+  border-bottom-color: $danger;
+  color: $danger;
+}
