@@ -6,7 +6,7 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
     "skipLibCheck": true,
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -22,21 +22,9 @@
     "rootDir": ".",
     "outDir": "./dist",
     "paths": {
-      "@api/*": ["./src/api/*"],
-      "@assets/*": ["./src/assets/*"],
-      "@components/*": ["./src/components/*"],
-      "@controllers/*": ["./src/controllers/*"],
-      "@core/*": ["./src/core/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@layouts/*": ["./src/layouts/*"],
-      "@pages/*": ["./src/pages/*"],
-      "@routers/*": ["./src/routers/*"],
-      "@service/*": ["./src/service/*"],
-      "@styles/*": ["./src/styles/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@public/*": ["./public/*"],
-
-      "@app": ["./src/app/index.tsx"]
+      "@shared/*": ["./app/shared/*"],
+      "@server/*": ["./app/server/*"],
+      "@client/*": ["./app/client/*"]
     }
   },
   "references": [
