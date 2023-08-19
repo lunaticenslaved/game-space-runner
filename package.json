@@ -20,7 +20,8 @@
   },
   "license": "MIT",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "packages/apps/*"
   ],
   "engines": {
     "node": ">=15"
