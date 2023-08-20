@@ -1,21 +1,20 @@
-import GenericObjectImpl from '@core/GenericObject/GenericObjectImpl';
-import PlayerImpl from '@core/Player/PlayerImpl';
-import { Keys } from '@pages/Game/types';
-import { getMovePlayerCondition } from '../../utils/getMovePlayerCondition';
-import { ROUTES } from '@routers/routes';
-import { NavigateFunction } from 'react-router-dom';
-import { getLevel } from './getLevel';
-import { Levels } from './levelsConfig';
-import { GetViewerResponse } from '@api/ViewerAPI';
-import { ControllersModel } from '@core/ControllersContext';
+import { User } from '@client/entities/user';
+
+import { GenericObject } from './generic-object';
+import { PlayerFigure } from './player-figure';
+import { Level } from './levels-config';
+import { getMovePlayerCondition } from './../utils/get-move-condition';
+import { getLevel } from './..';
+import { Keys } from './../types';
 
 export type GameLogicProps = {
-  level: Levels;
+  level: Level;
   canvas: HTMLCanvasElement;
   context: CanvasRenderingContext2D;
-  navigate: NavigateFunction;
-  viewer: GetViewerResponse;
-  controllers: ControllersModel;
+  viewer: User;
+  onWin: (level: Level) => void;
+  onLoose: (level: Level) => void;
+  onFinish: (score: number) => void;
 };
 
 const PLATFORM_SPEED = 5;
@@ -31,15 +30,17 @@ export class GameLogic {
   id = 0;
   scrollOffset = 0;
   jump = 0;
-  level: Levels;
+  level: Level;
   currentKey = '';
-  navigate: NavigateFunction;
+  onWin: GameLogicProps['onWin'] = () => null;
+  onLoose: GameLogicProps['onLoose'] = () => null;
+  onFinish: GameLogicProps['onFinish'] = () => null;
   canvas: HTMLCanvasElement;
   context: CanvasRenderingContext2D;
   finishPoint: number | undefined;
-  player: PlayerImpl | undefined;
-  finishObject: GenericObjectImpl | undefined;
-  genericObjects: GenericObjectImpl[] = [];
+  player: PlayerFigure | undefined;
+  finishObject: GenericObject | undefined;
+  genericObjects: GenericObject[] = [];
   keys: Keys = {
     right: {
       presed: false,
@@ -48,24 +49,24 @@ export class GameLogic {
       presed: false,
     },
   };
-  viewer: GetViewerResponse;
-  controllers: ControllersModel;
+  viewer: User;
 
-  constructor({ canvas, level, context, navigate, viewer, controllers }: GameLogicProps) {
+  constructor({ canvas, level, context, onWin, onLoose, onFinish, viewer }: GameLogicProps) {
     this.canvas = canvas;
     this.context = context;
     this.player = undefined;
-    this.navigate = navigate;
+    this.onWin = onWin;
+    this.onLoose = onLoose;
+    this.onFinish = onFinish;
     this.level = level;
     this.viewer = viewer;
-    this.controllers = controllers;
   }
 
   init = () => {
     this.startTime = Date.now();
 
     {
-      this.player = new PlayerImpl({
+      this.player = new PlayerFigure({
         scrollOffset: this.scrollOffset,
         canvas: this.canvas,
         context: this.context,
@@ -73,7 +74,7 @@ export class GameLogic {
       const { elements, finishPoint } = getLevel(this.context, this.level, this.canvas.height);
       this.finishPoint = finishPoint;
       this.genericObjects = elements;
-      this.finishObject = elements.find((i: GenericObjectImpl) => i.type === 'finish');
+      this.finishObject = elements.find((i: GenericObject) => i.type === 'finish');
     }
   };
 
@@ -129,9 +130,7 @@ export class GameLogic {
     if (this._getWinCondition()) {
       this.cancelAnimate();
       this.init();
-      this.navigate(ROUTES.End.path, {
-        state: { win: true, level: this.level },
-      });
+      this.onWin(this.level);
     }
 
     if (
@@ -140,9 +139,7 @@ export class GameLogic {
     ) {
       this.cancelAnimate();
       this.init();
-      this.navigate(ROUTES.End.path, {
-        state: { level: this.level },
-      });
+      this.onLoose(this.level);
     }
   };
   //@typescript-eslint/no-explicit-any
@@ -217,15 +214,7 @@ export class GameLogic {
         const timeElapsed = this.endTime - this.startTime;
         // За каждые 10 секунд прохождения игры 1000 очков
         this.score = Math.floor(1000 * (10000 / timeElapsed));
-
-        this.controllers.lead.addUser({
-          data: {
-            imgSrc: this.viewer.avatar || undefined,
-            login: this.viewer.login || this.viewer.first_name || 'Неизвестный пользователь',
-            teamwork_theTeam_score: this.score,
-          },
-        });
-
+        this.onFinish(this.score);
         return true;
       }
 
@@ -235,7 +224,7 @@ export class GameLogic {
     return false;
   };
 
-  private _moveObject = (item: GenericObjectImpl) => {
+  private _moveObject = (item: GenericObject) => {
     if (this.keys.right.presed) {
       item.position.x -= this.player!.speed * item.speedKoef;
     } else if (this.keys.left.presed && this.scrollOffset > 0) {

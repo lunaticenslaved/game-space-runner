@@ -5,7 +5,7 @@ type Position = {
 
 type GenericObjectKind = 'platform' | 'decoration' | 'finish';
 
-export type GenericObjectImplProps = {
+export type GenericObjectProps = {
   context: CanvasRenderingContext2D | null;
   x: number;
   y: number;
@@ -16,7 +16,7 @@ export type GenericObjectImplProps = {
   type?: GenericObjectKind;
 };
 
-export default class GenericObjectImpl {
+export class GenericObject {
   readonly context: CanvasRenderingContext2D | null;
   image: HTMLImageElement;
   width: number;
@@ -33,7 +33,7 @@ export default class GenericObjectImpl {
     height,
     speedKoef,
     type = 'platform',
-  }: GenericObjectImplProps) {
+  }: GenericObjectProps) {
     this.context = context;
     this.position = {
       x,

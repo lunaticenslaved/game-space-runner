@@ -1,9 +1,9 @@
-import createImage from '../../utils/createImage';
+import { createImage } from '../utils/create-image';
 import spriteStandRight from '@assets/png/spriteStandRight.png';
 import spriteStandLeft from '@assets/png/spriteStandLeft.png';
 import spriteRunRight from '@assets/png/spriteRunRight.png';
 import spriteRunLeft from '@assets/png/spriteRunLeft.png';
-import { GAME_GRAVITY } from '@pages/Game/Game';
+import { GAME_GRAVITY } from '../contants';
 
 const FRAMECUT_FOR_STAND = 59;
 const FRAMECUT_FOR_RUN = 29;
@@ -26,13 +26,13 @@ type Sprite = {
   width: number;
 };
 
-export type PlayerImplProps = {
+export type PlayerFigureProps = {
   scrollOffset: number;
   canvas: HTMLCanvasElement;
   context: CanvasRenderingContext2D | null;
 };
 
-export default class PlayerImpl {
+export class PlayerFigure {
   position: PlayerPosition;
   velocity: PlayerPosition;
   width: number;
@@ -46,7 +46,7 @@ export default class PlayerImpl {
   readonly canvas?: HTMLCanvasElement;
   scrollOffset: number;
   readonly context: CanvasRenderingContext2D | null;
-  constructor({ scrollOffset, canvas, context }: PlayerImplProps) {
+  constructor({ scrollOffset, canvas, context }: PlayerFigureProps) {
     this.context = context;
     this.scrollOffset = scrollOffset;
     this.canvas = canvas;
@@ -94,7 +94,7 @@ export default class PlayerImpl {
         this.position.x,
         this.position.y,
         this.width,
-        this.height,
+        this.height
       );
   }
 

@@ -1,32 +1,48 @@
 import { useCallback, useState } from 'react';
-import StartView from './view/StartView';
 import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '@routers/routes';
-import { levelList, LevelListType } from '@core/GameLogic/getLevel';
 
-export default function Start() {
+import { LevelListType, levelList } from '@client/entities/game';
+import { useGameNavigation } from '@client/navigation';
+import { Input } from '@client/shared/components/input';
+import { Button } from '@client/shared/components/button';
+
+import styles from './start.module.scss';
+
+export function Start() {
+  const gameNavigation = useGameNavigation();
   const [active, setActive] = useState(
-    levelList.find(l => l.id === sessionStorage.getItem('level')) || levelList[0],
+    levelList.find(l => l.id === sessionStorage.getItem('level')) || levelList[0]
   );
   const navigate = useNavigate();
-  const handleStart = useCallback(() => {
-    navigate(ROUTES.Game.path, {
-      state: { level: active.id },
-    });
-  }, [navigate, active]);
+  const startGame = useCallback(
+    () => gameNavigation.toGame({ level: active.id }),
+    [navigate, active]
+  );
 
-  const updateActive = useCallback((act: LevelListType) => {
-    document.body.dataset.level = act.id;
-    sessionStorage.setItem('level', act.id);
-    setActive(act);
+  const updateActive = useCallback((act: LevelListType | null) => {
+    const level = act || active;
+    document.body.dataset.level = level.id;
+    sessionStorage.setItem('level', level.id);
+    setActive(level);
   }, []);
+
+  // TODO добавить useSelect
+  // TODO добавить форму
+
   return (
-    <StartView
-      username="User"
-      onStart={handleStart}
-      active={active}
-      setActive={updateActive}
-      list={levelList}
-    />
+    <>
+      <h3 className={styles.title}>Привет, user</h3>
+      <p className={styles.text}>Выбери уровень и начни игру)</p>
+      <Input.Select<LevelListType>
+        label="Уровень"
+        name="level"
+        items={levelList}
+        value={active}
+        onChange={updateActive}
+      />
+      <Button className={styles.btn} onClick={startGame}>
+        Начать
+      </Button>
+    </>
   );
 }

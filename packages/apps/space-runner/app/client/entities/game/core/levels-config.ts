@@ -1,13 +1,14 @@
-import createImage from '@utils/createImage';
-import diamandSrc from '@assets/png/diamand.png';
-import { GenericObjectImplProps } from '@core/GenericObject/GenericObjectImpl';
-import getImage from './getImage';
+import diamandSrc from '@client/shared/assets/png/diamand.png';
 
-export type Levels = 'first' | 'second' | 'third';
+import { getImage } from '../utils/get-image';
+import { createImage } from '../utils/create-image';
+import { GenericObjectProps } from '../core/generic-object';
+
+export type Level = 'first' | 'second' | 'third';
 export type LevelConfigItem = {
   id: string;
   finishPoint: number;
-  items: Omit<GenericObjectImplProps, 'context'>[];
+  items: Omit<GenericObjectProps, 'context'>[];
 };
 const diamand = createImage(diamandSrc);
 

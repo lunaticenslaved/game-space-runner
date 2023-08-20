@@ -1,8 +1,13 @@
-import jump from '@assets/sounds/jump.mp3';
-import step from '@assets/sounds/step.mp3';
-import finish from '@assets/sounds/finish.mp3';
-import gameOver from '@assets/sounds/game_over.mp3';
-import createAudio from '@utils/createSound';
+import jump from '@client/shared/assets/sounds/jump.mp3';
+import step from '@client/shared/assets/sounds/step.mp3';
+import finish from '@client/shared/assets/sounds/finish.mp3';
+import gameOver from '@client/shared/assets/sounds/game_over.mp3';
+
+function createAudio(src: string) {
+  const audio = new Audio();
+  audio.src = src;
+  return audio;
+}
 
 class GameAudio {
   private jumpSound: HTMLAudioElement | undefined;
