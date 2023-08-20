@@ -1,5 +1,5 @@
-import { NavbarIcons } from './views/icons/NavbarIcons';
-import { NavbarTabs } from './views/tabs/NavbarTabs';
+import { NavbarIcons } from './views/icons/navbar-icons';
+import { NavbarTabs } from './views/tabs/navbar-tabs';
 
 export interface NavbarProps {
   view?: 'tabs' | 'icons';

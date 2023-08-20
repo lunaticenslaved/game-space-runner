@@ -7,6 +7,6 @@ export const useForumNavigation = () => {
 
   return {
     toForm: () => navigate,
-    toTopic: ({ id }: { id: number }) => navigate(generatePath(forumRoutes.topic, { id })),
+    toTopic: ({ id }: { id: number }) => navigate(generatePath(forumRoutes.topic.path, { id })),
   };
 };

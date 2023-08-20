@@ -7,9 +7,9 @@ export const useGameNavigation = () => {
 
   return {
     toGame: ({ level }: { level: string }) =>
-      navigate(generatePath(gameRoutes.root), { state: { level } }),
+      navigate(generatePath(gameRoutes.root.path), { state: { level } }),
     toGameStart: ({ level }: { level: string }) =>
-      navigate(generatePath(gameRoutes.start), { state: { level } }),
-    toGameEnd: () => navigate(generatePath(gameRoutes.end)),
+      navigate(generatePath(gameRoutes.start.path), { state: { level } }),
+    toGameEnd: () => navigate(generatePath(gameRoutes.end.path)),
   };
 };

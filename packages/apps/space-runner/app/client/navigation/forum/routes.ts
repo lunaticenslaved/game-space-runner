@@ -1,4 +1,6 @@
+import { AccessLevel } from '../types';
+
 export const forumRoutes = {
-  root: '/topics',
-  topic: '/topics/:topicId',
+  root: { path: '/topics', access: AccessLevel.Common },
+  topic: { path: '/topics/:topicId', access: AccessLevel.Common },
 };

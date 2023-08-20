@@ -1,4 +1,6 @@
+import { AccessLevel } from '../types';
+
 export const authRoutes = {
-  signIn: '/auth/sign-in',
-  signUp: '/auth/sign-up',
+  signIn: { path: '/auth/sign-in', access: AccessLevel.Public },
+  signUp: { path: '/auth/sign-up', access: AccessLevel.Public },
 };

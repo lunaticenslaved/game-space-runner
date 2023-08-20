@@ -6,7 +6,7 @@ export const useAuthNavigation = () => {
   const navigate = useNavigate();
 
   return {
-    toSignIn: () => navigate(generatePath(authRoutes.signIn)),
-    toSignUp: () => navigate(generatePath(authRoutes.signUp)),
+    toSignIn: () => navigate(generatePath(authRoutes.signIn.path)),
+    toSignUp: () => navigate(generatePath(authRoutes.signUp.path)),
   };
 };

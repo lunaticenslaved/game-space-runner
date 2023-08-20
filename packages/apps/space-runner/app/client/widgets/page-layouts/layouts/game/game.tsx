@@ -2,7 +2,7 @@ import { PropsWithChildren, Suspense, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
 import { ViewPlaceholder } from '@client/shared/components/view-placeholder';
-import { ROUTES } from '@routers/routes';
+import { routes } from '@client/navigation';
 
 import { Navbar } from '../../components/navbar';
 import styles from './game.module.scss';
@@ -30,7 +30,7 @@ type ContainerProps = PropsWithChildren;
 
 const Container = ({ children }: ContainerProps) => {
   const location = useLocation();
-  if (location.pathname === ROUTES.Game.path) {
+  if (location.pathname === routes.game.root.path) {
     return <>{children}</>;
   }
 

@@ -9,8 +9,8 @@ const TopicPage = lazy(() => import('./topic'));
 export const Router = () => {
   return (
     <Route>
-      <Route path={routes.forum.root} element={<TopicsPage />} />
-      <Route path={routes.forum.topic} element={<TopicPage />} />
+      <Route path={routes.forum.root.path} element={<TopicsPage />} />
+      <Route path={routes.forum.topic.path} element={<TopicPage />} />
     </Route>
   );
 };

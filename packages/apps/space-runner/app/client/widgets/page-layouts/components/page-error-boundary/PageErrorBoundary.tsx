@@ -2,8 +2,8 @@ import { Component, ErrorInfo, PropsWithChildren } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Location, useLocation } from 'react-router';
 
-import { ROUTES } from '@routers/routes';
-import { StyledLink } from '@components/StyledLink';
+import { routes } from '@client/navigation';
+import { StyledLink } from '@client/shared/components/styled-link';
 
 import style from './PageErrorBoundary.module.scss';
 
@@ -43,17 +43,17 @@ class PageErrorBoundaryWithRouter extends Component<
     const errorWithResponse = error as unknown as { response?: { status?: number } };
 
     if (errorWithResponse.response?.status === 500) {
-      return location.pathname === ROUTES.Error500.path ? (
+      return location.pathname === routes.error.error404.path ? (
         this.props.children
       ) : (
-        <Navigate to={ROUTES.Error500.path} />
+        <Navigate to={routes.error.error500.path} />
       );
     }
 
     return (
       <div className={style.pageErrorBoundary}>
         <h1>Something went wrong.</h1>
-        <StyledLink to={ROUTES.Home.path}>На главную</StyledLink>
+        <StyledLink to={routes.home.path}>На главную</StyledLink>
       </div>
     );
   }
