@@ -1,5 +1,5 @@
-import { GameLogic } from '@core/GameLogic/GameLogic';
-import { gameAudio } from '@core/GameAudio/GameAudio';
+import { GameLogic } from './game-logic';
+import { gameAudio } from '../app-api/audio';
 
 type TGameControlEventHandler = (game: GameLogic | null) => EventListenerOrEventListenerObject;
 

@@ -4,7 +4,7 @@ import { useClickOutside } from '@client/shared/hooks/useClickOutside';
 
 import styles from './select.module.scss';
 
-export type SelectItem = string | { id: number; title: string };
+export type SelectItem = string | { id: number | string; title: string };
 
 export type SelectProps<T extends SelectItem> = {
   value?: T | null;

@@ -1,22 +1,23 @@
-import { useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { GameLogic } from '@core/GameLogic/GameLogic';
-import { fullscreenHandler } from '@utils/fullscreen';
-import { GetViewerResponse } from '@api/ViewerAPI';
-import { useControllers } from '@core/ControllersContext';
-import { gameControlHandler } from '@utils/gameControl';
-import { useAppSelector } from '@core/StoreContext';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { GameLogic, fullscreenHandler, gameControlHandler } from '@client/entities/game';
 import styles from './game.module.scss';
+import { useViewer } from '@client/features/viewer/get-viewer';
 
 const HEADER_HEIGHT = 120;
 
 export const GamePage = () => {
   const ref = useRef<HTMLCanvasElement>(null);
   const [game, setGame] = useState<GameLogic | null>(null);
-  const navigate = useNavigate();
   const { state } = useLocation();
-  const viewer = useAppSelector(store => store.user.user);
-  const controllers = useControllers();
+  const { viewer } = useViewer();
+  const onWin = useCallback(() => {}, []);
+  const onLoose = useCallback(() => {}, []);
+  const onFinish = useCallback(() => {}, []);
+
+  if (!viewer) {
+    return null;
+  }
 
   useEffect(() => {
     if (ref.current) {
@@ -26,9 +27,10 @@ export const GamePage = () => {
         level: state?.level || sessionStorage.getItem('level') || 'first',
         canvas: ref.current,
         context: ref.current.getContext('2d')!,
-        navigate,
-        viewer: viewer as GetViewerResponse,
-        controllers: controllers,
+        viewer,
+        onWin,
+        onLoose,
+        onFinish,
       });
       setGame(logic);
       logic.init();
