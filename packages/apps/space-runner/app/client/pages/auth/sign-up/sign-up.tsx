@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
 
-import { AuthLayout } from '@client/pages/__layouts__/auth-layout';
 import { Input } from '@client/shared/components/input';
-import { AuthForm } from '@client/features/auth/components/auth-form';
+import { AuthForm } from '@client/features/auth/auth-form';
 import { useOAuthSignIn, useSignUp } from '@client/features/auth/hooks';
 import { usePasswordField, useTextField } from '@libs/validate-react';
 import { required } from '@libs/validate';
+import { AuthLayout } from '@client/widgets/page-layouts/layouts/auth';
 
 export const SignUpPage = () => {
   document.title = 'Регистрация';

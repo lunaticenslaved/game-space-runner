@@ -12,6 +12,7 @@ export default defineConfig({
     alias: {
       '@client': resolve(__dirname, './app/client'),
       '@libs': resolve(__dirname, './app/libs'),
+      '@shared': resolve(__dirname, './app/shared'),
     },
   },
 });

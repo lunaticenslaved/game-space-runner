@@ -22,7 +22,8 @@
 
     "paths": {
       "@client/*": ["./app/client/*"],
-      "@libs/*": ["./app/libs/*"]
+      "@libs/*": ["./app/libs/*"],
+      "@shared/*": ["./app/shared/*"]
     }
   },
   "include": ["app"],

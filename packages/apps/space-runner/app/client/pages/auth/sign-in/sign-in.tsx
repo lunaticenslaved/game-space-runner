@@ -1,9 +1,10 @@
 import { useMemo } from 'react';
 
-import { AuthLayout } from '@client/pages/__layouts__/auth-layout';
 import { Input } from '@client/shared/components/input';
 import { AuthForm } from '@client/features/auth/components/auth-form';
-import { useOAuthSignIn, useSignIn } from '@client/features/auth/hooks';
+import { useOAuthSignIn } from '@client/features/auth/oauth';
+import { useSignIn } from '@client/features/auth/sign-in';
+import { AuthLayout } from '@client/widgets/page-layouts/layouts/auth';
 import { usePasswordField, useTextField } from '@libs/validate-react';
 import { required } from '@libs/validate';
 

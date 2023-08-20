@@ -1,12 +1,12 @@
-import { useViewer } from '@hooks/useViewer';
+import { useGetViewer } from '@client/features/viewer/get-viewer';
 
 import { Account, Loading } from './views';
-import style from './Account.module.scss';
+import style from './profile.module.scss';
 
-export const AccountPage = () => {
+export const ProfilePage = () => {
   document.title = 'Профиль';
 
-  const { viewer } = useViewer();
+  const { viewer } = useGetViewer();
 
   if (!viewer) {
     return (
