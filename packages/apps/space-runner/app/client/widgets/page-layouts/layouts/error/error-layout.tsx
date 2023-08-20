@@ -13,9 +13,11 @@ export const ErrorLayout = ({ error, title, onHomeClick }: ErrorLayoutProps) => 
   return (
     <BaseLayout>
       <div className={styles.root}>
-        <h1 className={styles.name}>{error}</h1>
-        <h2 className={styles.title}>{title}</h2>
-        <Button onClick={onHomeClick}>Назад к игре</Button>
+        <div className={styles.wrapper}>
+          <h1 className={styles.name}>{error}</h1>
+          <h2 className={styles.title}>{title}</h2>
+          <Button onClick={onHomeClick}>Назад к игре</Button>
+        </div>
       </div>
     </BaseLayout>
   );

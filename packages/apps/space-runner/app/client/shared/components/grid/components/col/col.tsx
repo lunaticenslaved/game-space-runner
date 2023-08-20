@@ -3,10 +3,10 @@ import React, { useMemo } from 'react';
 
 import { ResponsivePropertyType, AlignContentType, JustifyContentType } from '../../types';
 import { getClassNames } from '../../utils';
-import guttersStyles from '../styles/gutters.module.scss';
-import globalStyles from '../styles/globals.module.css';
+import guttersStyles from '../../styles/gutters.module.scss';
+import globalStyles from '../../styles/globals.module.css';
 
-import styles from './index.module.scss';
+import styles from './col.module.scss';
 
 export type ColProps = {
   tag?: keyof JSX.IntrinsicElements;

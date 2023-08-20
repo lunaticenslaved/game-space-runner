@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 import { BreakpointsType } from '../../types';
 import { getClassNames } from '../../utils';
 
-import styles from './index.module.scss';
+import styles from './container.module.scss';
 
 export type ContainerProps = {
   tag?: keyof JSX.IntrinsicElements;

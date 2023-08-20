@@ -10,13 +10,13 @@ import styles from './base-layout.module.scss';
 export const BaseLayout = ({ children }: PropsWithChildren) => {
   return (
     <div className={styles.root}>
-      <Navbar />
+      <PageErrorBoundary>
+        <Navbar />
 
-      <main className={styles.main}>
-        <PageErrorBoundary>
+        <main className={styles.main}>
           <Suspense fallback={<ViewPlaceholder />}>{children}</Suspense>
-        </PageErrorBoundary>
-      </main>
+        </main>
+      </PageErrorBoundary>
     </div>
   );
 };

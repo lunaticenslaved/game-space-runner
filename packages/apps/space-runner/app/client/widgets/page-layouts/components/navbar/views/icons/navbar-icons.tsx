@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 
 import { routes } from '@client/navigation';
 import { useViewer } from '@client/features/viewer/get-viewer';
-import HomeSVG from '@assets/svg/colored/home-icon.svg';
-import LeaderboardSVG from '@assets/svg/colored/leaderboard-icon.svg';
-import ProfileSVG from '@assets/svg/colored/profile-icon.svg';
-import SettingsSVG from '@assets/svg/colored/settings-icon.svg';
+import HomeSVG from '@client/shared/assets/svg/colored/home-icon.svg';
+import LeaderboardSVG from '@client/shared/assets/svg/colored/leaderboard-icon.svg';
+import ProfileSVG from '@client/shared/assets/svg/colored/profile-icon.svg';
+import SettingsSVG from '@client/shared/assets/svg/colored/settings-icon.svg';
 import { filterLinks } from '../../utils';
 
-import style from './NavbarIcons.module.scss';
+import style from './navbar-icons.module.scss';
 
 const links = [
   { title: 'Главная', route: routes.home, icon: <HomeSVG /> },

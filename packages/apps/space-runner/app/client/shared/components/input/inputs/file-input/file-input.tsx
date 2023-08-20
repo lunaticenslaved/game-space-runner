@@ -2,7 +2,7 @@ import { ChangeEventHandler, useCallback, useState } from 'react';
 
 import { InputWrapper, InputWrapperProps } from '../../components';
 
-import styles from './text-input.module.scss';
+import styles from './file-input.module.scss';
 
 export type FileInputProps = {
   name: string;

@@ -11,13 +11,13 @@ import { Router as ErrorRouter } from '@client/pages/error';
 export const Router = () => {
   return (
     <Routes>
-      <HomeRouter />
-      <AuthRouter />
-      <ForumRouter />
-      <GameRouter />
-      <LeaderBoardRouter />
-      <ProfileRouter />
-      <ErrorRouter />
+      {HomeRouter}
+      {LeaderBoardRouter}
+      {ProfileRouter}
+      {ForumRouter}
+      {AuthRouter}
+      {GameRouter}
+      {ErrorRouter}
     </Routes>
   );
 };

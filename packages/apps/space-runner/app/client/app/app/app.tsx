@@ -12,7 +12,7 @@ import { useViewerFromSession } from '@hooks/useViewerFromSession';
 
 import { services, createControllers } from './dependencies';
 
-import '@styles/index.scss';
+import '@client/shared/styles/index.scss';
 
 const ContentSPA = () => {
   const { isLoading, getViewer } = useViewerFromSession(true);

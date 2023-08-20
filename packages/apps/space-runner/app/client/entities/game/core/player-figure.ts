@@ -1,8 +1,8 @@
 import { createImage } from '../utils/create-image';
-import spriteStandRight from '@assets/png/spriteStandRight.png';
-import spriteStandLeft from '@assets/png/spriteStandLeft.png';
-import spriteRunRight from '@assets/png/spriteRunRight.png';
-import spriteRunLeft from '@assets/png/spriteRunLeft.png';
+import spriteStandRight from '@client/shared/assets/png/spriteStandRight.png';
+import spriteStandLeft from '@client/shared/assets/png/spriteStandLeft.png';
+import spriteRunRight from '@client/shared/assets/png/spriteRunRight.png';
+import spriteRunLeft from '@client/shared/assets/png/spriteRunLeft.png';
 import { GAME_GRAVITY } from '../contants';
 
 const FRAMECUT_FOR_STAND = 59;

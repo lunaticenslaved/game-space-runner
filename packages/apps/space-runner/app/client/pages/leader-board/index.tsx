@@ -4,6 +4,6 @@ import { Route } from 'react-router-dom';
 
 const LeaderBoardPage = lazy(() => import('./leader-board'));
 
-export const Router = () => {
-  return <Route path={routes.leaderBoard.path} element={<LeaderBoardPage />} />;
-};
+export const Router = [
+  <Route key={0} path={routes.leaderBoard.path} element={<LeaderBoardPage />} />,
+];

@@ -5,6 +5,4 @@ import { routes } from '@client/navigation';
 
 const ProfilePage = lazy(() => import('./profile'));
 
-export const Router = () => {
-  return <Route path={routes.profile.root.path} element={<ProfilePage />} />;
-};
+export const Router = [<Route key={1} path={routes.profile.root.path} element={<ProfilePage />} />];

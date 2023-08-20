@@ -1,7 +1,10 @@
+@import '@client/shared/styles/images.scss';
+
 .root {
   display: flex;
   flex-direction: column;
   height: 100%;
+  background: $backgroundImg;
 }
 
 .main {

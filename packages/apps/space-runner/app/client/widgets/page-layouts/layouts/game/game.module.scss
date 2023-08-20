@@ -1,10 +1,9 @@
-@import '@styles/variables.scss';
+@import '@client/shared/styles/variables.scss';
 
 .container {
   min-height: 100vh;
   min-width: 100vw;
   padding: 20px;
-  background: $backgroundImg;
   display: flex;
   align-items: center;
   flex-direction: column;

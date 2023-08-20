@@ -2,7 +2,7 @@ import cn from 'classnames';
 
 import { Spinner } from '@client/shared/components/spinner';
 
-import styles from './PageLoader.module.scss';
+import styles from './view-placeholder.module.scss';
 
 export interface ViewPlaceholderProps {
   withBackground?: boolean;

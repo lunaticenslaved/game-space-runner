@@ -8,7 +8,7 @@ import { RootStore } from '@workspace/shared/src/store';
 
 import { services, createControllers } from './dependencies';
 
-import '@styles/index.scss';
+import '@client/shared/styles/index.scss';
 
 function App({ store }: { store: RootStore }) {
   const getControllers = useMemo(() => createControllers.bind(null, store), [store]);

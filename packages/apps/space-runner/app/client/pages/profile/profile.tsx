@@ -1,4 +1,7 @@
+import { useMemo } from 'react';
+
 import { useViewer } from '@client/features/viewer/get-viewer';
+import { DefaultLayout } from '@client/widgets/page-layouts';
 
 import { Account, Loading } from './views';
 import style from './profile.module.scss';
@@ -7,19 +10,18 @@ const ProfilePage = () => {
   document.title = 'Профиль';
 
   const { viewer } = useViewer();
+  const content = useMemo(() => {
+    if (!viewer) {
+      return <Loading />;
+    }
 
-  if (!viewer) {
-    return (
-      <div className={style.page}>
-        <Loading />
-      </div>
-    );
-  }
+    return <Account user={viewer} />;
+  }, []);
 
   return (
-    <div className={style.page}>
-      <Account user={viewer} />
-    </div>
+    <DefaultLayout>
+      <div className={style.page}>{content}</div>
+    </DefaultLayout>
   );
 };
 
