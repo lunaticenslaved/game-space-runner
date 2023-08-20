@@ -4,7 +4,7 @@ import styles from './input-wrapper.module.scss';
 
 export type InputWrapperProps = PropsWithChildren & {
   label: string;
-  error?: string;
+  error?: string | null;
 };
 
 export const InputWrapper = ({ label, error, children }: InputWrapperProps) => {

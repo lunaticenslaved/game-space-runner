@@ -7,7 +7,7 @@ import {
 } from 'react';
 import { FormFieldState, FormFieldProps, ValidationResult, validateValue } from '@libs/validate';
 
-type Value = File | null;
+type Value = File | undefined;
 
 type UseFieldFieldProps = {
   name: string;
@@ -21,13 +21,15 @@ type UseFieldFieldState = FormFieldState<
   {
     type: 'file';
     name: string;
+    error: string | null;
+    value?: File;
     onChange?: InputHTMLAttributes<HTMLInputElement>['onChange'];
     onBlur?: InputHTMLAttributes<HTMLInputElement>['onBlur'];
   }
 >;
 
 export const useFileField = (props: UseFieldFieldProps): UseFieldFieldState => {
-  const { rules, name, value: initialValue = null } = props;
+  const { rules, name, value: initialValue } = props;
 
   const [value, setValue] = useState(initialValue);
   const [error, setError] = useState<ValidationResult>(null);
@@ -39,7 +41,7 @@ export const useFileField = (props: UseFieldFieldProps): UseFieldFieldState => {
       }
 
       const { files } = event.target;
-      const file = files?.item(0) ?? null;
+      const file = files?.item(0) ?? undefined;
 
       setValue(file);
       setError(await validateValue(file, rules));
@@ -66,15 +68,16 @@ export const useFileField = (props: UseFieldFieldProps): UseFieldFieldState => {
   }, [value, rules]);
 
   return {
-    fieldProps: {
+    props: {
       type: 'file',
       onChange,
       onBlur,
       name,
+      value,
+      error,
     },
-    isValid,
     value,
-    error,
-    clear: () => setValue(null),
+    isValid,
+    clear: () => setValue(undefined),
   };
 };

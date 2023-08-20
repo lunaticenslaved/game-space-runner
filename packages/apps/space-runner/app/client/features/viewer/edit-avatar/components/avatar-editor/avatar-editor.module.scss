@@ -1,0 +1,7 @@
+@import '@client/shared/styles/variables';
+
+.dialog {
+  background: $darkPurple;
+  box-shadow: $primaryShadow !important;
+  color: $white;
+}

@@ -1,28 +1,40 @@
-import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 import { AuthLayout } from '@client/pages/__layouts__/auth-layout';
 import { Input } from '@client/shared/components/input';
 import { AuthForm } from '@client/features/auth/components/auth-form';
+import { useOAuthSignIn, useSignIn } from '@client/features/auth/hooks';
+import { usePasswordField, useTextField } from '@libs/validate-react';
+import { required } from '@libs/validate';
 
 export const SignInPage = () => {
+  document.title = 'Вход';
+
+  const loginField = useTextField({
+    name: 'login',
+    rules: [required()],
+  });
+  const passwordField = usePasswordField({
+    name: 'password',
+    rules: [required()],
+  });
+  const fields = useMemo(() => [loginField, passwordField], [loginField, passwordField]);
+
+  const { signIn } = useSignIn();
+  const { signIn: oauthSignIn } = useOAuthSignIn();
+
   // TODO вынести пароль как отдельный тип ввода
-  const signIn = useCallback(() => {
-    console.log('sign-in');
-  }, []);
-  const gotoAuthSignIn = useCallback(() => {
-    console.log('gotoAuthSignIn');
-  }, []);
 
   return (
     <AuthLayout>
       <AuthForm
         title="Sign In"
         submitText="Sign In"
+        fields={fields}
         onSubmit={signIn}
-        fields={[]}
-        onOAuthSubmit={gotoAuthSignIn}>
-        <Input.TextInput name="login" label="Login" />
-        <Input.TextInput name="password" label="Password" />
+        onOAuthSubmit={oauthSignIn}>
+        <Input.TextInput label="Login" {...loginField.props} error={loginField.error} />
+        <Input.TextInput label="Password" {...passwordField.props} error={passwordField.error} />
       </AuthForm>
     </AuthLayout>
   );

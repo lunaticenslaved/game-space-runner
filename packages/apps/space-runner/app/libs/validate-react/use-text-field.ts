@@ -23,6 +23,7 @@ type UseTextFieldState = FormFieldState<
     type: 'text';
     name: string;
     value?: Value;
+    error?: string | null;
     onChange?: InputHTMLAttributes<Element>['onChange'];
     onBlur?: InputHTMLAttributes<Element>['onBlur'];
   }
@@ -67,16 +68,16 @@ export const useTextField = (props: UseTextFieldProps): UseTextFieldState => {
   }, [value, rules]);
 
   return {
-    fieldProps: {
+    props: {
       type: 'text',
       onChange,
       onBlur,
       name,
       value,
+      error,
     },
     isValid,
     value,
-    error,
     clear: () => setValue(''),
   };
 };
