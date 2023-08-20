@@ -3,7 +3,7 @@ import { useViewer } from '@client/features/viewer/get-viewer';
 import { Account, Loading } from './views';
 import style from './profile.module.scss';
 
-export const ProfilePage = () => {
+const ProfilePage = () => {
   document.title = 'Профиль';
 
   const { viewer } = useViewer();
@@ -22,3 +22,5 @@ export const ProfilePage = () => {
     </div>
   );
 };
+
+export default ProfilePage;

@@ -7,7 +7,7 @@ import { PlayerList, usePlayersList } from '@client/entities/player';
 
 import styles from './leader-board.module.scss';
 
-export const LeaderBoardPage = () => {
+const LeaderBoardPage = () => {
   document.title = 'LeaderBoard';
 
   const { query, players } = usePlayersList();
@@ -34,3 +34,5 @@ export const LeaderBoardPage = () => {
     </DefaultLayout>
   );
 };
+
+export default LeaderBoardPage;

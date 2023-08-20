@@ -1,9 +1,10 @@
-import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+import { Router } from './router';
 
-import { SignUpPage } from '@client/pages/auth/sign-up';
-
-function App() {
-  return <SignUpPage />;
+export function App() {
+  return (
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
+  );
 }
-
-export default App;

@@ -4,7 +4,7 @@ import { useAuthNavigation } from '@client/navigation';
 
 import './landing.scss';
 
-export const LandingPage = () => {
+const LandingPage = () => {
   const { isAuthenticated } = useViewer();
   const authNavigate = useAuthNavigation();
 
@@ -17,3 +17,5 @@ export const LandingPage = () => {
     </div>
   );
 };
+
+export default LandingPage;
