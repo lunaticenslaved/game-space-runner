@@ -1,23 +1,23 @@
 import { useMemo } from 'react';
 
 import { Input } from '@client/shared/components/input';
-import { AuthForm } from '@client/features/auth/components/auth-form';
+import { AuthForm } from '@client/features/auth/_components/auth-form';
 import { useOAuthSignIn } from '@client/features/auth/oauth';
 import { useSignIn } from '@client/features/auth/sign-in';
 import { AuthLayout } from '@client/widgets/page-layouts/layouts/auth';
 import { usePasswordField, useTextField } from '@libs/validate-react';
-import { required } from '@libs/validate';
+import { validationRules } from '@libs/validate';
 
 export const SignInPage = () => {
   document.title = 'Вход';
 
   const loginField = useTextField({
     name: 'login',
-    rules: [required()],
+    rules: [validationRules.required()],
   });
   const passwordField = usePasswordField({
     name: 'password',
-    rules: [required()],
+    rules: [validationRules.required()],
   });
   const fields = useMemo(() => [loginField, passwordField], [loginField, passwordField]);
 

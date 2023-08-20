@@ -1,37 +1,23 @@
 import { useCallback, useState } from 'react';
 
-import { setUser } from '@workspace/shared/src/store/reducers';
-import { useServices } from '@core/ServicesContext';
-import { QueryHandler } from '@utils/hooks';
-import { useAppDispatch } from '@core/StoreContext';
-
-import { AvatarEditorProps } from '../components';
+import { QueryHandler } from '@client/shared/api';
 
 export const useEditAvatar = ({ onError, onSuccess }: QueryHandler) => {
   const [isFetching, setFetching] = useState(false);
-  const dispatch = useAppDispatch();
-  const services = useServices();
 
-  const mutate: AvatarEditorProps['onSubmit'] = useCallback(
-    async values => {
-      setFetching(true);
+  const mutate = useCallback(async () => {
+    setFetching(true);
 
-      try {
-        const response = await services.viewer.updateAvatar(values);
+    try {
+      onSuccess();
+    } catch (error) {
+      console.error(error);
 
-        dispatch(setUser(response));
+      onError();
+    }
 
-        onSuccess();
-      } catch (error) {
-        console.error(error);
-
-        onError();
-      }
-
-      setFetching(false);
-    },
-    [dispatch, onError, onSuccess, services.viewer]
-  );
+    setFetching(false);
+  }, [onError, onSuccess]);
 
   return { mutate, isFetching };
 };

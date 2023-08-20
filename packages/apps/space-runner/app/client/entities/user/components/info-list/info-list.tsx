@@ -9,8 +9,8 @@ export type InfoListProps = User;
 export const InfoList = ({
   email,
   login,
-  first_name: firstName,
-  second_name: secondName,
+  firstName: firstName,
+  secondName: secondName,
   phone,
 }: InfoListProps) => {
   const items = useMemo(

@@ -1,4 +1,4 @@
-import { useState, ChangeEventHandler, useCallback } from 'react';
+import { useState, ChangeEventHandler, useCallback, TextareaHTMLAttributes } from 'react';
 
 import { InputWrapper, InputWrapperProps } from '../../components';
 
@@ -7,8 +7,8 @@ import styles from './text-area.module.scss';
 export type TextAreaProps = {
   name: string;
   value?: string;
-  onChange: ChangeEventHandler<HTMLTextAreaElement>;
-} & Omit<InputWrapperProps, 'children'>;
+} & Omit<InputWrapperProps, 'children'> &
+  Pick<TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange' | 'rows'>;
 
 export const TextArea = ({
   error,

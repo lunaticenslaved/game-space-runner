@@ -1,5 +1,8 @@
-import { OAuthForm } from '@client/features/auth/oauth';
+import { useOAuthRedirect } from '@client/features/auth/oauth';
+import { ViewPlaceholder } from '@client/shared/components/view-placeholder';
 
 export const OAuthPage = () => {
-  return <OAuthForm />;
+  useOAuthRedirect();
+
+  return <ViewPlaceholder />;
 };

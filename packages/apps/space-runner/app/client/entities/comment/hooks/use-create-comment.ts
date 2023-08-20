@@ -1,0 +1,26 @@
+import { useCallback, useState } from 'react';
+
+import { QueryHandler } from '@client/shared/api';
+
+export interface UseCreateCommentProps extends QueryHandler {
+  topicId: number;
+}
+
+export const useCreateComment = ({ onError, onSuccess }: UseCreateCommentProps) => {
+  const [isFetching, setFetching] = useState(false);
+
+  const mutate = useCallback(async () => {
+    setFetching(true);
+
+    try {
+      onSuccess();
+    } catch (error) {
+      console.error(error);
+      onError();
+    }
+
+    setFetching(false);
+  }, [onError, onSuccess]);
+
+  return { isFetching, mutate };
+};

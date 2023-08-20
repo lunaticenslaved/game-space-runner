@@ -1,15 +1,11 @@
 import { Avatar } from '@client/entities/user';
 
+import { Player } from '../..';
+
 import styles from './player-list.module.scss';
 
 export type PlayerListProps = {
-  players: {
-    id: number;
-    position: number;
-    score: number;
-    imgSrc: string;
-    login: string;
-  }[];
+  players: Player[];
 };
 
 export const PlayerList = ({ players }: PlayerListProps) => {

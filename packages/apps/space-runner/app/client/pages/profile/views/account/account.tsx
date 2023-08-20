@@ -35,7 +35,7 @@ export const Account = ({ user }: AccountProps) => {
           user={user}
           isOpen={editUserDialog.isOpen}
           onSubmit={updateUser}
-          onOpenChange={editUserDialog.setState}
+          onClose={editUserDialog.close}
         />
       )}
 
@@ -58,7 +58,7 @@ export const Account = ({ user }: AccountProps) => {
       <div className={styles.content}>
         <Avatar link={user.avatar} />
         <h4 className={styles.userName}>
-          {user.display_name ? user.display_name : `${user.first_name} ${user.second_name}`}
+          {user.display_name ? user.display_name : `${user.firstName} ${user.secondName}`}
         </h4>
 
         <InfoList {...user} />

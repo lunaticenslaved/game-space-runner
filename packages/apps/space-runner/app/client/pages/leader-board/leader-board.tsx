@@ -1,14 +1,21 @@
-import { DefaultLayout } from '@client/widgets/page-layouts/layouts/default';
+import { useEffect } from 'react';
+
+import { DefaultLayout } from '@client/widgets/page-layouts';
 import { Grid } from '@client/shared/components/grid';
 import { Input } from '@client/shared/components/input';
-import { PlayerList, useGetPlayers } from '@client/entities/player';
+import { PlayerList, usePlayersList } from '@client/entities/player';
 
 import styles from './leader-board.module.scss';
 
 export const LeaderBoardPage = () => {
   document.title = 'LeaderBoard';
 
-  const playerListData = useGetPlayers();
+  const { query, players } = usePlayersList();
+
+  useEffect(() => {
+    query();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <DefaultLayout>
@@ -20,7 +27,7 @@ export const LeaderBoardPage = () => {
             <div className={styles.searchBar}>
               <Input.TextInput name="search" label="Поиск игрока" />
             </div>
-            <PlayerList players={playerListData} />
+            <PlayerList players={players} />
           </Grid.Col>
         </Grid.Row>
       </Grid.Container>

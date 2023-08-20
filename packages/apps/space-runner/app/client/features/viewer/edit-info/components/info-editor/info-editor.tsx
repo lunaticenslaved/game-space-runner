@@ -1,65 +1,62 @@
-import { Button } from '@components/Button';
-import { Dialog } from '@components/Dialog';
-import { Input } from '@components/Input';
+import { Button } from '@client/shared/components/button';
+import { Input } from '@client/shared/components/input';
+import { Dialog } from '@client/shared/components/dialog';
+import { User } from '@client/entities/user';
 
-import { ViewerModel } from '@pages/Account/models';
-import { useForm } from '@core/Validation';
-import { useTextField } from '@core/Validation/useTextField';
-import { validate } from '@service/Validate';
+import { validationRules } from '@libs/validate';
+import { useTextField, useForm } from '@libs/validate-react';
 
 import styles from './info-editor.module.scss';
 
 export type InfoEditorFormValue = {
   email: string;
   login: string;
-  first_name: string;
-  second_name: string;
-  display_name: string;
+  firstName: string;
+  secondName: string;
   phone: string;
 };
 
 export type InfoEditorProps = {
-  user: ViewerModel;
-  onSubmit: (values: InfoEditorFormValue) => Promise<void> | void;
+  user: User;
   isOpen: boolean;
-  onOpenChange: (isOpen: boolean) => void;
+  onSubmit: (values: InfoEditorFormValue) => Promise<void> | void;
+  onClose: () => void;
 };
 
-export const InfoEditor = ({ viewer, isOpen, onSubmit, onOpenChange }: InfoEditorProps) => {
+export const InfoEditor = ({ user, isOpen, onSubmit, onClose }: InfoEditorProps) => {
   const emailField = useTextField({
-    value: viewer.email || '',
+    value: user.email || '',
     name: 'email',
-    rules: [value => (validate.email(value || '') ? null : validate.errorMessages.email)],
+    rules: [validationRules.email()],
   });
   const loginField = useTextField({
-    value: viewer.login || '',
+    value: user.login || '',
     name: 'login',
-    rules: [value => (validate.login(value || '') ? null : validate.errorMessages.login)],
+    rules: [validationRules.login()],
   });
   const firstNameField = useTextField({
-    value: viewer.first_name || '',
+    value: user.firstName || '',
     name: 'first_name',
-    rules: [value => (validate.name(value || '') ? null : validate.errorMessages.name)],
+    rules: [validationRules.name()],
   });
   const secondNameField = useTextField({
-    value: viewer.second_name || '',
+    value: user.secondName || '',
     name: 'second_name',
-    rules: [value => (validate.name(value || '') ? null : validate.errorMessages.name)],
+    rules: [validationRules.name()],
   });
   const phoneField = useTextField({
-    value: viewer.phone || '',
+    value: user.phone || '',
     name: 'phone',
-    rules: [value => (validate.phone(value || '') ? null : validate.errorMessages.phone)],
+    rules: [validationRules.phone()],
   });
-  const { formProps, isSubmitting } = useForm({
+  const { props, isSubmitting } = useForm({
     fields: [emailField, loginField, firstNameField, secondNameField, phoneField],
     onSubmit: async () => {
       await onSubmit({
         login: loginField.value,
         email: emailField.value,
-        first_name: firstNameField.value,
-        second_name: secondNameField.value,
-        display_name: viewer.display_name || '',
+        firstName: firstNameField.value,
+        secondName: secondNameField.value,
         phone: phoneField.value,
       });
     },
@@ -69,18 +66,14 @@ export const InfoEditor = ({ viewer, isOpen, onSubmit, onOpenChange }: InfoEdito
     <Dialog
       title="Редактировать данные"
       isOpen={isOpen}
-      onOpenChange={onOpenChange}
+      onClose={onClose}
       contentClass={styles.dialog}>
-      <form {...formProps}>
-        <Input {...emailField.fieldProps} errorText={emailField.error} labelText="E-mail" />
-        <Input {...loginField.fieldProps} labelText="Логин" errorText={loginField.error} />
-        <Input {...firstNameField.fieldProps} labelText="Имя" errorText={firstNameField.error} />
-        <Input
-          {...secondNameField.fieldProps}
-          labelText="Фамилия"
-          errorText={secondNameField.error}
-        />
-        <Input {...phoneField.fieldProps} labelText="Телефон" errorText={phoneField.error} />
+      <form {...props}>
+        <Input.TextInput {...emailField.props} label="E-mail" />
+        <Input.TextInput {...loginField.props} label="Логин" />
+        <Input.TextInput {...firstNameField.props} label="Имя" />
+        <Input.TextInput {...secondNameField.props} label="Фамилия" />
+        <Input.TextInput {...phoneField.props} label="Телефон" />
 
         <Button type="submit" loading={isSubmitting} disabled={isSubmitting}>
           Редактировать

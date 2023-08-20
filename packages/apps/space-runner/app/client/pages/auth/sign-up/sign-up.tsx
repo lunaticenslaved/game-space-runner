@@ -1,22 +1,26 @@
 import { useMemo } from 'react';
 
 import { Input } from '@client/shared/components/input';
-import { AuthForm } from '@client/features/auth/auth-form';
-import { useOAuthSignIn, useSignUp } from '@client/features/auth/hooks';
-import { usePasswordField, useTextField } from '@libs/validate-react';
-import { required } from '@libs/validate';
+import { AuthForm } from '@client/features/auth/_components/auth-form';
+import { useOAuthSignIn } from '@client/features/auth/oauth';
+import { useSignUp } from '@client/features/auth/sign-up';
 import { AuthLayout } from '@client/widgets/page-layouts/layouts/auth';
+import { usePasswordField, useTextField } from '@libs/validate-react';
+import { validationRules } from '@libs/validate';
 
 export const SignUpPage = () => {
   document.title = 'Регистрация';
 
-  const emailField = useTextField({ name: 'email', rules: [required()] });
-  const loginField = useTextField({ name: 'login', rules: [required()] });
-  const firstNameField = useTextField({ name: 'firstName', rules: [required()] });
-  const secondNameField = useTextField({ name: 'secondName', rules: [required()] });
-  const phoneField = useTextField({ name: 'phone', rules: [required()] });
-  const passwordField = usePasswordField({ name: 'password', rules: [required()] });
-  const passwordConfirmField = usePasswordField({ name: 'passwordConfirm', rules: [required()] });
+  const emailField = useTextField({ name: 'email', rules: [validationRules.required()] });
+  const loginField = useTextField({ name: 'login', rules: [validationRules.required()] });
+  const firstNameField = useTextField({ name: 'firstName', rules: [validationRules.required()] });
+  const secondNameField = useTextField({ name: 'secondName', rules: [validationRules.required()] });
+  const phoneField = useTextField({ name: 'phone', rules: [validationRules.required()] });
+  const passwordField = usePasswordField({ name: 'password', rules: [validationRules.required()] });
+  const passwordConfirmField = usePasswordField({
+    name: 'passwordConfirm',
+    rules: [validationRules.required()],
+  });
   const fields = useMemo(
     () => [
       emailField,

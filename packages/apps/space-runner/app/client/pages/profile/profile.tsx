@@ -1,4 +1,4 @@
-import { useGetViewer } from '@client/features/viewer/get-viewer';
+import { useViewer } from '@client/features/viewer/get-viewer';
 
 import { Account, Loading } from './views';
 import style from './profile.module.scss';
@@ -6,7 +6,7 @@ import style from './profile.module.scss';
 export const ProfilePage = () => {
   document.title = 'Профиль';
 
-  const { viewer } = useGetViewer();
+  const { viewer } = useViewer();
 
   if (!viewer) {
     return (

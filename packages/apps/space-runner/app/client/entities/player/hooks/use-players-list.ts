@@ -5,9 +5,9 @@ import { Player } from '..';
 export const usePlayersList = () => {
   const [players] = useState<Player[]>([]);
 
-  const list = useCallback(() => {
+  const query = useCallback(() => {
     return players;
   }, [players]);
 
-  return { list };
+  return { query, players };
 };

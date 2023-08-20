@@ -1,11 +1,10 @@
-import { Button } from '@components/Button';
-import { Dialog } from '@components/Dialog';
-import { Input } from '@components/Input';
-import { useForm } from '@core/Validation';
-import { validate } from '@service/Validate';
-import { useTextField } from '@core/Validation/useTextField';
+import { Button } from '@client/shared/components/button';
+import { Dialog } from '@client/shared/components/dialog';
+import { Input } from '@client/shared/components/input';
+import { useForm, usePasswordField, useTextField } from '@libs/validate-react';
 
 import styles from './password-editor.module.scss';
+import { validationRules } from '@libs/validate';
 
 export type PasswordEditorForm = {
   oldPassword: string;
@@ -17,16 +16,17 @@ export type PasswordEditorProps = {
   onSubmit: (values: PasswordEditorForm) => Promise<void>;
   onClose: () => void;
 };
+
 export const PasswordEditor = ({ isOpen, onSubmit, onClose }: PasswordEditorProps) => {
-  const oldPassField = useTextField({
+  const oldPassField = usePasswordField({
     value: '',
     name: 'oldPassword',
     rules: [],
   });
-  const newPassField = useTextField({
+  const newPassField = usePasswordField({
     value: '',
     name: 'newPassword',
-    rules: [value => (validate.password(value || '') ? null : validate.errorMessages.password)],
+    rules: [validationRules.password()],
   });
   const repeatPassField = useTextField({
     value: '',
@@ -34,7 +34,7 @@ export const PasswordEditor = ({ isOpen, onSubmit, onClose }: PasswordEditorProp
     rules: [value => (newPassField.value === value ? null : 'Пароли должны совпадать')],
   });
 
-  const { isSubmitting, formProps } = useForm({
+  const form = useForm({
     fields: [oldPassField, newPassField, repeatPassField],
     onSubmit: async () => {
       await onSubmit({
@@ -50,27 +50,12 @@ export const PasswordEditor = ({ isOpen, onSubmit, onClose }: PasswordEditorProp
       isOpen={isOpen}
       onClose={onClose}
       contentClass={styles.dialog}>
-      <form {...formProps}>
-        <Input
-          {...oldPassField.fieldProps}
-          errorText={oldPassField.error}
-          labelText="Старый пароль"
-          type="password"
-        />
-        <Input
-          {...newPassField.fieldProps}
-          labelText="Новый пароль"
-          errorText={newPassField.error}
-          type="password"
-        />
-        <Input
-          {...repeatPassField.fieldProps}
-          labelText="Повторите пароль"
-          errorText={repeatPassField.error}
-          type="password"
-        />
+      <form {...form.props}>
+        <Input.TextInput {...oldPassField.props} label="Старый пароль" />
+        <Input.TextInput {...newPassField.props} label="Новый пароль" />
+        <Input.TextInput {...repeatPassField.props} label="Повторите пароль" />
 
-        <Button type="submit" loading={isSubmitting} disabled={isSubmitting}>
+        <Button type="submit" loading={form.isSubmitting} disabled={form.isSubmitting}>
           Редактировать
         </Button>
       </form>

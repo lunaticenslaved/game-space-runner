@@ -1,2 +1,2 @@
 export * from './hooks/use-oauth-sign-in';
-export { OAuthForm } from './components/form';
+export * from './hooks/use-oauth-redirect';

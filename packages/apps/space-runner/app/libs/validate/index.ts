@@ -1,3 +1,3 @@
 export * from './utils';
 export * from './types';
-export * from './rules';
+export * as validationRules from './rules';
