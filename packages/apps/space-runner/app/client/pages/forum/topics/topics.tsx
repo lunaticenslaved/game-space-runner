@@ -6,7 +6,6 @@ import { useDialog } from '@client/shared/components/dialog';
 import { useForumNavigation } from '@client/navigation';
 import { TopicFormDialog, TopicList, useCreateTopic, useListTopic } from '@client/entities/topic';
 import { useViewer } from '@client/features/viewer/get-viewer';
-import { DefaultLayout } from '@client/widgets/page-layouts';
 
 import styles from './topics.module.scss';
 
@@ -14,7 +13,7 @@ export const ForumPage = () => {
   document.title = 'Forum';
 
   const { isAuthenticated } = useViewer();
-  const { toTopic: navigateToTopic } = useForumNavigation();
+  const navigate = useForumNavigation();
   const {
     isFetching,
     query: fetchTopicList,
@@ -27,7 +26,7 @@ export const ForumPage = () => {
   const { createPost } = useCreateTopic({
     onError: () => alert('Cannot create topic!'),
     onSuccess: topic => {
-      navigateToTopic(topic);
+      navigate.toTopic(topic);
       topicDialog.close();
     },
   });
@@ -38,35 +37,33 @@ export const ForumPage = () => {
   }, []);
 
   return (
-    <DefaultLayout>
-      <div className={styles.page}>
-        <TopicFormDialog
-          isOpen={topicDialog.isOpen}
-          onSubmit={createPost}
-          onClose={topicDialog.close}
-        />
+    <div className={styles.page}>
+      <TopicFormDialog
+        isOpen={topicDialog.isOpen}
+        onSubmit={createPost}
+        onClose={topicDialog.close}
+      />
 
-        {isFetching ? (
-          <ViewPlaceholder />
-        ) : (
-          <Grid.Container width={'full'} className={styles.container}>
-            <Grid.Row justify="center">
-              <Grid.Col width={9}>
-                <div className={styles.header}>
-                  <h1 className={styles.title}>Форум</h1>
-                  {isAuthenticated && (
-                    <div className={styles.actions}>
-                      <Button children="Создать топик" onClick={topicDialog.open} />
-                    </div>
-                  )}
-                </div>
+      {isFetching ? (
+        <ViewPlaceholder />
+      ) : (
+        <Grid.Container width={'full'} className={styles.container}>
+          <Grid.Row justify="center">
+            <Grid.Col width={9}>
+              <div className={styles.header}>
+                <h1 className={styles.title}>Форум</h1>
+                {isAuthenticated && (
+                  <div className={styles.actions}>
+                    <Button children="Создать топик" onClick={topicDialog.open} />
+                  </div>
+                )}
+              </div>
 
-                <TopicList topics={topics} onTopicClick={navigateToTopic} />
-              </Grid.Col>
-            </Grid.Row>
-          </Grid.Container>
-        )}
-      </div>
-    </DefaultLayout>
+              <TopicList topics={topics} onTopicClick={navigate.toTopic} />
+            </Grid.Col>
+          </Grid.Row>
+        </Grid.Container>
+      )}
+    </div>
   );
 };

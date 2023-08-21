@@ -7,7 +7,7 @@ import { createReduxStore } from '@workspace/shared/src/store';
 import { IS_RUNNING_SSR_IN_BROWSER } from './app/index';
 
 import 'normalize.css';
-import '@styles/index.scss';
+import '@client/shared/styles/index.scss';
 
 const element = document.getElementById('root') as HTMLElement;
 const AppSPA = lazy(() => import('./app/app'));

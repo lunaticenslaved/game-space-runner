@@ -4,7 +4,7 @@ import { Input } from '@client/shared/components/input';
 import { AuthForm } from '@client/features/auth/_components/auth-form';
 import { useOAuthSignIn } from '@client/features/auth/oauth';
 import { useSignUp } from '@client/features/auth/sign-up';
-import { AuthLayout } from '@client/widgets/page-layouts/layouts/auth';
+import { AuthLayout } from '@client/widgets/page-layouts/auth';
 import { usePasswordField, useTextField } from '@libs/validate-react';
 import { validationRules } from '@libs/validate';
 

@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+
 import { GameLogic, fullscreenHandler, gameControlHandler } from '@client/entities/game';
-import styles from './game.module.scss';
 import { useViewer } from '@client/features/viewer/get-viewer';
+
+import styles from './game.module.scss';
 
 const HEADER_HEIGHT = 120;
 

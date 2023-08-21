@@ -27,7 +27,7 @@
 .playListBody {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 348px);
+  height: calc(100% - 348px);
   padding-top: $spacing-2;
   gap: $spacing-2;
   overflow: auto;

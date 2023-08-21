@@ -4,12 +4,14 @@ import { QueryHandler } from '@client/shared/api';
 import { AccessLevel } from '@client/navigation';
 
 export const useViewer = () => {
-  const isAuthenticated = useMemo(() => true, []);
+  const isAuthenticated = useMemo(() => false, []);
   const access = useMemo(() => {
-    const list = [AccessLevel.Common, AccessLevel.Public];
+    const list = [AccessLevel.Common];
 
     if (isAuthenticated) {
       list.push(AccessLevel.Private);
+    } else {
+      list.push(AccessLevel.Public);
     }
 
     return list;

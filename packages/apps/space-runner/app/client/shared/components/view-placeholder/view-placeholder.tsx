@@ -1,20 +1,10 @@
-import cn from 'classnames';
-
 import { Spinner } from '@client/shared/components/spinner';
 
 import styles from './view-placeholder.module.scss';
 
-export interface ViewPlaceholderProps {
-  withBackground?: boolean;
-}
-
-export const ViewPlaceholder = ({ withBackground }: ViewPlaceholderProps) => {
+export const ViewPlaceholder = () => {
   return (
-    <div
-      className={cn({
-        [styles.container]: true,
-        [styles.withBackground]: withBackground,
-      })}>
+    <div className={styles.container}>
       <Spinner size={64} />
     </div>
   );

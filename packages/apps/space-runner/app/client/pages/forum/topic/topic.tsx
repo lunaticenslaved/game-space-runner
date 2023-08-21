@@ -12,7 +12,6 @@ import {
 import { dateConvert } from '@client/shared/utils/dates';
 import { useGetTopic } from '@client/entities/topic';
 import { useViewer } from '@client/features/viewer/get-viewer';
-import { DefaultLayout } from '@client/widgets/page-layouts';
 
 import styles from './topic.module.scss';
 
@@ -51,31 +50,29 @@ export const TopicPage = () => {
   }
 
   return (
-    <DefaultLayout>
-      <div className={styles.page}>
-        <div className={styles.container}>
-          <div className={styles.header}>
-            <time className={styles.createdAt} dateTime={topic.createdAt}>
-              {dateConvert(topic.createdAt)}
-            </time>
+    <div className={styles.page}>
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <time className={styles.createdAt} dateTime={topic.createdAt}>
+            {dateConvert(topic.createdAt)}
+          </time>
 
-            <h1 className={styles.title}>{topic.title}</h1>
-          </div>
+          <h1 className={styles.title}>{topic.title}</h1>
+        </div>
 
-          <div className={styles.content}>{topic.content}</div>
+        <div className={styles.content}>{topic.content}</div>
 
-          <div className={styles.comments}>
-            {comments && !commentListQuery.isFetching ? (
-              <Fragment>
-                <CommentsList comments={comments} />
-                {isAuthenticated && <CommentInput onSubmit={sendMessage} />}
-              </Fragment>
-            ) : (
-              <Spinner />
-            )}
-          </div>
+        <div className={styles.comments}>
+          {comments && !commentListQuery.isFetching ? (
+            <Fragment>
+              <CommentsList comments={comments} />
+              {isAuthenticated && <CommentInput onSubmit={sendMessage} />}
+            </Fragment>
+          ) : (
+            <Spinner />
+          )}
         </div>
       </div>
-    </DefaultLayout>
+    </div>
   );
 };

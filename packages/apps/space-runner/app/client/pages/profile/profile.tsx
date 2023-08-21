@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 
 import { useViewer } from '@client/features/viewer/get-viewer';
-import { DefaultLayout } from '@client/widgets/page-layouts';
 
 import { Account, Loading } from './views';
 import style from './profile.module.scss';
@@ -18,11 +17,7 @@ const ProfilePage = () => {
     return <Account user={viewer} />;
   }, []);
 
-  return (
-    <DefaultLayout>
-      <div className={style.page}>{content}</div>
-    </DefaultLayout>
-  );
+  return <div className={style.page}>{content}</div>;
 };
 
 export default ProfilePage;

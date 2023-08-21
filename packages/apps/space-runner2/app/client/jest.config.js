@@ -7,7 +7,7 @@ export default {
   testMatch: ['<rootDir>/src/**/*.test.{ts,tsx}'],
   moduleNameMapper: {
     '^@api/(.*)$': '<rootDir>/src/api/$1',
-    // '^@assets/(.*)$': '<rootDir>/src/assets/$1',
+    // '^@client/shared/assets/(.*)$': '<rootDir>/src/assets/$1',
     '^@components/(.*)$': '<rootDir>/src/components/$1',
     '^@core/(.*)$': '<rootDir>/src/core/$1',
     '^@hooks/(.*)$': '<rootDir>/src/hooks/$1',
@@ -15,7 +15,7 @@ export default {
     '^@pages/(.*)$': '<rootDir>/src/pages/$1',
     '^@routers/(.*)$': '<rootDir>/src/routers/$1',
     '^@service/(.*)$': '<rootDir>/src/service/$1',
-    '^@styles/(.*)$': '<rootDir>/src/styles/$1',
+    '^@client/shared/styles/(.*)$': '<rootDir>/src/styles/$1',
     '^@utils/(.*)$': '<rootDir>/src/utils/$1',
     '^@shared/(.*)$': '<rootDir>/../shared/$1',
     '^@public/(.*)$': '<rootDir>/src/public/$1',
