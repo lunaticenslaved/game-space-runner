@@ -1,13 +1,8 @@
 import { Avatar, InfoList, User } from '@client/entities/user';
 import { useDialog } from '@client/shared/components/dialog';
-import {
-  useEditUserInfo,
-  InfoEditor,
-  useEditAvatar,
-  AvatarEditor,
-  useEditPassword,
-  PasswordEditor,
-} from '@client/features/edit-viewer';
+import { InfoEditor } from '@client/features/viewer/edit-info';
+import { PasswordEditor } from '@client/features/viewer/edit-password';
+import { AvatarEditor } from '@client/features/viewer/edit-avatar';
 import { Button } from '@client/shared/components/button';
 
 import styles from './Account.module.scss';
@@ -20,18 +15,6 @@ export const Account = ({ user }: AccountProps) => {
   const editUserDialog = useDialog();
   const editPasswordDialog = useDialog();
   const editAvatarDialog = useDialog();
-  const { mutate: updateUser } = useEditUserInfo({
-    onSuccess: editUserDialog.close,
-    onError: () => alert('Cannot update user'),
-  });
-  const { mutate: updateAvatar } = useEditAvatar({
-    onSuccess: editAvatarDialog.close,
-    onError: () => alert('Cannot update avatar'),
-  });
-  const { mutate: updatePassword } = useEditPassword({
-    onSuccess: editAvatarDialog.close,
-    onError: () => alert('Cannot update avatar'),
-  });
 
   return (
     <div className={styles.page}>
@@ -39,24 +22,27 @@ export const Account = ({ user }: AccountProps) => {
         <InfoEditor
           user={user}
           isOpen={editUserDialog.isOpen}
-          onSubmit={updateUser}
           onClose={editUserDialog.close}
+          onSubmitSuccess={editPasswordDialog.close}
+          onSubmitError={() => alert('cannot update info')}
         />
       )}
 
       {editPasswordDialog.isOpen && (
         <PasswordEditor
           isOpen={editPasswordDialog.isOpen}
-          onSubmit={updatePassword}
           onClose={editPasswordDialog.close}
+          onSubmitSuccess={editPasswordDialog.close}
+          onSubmitError={() => alert('cannot update password')}
         />
       )}
 
       {editAvatarDialog.isOpen && (
         <AvatarEditor
           isOpen={editAvatarDialog.isOpen}
-          onSubmit={updateAvatar}
           onClose={editAvatarDialog.close}
+          onSubmitSuccess={editAvatarDialog.close}
+          onSubmitError={() => alert('cannot update avatar')}
         />
       )}
 

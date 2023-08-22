@@ -1,6 +1,6 @@
 import type { Validator } from './types';
 
-export const required = (message = 'Обязательное поле'): Validator<string> => {
+export const required = <T>(message = 'Обязательное поле'): Validator<T> => {
   return async value => (value ? null : message);
 };
 

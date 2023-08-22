@@ -1,6 +1,9 @@
+import { useCallback } from 'react';
+
 import { Button } from '@client/shared/components/button';
 import { Dialog } from '@client/shared/components/dialog';
 import { Input } from '@client/shared/components/input';
+import { useUpdateAvatarMutation } from '@client/shared/api/viewer';
 import { useFileField, useForm } from '@libs/validate-react';
 
 import styles from './avatar-editor.module.scss';
@@ -11,23 +14,38 @@ export type AvatarEditorForm = {
 
 export type AvatarEditorProps = {
   isOpen: boolean;
-  onSubmit: (value: AvatarEditorForm) => Promise<void>;
   onClose: () => void;
+  onSubmitSuccess: () => void;
+  onSubmitError: () => void;
 };
 
-export const AvatarEditor = ({ isOpen, onSubmit, onClose }: AvatarEditorProps) => {
+export const AvatarEditor = ({
+  isOpen,
+  onClose,
+  onSubmitError,
+  onSubmitSuccess,
+}: AvatarEditorProps) => {
+  const [mutate] = useUpdateAvatarMutation();
+
   const fileField = useFileField({
     name: 'file',
     rules: [value => (value ? null : 'Выберите файл')],
   });
 
+  const editAvatar = useCallback(async () => {
+    try {
+      await mutate({});
+
+      onSubmitSuccess();
+    } catch (error) {
+      console.error(error);
+      onSubmitError();
+    }
+  }, []);
+
   const form = useForm({
     fields: [fileField],
-    onSubmit: async () => {
-      if (!fileField.value) return;
-
-      await onSubmit({ file: fileField.value });
-    },
+    onSubmit: editAvatar,
   });
 
   return (

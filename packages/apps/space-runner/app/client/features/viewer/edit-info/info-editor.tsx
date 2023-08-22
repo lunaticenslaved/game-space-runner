@@ -1,7 +1,10 @@
+import { useCallback } from 'react';
+
 import { Button } from '@client/shared/components/button';
 import { Input } from '@client/shared/components/input';
 import { Dialog } from '@client/shared/components/dialog';
 import { User } from '@client/entities/user';
+import { useUpdateInfoMutation } from '@client/shared/api/viewer';
 
 import { validationRules } from '@libs/validate';
 import { useTextField, useForm } from '@libs/validate-react';
@@ -19,11 +22,20 @@ export type InfoEditorFormValue = {
 export type InfoEditorProps = {
   user: User;
   isOpen: boolean;
-  onSubmit: (values: InfoEditorFormValue) => Promise<void> | void;
   onClose: () => void;
+  onSubmitSuccess: () => void;
+  onSubmitError: () => void;
 };
 
-export const InfoEditor = ({ user, isOpen, onSubmit, onClose }: InfoEditorProps) => {
+export const InfoEditor = ({
+  user,
+  isOpen,
+  onClose,
+  onSubmitSuccess,
+  onSubmitError,
+}: InfoEditorProps) => {
+  const [mutate] = useUpdateInfoMutation();
+
   const emailField = useTextField({
     value: user.email || '',
     name: 'email',
@@ -49,17 +61,21 @@ export const InfoEditor = ({ user, isOpen, onSubmit, onClose }: InfoEditorProps)
     name: 'phone',
     rules: [validationRules.phone()],
   });
+
+  const onSubmit = useCallback(async () => {
+    try {
+      await mutate({});
+
+      onSubmitSuccess();
+    } catch (error) {
+      console.error(error);
+      onSubmitError();
+    }
+  }, []);
+
   const { props, isSubmitting } = useForm({
     fields: [emailField, loginField, firstNameField, secondNameField, phoneField],
-    onSubmit: async () => {
-      await onSubmit({
-        login: loginField.value,
-        email: emailField.value,
-        firstName: firstNameField.value,
-        secondName: secondNameField.value,
-        phone: phoneField.value,
-      });
-    },
+    onSubmit,
   });
 
   return (
