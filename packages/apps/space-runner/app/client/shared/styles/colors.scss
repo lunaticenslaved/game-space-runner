@@ -20,6 +20,8 @@ $darkPurple: #191c2c;
 
 /* Multicolor pallete */
 $primaryColor: $purple;
+$primaryColorDarken: darken($purple, 10%);
+$primaryColorLighten: lighten($purple, 10%);
 $danger: hsl(0, 100%, 55%);
 $secondaryColor: $blue;
 $onPrimaryColor: $white;

@@ -15,10 +15,10 @@ export const useGetTopic = ({ onError, onSuccess }: UseGetTopicProps) => {
     setFetching(true);
 
     try {
-      onSuccess();
+      if (onSuccess) onSuccess();
     } catch (error) {
       console.log(error);
-      onError();
+      if (onError) onError();
     }
 
     setFetching(false);

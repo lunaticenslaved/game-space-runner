@@ -9,9 +9,9 @@ export const useListTopic = ({ onError, onSuccess }: QueryHandler) => {
     setFetching(true);
 
     try {
-      onSuccess();
+      if (onSuccess) onSuccess();
     } catch {
-      onError;
+      if (onError) onError();
     }
 
     setFetching(false);

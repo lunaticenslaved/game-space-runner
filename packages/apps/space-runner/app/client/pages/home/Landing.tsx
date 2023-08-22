@@ -1,18 +1,20 @@
 import { Button } from '@client/shared/components/button';
-import { useViewer } from '@client/features/viewer/get-viewer';
+import { useViewer } from '@client/features/auth';
 import { useAuthNavigation } from '@client/navigation';
 
-import './landing.scss';
+import styles from './landing.module.scss';
 
 const LandingPage = () => {
   const { isAuthenticated } = useViewer();
   const authNavigate = useAuthNavigation();
 
   return (
-    <div className="landing">
-      <div className="landing__content">
-        <h1 className="landing__content__title">Добро пожаловать в theTeam</h1>
-        {!isAuthenticated && <Button onClick={authNavigate.toSignIn}>Войти</Button>}
+    <div className={styles.root}>
+      <div className={styles.wrapper}>
+        <h1 className={styles.header}>Добро пожаловать в игру!</h1>
+        <div className={styles.body}>
+          {!isAuthenticated && <Button onClick={authNavigate.toSignIn}>Войти</Button>}
+        </div>
       </div>
     </div>
   );

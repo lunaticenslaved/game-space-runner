@@ -2,10 +2,9 @@ import { useMemo } from 'react';
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 
-import { useViewer } from '@client/features/viewer/get-viewer';
+import { useViewer, useLogout } from '@client/features/auth';
 import { routes } from '@client/navigation';
 import { Button } from '@client/shared/components/button';
-import { useLogout } from '@client/features/auth/logout';
 
 import { filterLinks } from '../../utils';
 

@@ -1,27 +1,13 @@
-import { useMemo } from 'react';
-
 import { Input } from '@client/shared/components/input';
-import { AuthForm } from '@client/features/auth/_components/auth-form';
-import { useOAuthSignIn } from '@client/features/auth/oauth';
-import { useSignIn } from '@client/features/auth/sign-in';
+import { AuthForm, useOAuthSignIn } from '@client/features/auth';
 import { AuthLayout } from '@client/widgets/page-layouts/auth';
-import { usePasswordField, useTextField } from '@libs/validate-react';
-import { validationRules } from '@libs/validate';
+import { routes } from '@client/navigation';
+import { useSignInForm } from '@client/features/auth/hooks/use-sign-in';
 
 export const SignInPage = () => {
   document.title = 'Вход';
 
-  const loginField = useTextField({
-    name: 'login',
-    rules: [validationRules.required()],
-  });
-  const passwordField = usePasswordField({
-    name: 'password',
-    rules: [validationRules.required()],
-  });
-  const fields = useMemo(() => [loginField, passwordField], [loginField, passwordField]);
-
-  const { signIn } = useSignIn();
+  const { fields, form } = useSignInForm({});
   const { signIn: oauthSignIn } = useOAuthSignIn();
 
   // TODO вынести пароль как отдельный тип ввода
@@ -29,13 +15,15 @@ export const SignInPage = () => {
   return (
     <AuthLayout>
       <AuthForm
-        title="Sign In"
-        submitText="Sign In"
-        fields={fields}
-        onSubmit={signIn}
+        title="Вход"
+        submitText="Войти"
+        form={form}
+        appendLink={routes.auth.signUp.path}
+        appendText="Нет укканта?"
+        appendLinkText="Загеристрироваться"
         onOAuthSubmit={oauthSignIn}>
-        <Input.TextInput label="Login" {...loginField.props} error={loginField.error} />
-        <Input.TextInput label="Password" {...passwordField.props} error={passwordField.error} />
+        <Input.TextInput label="Login" {...fields.login.props} />
+        <Input.TextInput label="Password" {...fields.password.props} />
       </AuthForm>
     </AuthLayout>
   );

@@ -1,8 +1,13 @@
 import { Avatar, InfoList, User } from '@client/entities/user';
 import { useDialog } from '@client/shared/components/dialog';
-import { useEditUserInfo, InfoEditor } from '@client/features/viewer/edit-info';
-import { useEditAvatar, AvatarEditor } from '@client/features/viewer/edit-avatar';
-import { useEditPassword, PasswordEditor } from '@client/features/viewer/edit-password';
+import {
+  useEditUserInfo,
+  InfoEditor,
+  useEditAvatar,
+  AvatarEditor,
+  useEditPassword,
+  PasswordEditor,
+} from '@client/features/edit-viewer';
 import { Button } from '@client/shared/components/button';
 
 import styles from './Account.module.scss';

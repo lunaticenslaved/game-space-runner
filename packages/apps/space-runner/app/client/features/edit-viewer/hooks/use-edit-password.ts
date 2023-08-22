@@ -2,18 +2,18 @@ import { useCallback, useState } from 'react';
 
 import { QueryHandler } from '@client/shared/api';
 
-export const useEditUserInfo = ({ onError, onSuccess }: QueryHandler) => {
+export const useEditPassword = ({ onError, onSuccess }: QueryHandler) => {
   const [isFetching, setFetching] = useState(false);
 
   const mutate = useCallback(async () => {
     setFetching(true);
 
     try {
-      onSuccess();
+      if (onSuccess) onSuccess();
     } catch (error) {
       console.error(error);
 
-      onError();
+      if (onError) onError();
     }
 
     setFetching(false);

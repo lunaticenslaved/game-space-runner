@@ -5,11 +5,12 @@ import {
   PropsWithChildren,
   useMemo,
 } from 'react';
+import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
 import { Spinner } from '../spinner';
 
-import './button.scss';
+import styles from './button.module.scss';
 
 type OwnButtonProps = {
   disabled?: boolean;
@@ -34,24 +35,21 @@ export const Button = ({
   ...otherProps
 }: ButtonProps) => {
   const className = useMemo(() => {
-    return cn(classNameProps, {
-      basicButton: true,
-      'basicButton--link': view === 'link',
-      'button--loading': loading,
-    });
+    return cn(styles.button, classNameProps);
   }, [classNameProps, loading, view]);
   const props = useMemo(() => ({ ...otherProps, className }), [className, otherProps]);
   const content = useMemo(() => {
     return (
       <Fragment>
-        <div className="button__content">{children}</div>
-        <div className="button__spinner">{loading ? <Spinner /> : null}</div>
+        <div className={styles.content}>{children}</div>
+        <div className={styles.spinner}>{loading ? <Spinner /> : null}</div>
       </Fragment>
     );
   }, [children, loading]);
 
   if ('href' in props) {
-    return content;
+    const { href } = props;
+    return <Link to={href}>{content}</Link>;
   }
 
   const { type } = props;

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import { useViewer } from '@client/features/viewer/get-viewer';
+import { useViewer } from '@client/features/auth';
 import { RouteSetting, routes } from '@client/navigation';
 
 export type RouteGuardProps = {

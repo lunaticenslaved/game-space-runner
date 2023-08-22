@@ -1,31 +1,38 @@
-import { ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 
 import { Button } from '@client/shared/components/button';
-import { UseFormProps, useForm } from '@libs/validate-react';
+import { StyledLink } from '@client/shared/components/styled-link';
+import { UseFormState } from '@libs/validate-react';
 
 import styles from './auth-form.module.scss';
 
 export type AuthFormProps = {
-  children: ReactNode;
   title: string;
   submitText: string;
   authError?: string;
+  appendText: string;
+  appendLink: string;
+  appendLinkText: string;
+  form: UseFormState;
   onOAuthSubmit: () => void;
-} & UseFormProps;
+} & PropsWithChildren;
 
 export const AuthForm = ({
-  children,
   title,
   authError,
   submitText,
+  appendText,
+  appendLink,
+  appendLinkText,
   onOAuthSubmit,
-  ...formProps
+  form,
+  children,
 }: AuthFormProps) => {
-  const { props, isSubmitting } = useForm(formProps);
+  const { props: formProps, isSubmitting } = form;
 
   return (
     <div className={styles.root}>
-      <form className={styles.form} {...props}>
+      <form className={styles.form} {...formProps}>
         <h1 className={styles.header}>{title}</h1>
 
         {children}
@@ -38,6 +45,12 @@ export const AuthForm = ({
         <Button className={styles.button} disabled={isSubmitting} onClick={onOAuthSubmit}>
           Войти с Yandex
         </Button>
+
+        <div className={styles.append}>
+          <p>
+            {appendText} <StyledLink to={appendLink}>{appendLinkText}</StyledLink>
+          </p>
+        </div>
       </form>
     </div>
   );

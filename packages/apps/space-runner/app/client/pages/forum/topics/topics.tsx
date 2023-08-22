@@ -5,7 +5,7 @@ import { ViewPlaceholder } from '@client/shared/components/view-placeholder';
 import { useDialog } from '@client/shared/components/dialog';
 import { useForumNavigation } from '@client/navigation';
 import { TopicFormDialog, TopicList, useCreateTopic, useListTopic } from '@client/entities/topic';
-import { useViewer } from '@client/features/viewer/get-viewer';
+import { useViewer } from '@client/features/auth';
 
 import styles from './topics.module.scss';
 

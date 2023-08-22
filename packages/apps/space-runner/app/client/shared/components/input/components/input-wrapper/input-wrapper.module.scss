@@ -19,6 +19,7 @@
 .label {
   text-align: start;
   min-width: 100%;
+  margin-bottom: 8px;
 }
 
 .error {
@@ -29,4 +30,5 @@
   text-overflow: ellipsis;
   width: 0;
   min-width: 100%;
+  height: 24px;
 }

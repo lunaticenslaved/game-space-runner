@@ -11,10 +11,10 @@ export const useCreateTopic = ({ onError, onSuccess }: QueryHandler<Topic>) => {
     setSubmitting(true);
 
     try {
-      onSuccess({ id: 1, title: '', createdAt: '', content: '' });
+      if (onSuccess) onSuccess({ id: 1, title: '', createdAt: '', content: '' });
     } catch (error) {
       console.log(error);
-      onError();
+      if (onError) onError();
     }
 
     setSubmitting(false);

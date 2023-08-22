@@ -1,39 +1,12 @@
-import { useMemo } from 'react';
-
 import { Input } from '@client/shared/components/input';
-import { AuthForm } from '@client/features/auth/_components/auth-form';
-import { useOAuthSignIn } from '@client/features/auth/oauth';
-import { useSignUp } from '@client/features/auth/sign-up';
+import { AuthForm, useSignUpForm, useOAuthSignIn } from '@client/features/auth';
 import { AuthLayout } from '@client/widgets/page-layouts/auth';
-import { usePasswordField, useTextField } from '@libs/validate-react';
-import { validationRules } from '@libs/validate';
+import { routes } from '@client/navigation';
 
 export const SignUpPage = () => {
   document.title = 'Регистрация';
 
-  const emailField = useTextField({ name: 'email', rules: [validationRules.required()] });
-  const loginField = useTextField({ name: 'login', rules: [validationRules.required()] });
-  const firstNameField = useTextField({ name: 'firstName', rules: [validationRules.required()] });
-  const secondNameField = useTextField({ name: 'secondName', rules: [validationRules.required()] });
-  const phoneField = useTextField({ name: 'phone', rules: [validationRules.required()] });
-  const passwordField = usePasswordField({ name: 'password', rules: [validationRules.required()] });
-  const passwordConfirmField = usePasswordField({
-    name: 'passwordConfirm',
-    rules: [validationRules.required()],
-  });
-  const fields = useMemo(
-    () => [
-      emailField,
-      firstNameField,
-      secondNameField,
-      phoneField,
-      passwordField,
-      passwordConfirmField,
-    ],
-    [emailField, firstNameField, passwordConfirmField, passwordField, phoneField, secondNameField]
-  );
-
-  const { signUp } = useSignUp();
+  const { form, fields } = useSignUpForm({});
   const { signIn: oauthSignIn } = useOAuthSignIn();
 
   // TODO вынести пароль как отдельный тип ввода
@@ -41,18 +14,19 @@ export const SignUpPage = () => {
   return (
     <AuthLayout>
       <AuthForm
-        title="Sign In"
-        submitText="Sign In"
-        fields={fields}
-        onSubmit={signUp}
+        title="Регистрация"
+        submitText="Зарегистрироваться"
+        appendLink={routes.auth.signIn.path}
+        appendText="Уже есть аккаунт?"
+        appendLinkText="Войти"
+        form={form}
         onOAuthSubmit={oauthSignIn}>
-        <Input.TextInput label="Email" {...emailField.props} />
-        <Input.TextInput label="Login" {...loginField.props} />
-        <Input.TextInput label="First Name" {...firstNameField.props} />
-        <Input.TextInput label="Second Name" {...secondNameField.props} />
-        <Input.TextInput label="Phone" {...phoneField.props} />
-        <Input.TextInput label="Password" {...passwordField.props} />
-        <Input.TextInput label="Password Repeat" {...passwordConfirmField.props} />
+        <Input.TextInput label="E-mail" {...fields.email.props} />
+        <Input.TextInput label="Логин" {...fields.login.props} />
+        <Input.TextInput label="Имя" {...fields.name.props} />
+        <Input.TextInput label="Телефон" {...fields.phone.props} />
+        <Input.TextInput label="Пароль" {...fields.password.props} />
+        <Input.TextInput label="Повторите пароль" {...fields.passwordConfirm.props} />
       </AuthForm>
     </AuthLayout>
   );

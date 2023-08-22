@@ -13,10 +13,10 @@ export const useCreateComment = ({ onError, onSuccess }: UseCreateCommentProps) 
     setFetching(true);
 
     try {
-      onSuccess();
+      if (onSuccess) onSuccess();
     } catch (error) {
       console.error(error);
-      onError();
+      if (onError) onError();
     }
 
     setFetching(false);

@@ -14,24 +14,22 @@ import { Router as ProfileRouter } from './profile';
 import { Router as ErrorRouter } from './error';
 import styles from './index.module.scss';
 
-const DefaultLayout = (
+const layout = (
   <div className={styles.root}>
-    <Suspense fallback={<ViewPlaceholder />}>
-      <PageErrorBoundary>
-        <Navbar />
+    <Navbar />
 
-        <main className={styles.main}>
-          <Suspense fallback={<ViewPlaceholder />}>
-            <Outlet />
-          </Suspense>
-        </main>
+    <main className={styles.main}>
+      <PageErrorBoundary>
+        <Suspense fallback={<ViewPlaceholder />}>
+          <Outlet />
+        </Suspense>
       </PageErrorBoundary>
-    </Suspense>
+    </main>
   </div>
 );
 
 export const Pages = (
-  <Route element={DefaultLayout}>
+  <Route element={layout}>
     {HomeRouter}
     {LeaderBoardRouter}
     {ProfileRouter}
