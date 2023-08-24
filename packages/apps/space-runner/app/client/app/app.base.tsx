@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes } from 'react-router-dom';
+import { Routes } from 'react-router-dom';
 import { Provider as StoreProvider } from 'react-redux';
 
 import { Pages } from '@client/pages';
@@ -12,11 +12,9 @@ export type AppProps = {
 
 export function App({ store }: AppProps) {
   return (
-    <BrowserRouter>
-      <StoreProvider store={store}>
-        <Routes>{Pages}</Routes>
-      </StoreProvider>
-    </BrowserRouter>
+    <StoreProvider store={store}>
+      <Routes>{Pages}</Routes>
+    </StoreProvider>
   );
 }
 
