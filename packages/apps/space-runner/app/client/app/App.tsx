@@ -17,3 +17,5 @@ export function App() {
     </StoreProvider>
   );
 }
+
+export default App;

@@ -13,6 +13,7 @@ export default defineConfig({
       '@client': resolve(__dirname, './app/client'),
       '@libs': resolve(__dirname, './app/libs'),
       '@shared': resolve(__dirname, './app/shared'),
+      '@server': resolve(__dirname, './app/server'),
     },
   },
 });

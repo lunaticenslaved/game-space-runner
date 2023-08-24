@@ -1,0 +1,38 @@
+{
+  "extends": "../../../../../tsconfig.base.json",
+  "ts-node": {
+    "require": ["tsconfig-paths/register"],
+    "files": true
+  },
+  "tsc-alias": {
+    "verbose": false,
+    "resolveFullPaths": true
+  },
+  "compilerOptions": {
+    "composite": false,
+    "strict": true,
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": false,
+    "declarationMap": false,
+    "useDefineForClassFields": false,
+    "noImplicitAny": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "esnext",
+    "module": "commonjs",
+    "lib": ["DOM", "es2019", "esnext.asynciterable"],
+    "types": ["node", "jest"],
+
+    "baseUrl": "..",
+    "paths": {
+      "@client/*": ["./client/*"],
+      "@libs/*": ["./libs/*"],
+      "@shared/*": ["./shared/*"],
+      "@server/*": ["./server/*"]
+    }
+  }
+}

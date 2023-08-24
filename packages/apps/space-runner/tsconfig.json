@@ -1,14 +1,25 @@
 {
+  "ts-node": {
+    "require": ["tsconfig-paths/register"],
+    "files": true,
+    "esm": true
+  },
+  "tsc-alias": {
+    "verbose": false,
+    "resolveFullPaths": true
+  },
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "target": "es6",
+    "lib": ["DOM", "es2019", "esnext.asynciterable"],
     "module": "ESNext",
     "skipLibCheck": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "useDefineForClassFields": false,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
     "allowImportingTsExtensions": true,
+    "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
@@ -23,7 +34,8 @@
     "paths": {
       "@client/*": ["./app/client/*"],
       "@libs/*": ["./app/libs/*"],
-      "@shared/*": ["./app/shared/*"]
+      "@shared/*": ["./app/shared/*"],
+      "@server/*": ["./app/server/*"]
     }
   },
   "include": ["app"],
