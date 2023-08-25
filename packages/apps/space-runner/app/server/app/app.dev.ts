@@ -9,6 +9,7 @@ import bodyParser from 'body-parser';
 import { createStore } from '@client/shared/store';
 import { PORT, CORS_ORIGIN_WHITELIST } from '@server/constants';
 import { dbConnect } from '@server/db';
+import { addAuthRoutes } from '@server/controllers/auth';
 
 import { ROOT_PATH } from './constants';
 
@@ -35,6 +36,8 @@ export async function createApp() {
   });
 
   app.use(vite.middlewares);
+
+  addAuthRoutes(app);
 
   // let staticFiles: string[];
 
