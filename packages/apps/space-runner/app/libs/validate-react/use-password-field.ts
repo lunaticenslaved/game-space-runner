@@ -17,7 +17,7 @@ type UsePasswordFieldProps = {
   onBlur?: InputHTMLAttributes<Element>['onBlur'];
 } & FormFieldProps<Value>;
 
-type UsePasswordFieldState = FormFieldState<
+export type PasswordFieldState = FormFieldState<
   Value,
   {
     type: 'password';
@@ -29,7 +29,7 @@ type UsePasswordFieldState = FormFieldState<
   }
 >;
 
-export const usePasswordField = (props: UsePasswordFieldProps): UsePasswordFieldState => {
+export const usePasswordField = (props: UsePasswordFieldProps): PasswordFieldState => {
   const { rules, name, value: initialValue = '' } = props;
 
   const [value, setValue] = useState(initialValue);

@@ -1,11 +1,18 @@
-import { ValidationError } from '@server/errors/validation';
-import { createAction, validateObj } from '@server/utils';
-import { SignInRequest, signInValidator } from '@shared/api/auth';
+import { ValidationError } from '@shared/errors';
+import { createAction, validateObj } from '@server/shared/utils';
+import { SignInRequest, authApi } from '@shared/api';
 
 export const signIn = createAction<SignInRequest>(async ({ body }) => {
-  const { errors } = await validateObj(signInValidator)(body);
+  const { errors } = await validateObj(authApi.signIn.validator)(body);
+
+  console.log(body);
 
   if (errors) {
-    throw new ValidationError(errors);
+    throw new ValidationError({ errors });
   }
+
+  return {
+    id: 1,
+    login: 'login',
+  };
 });

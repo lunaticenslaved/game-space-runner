@@ -31,13 +31,17 @@ export const Button = ({
   loading,
   children,
   view = 'button',
-  className: classNameProps,
+  className: classNameProp,
   ...otherProps
 }: ButtonProps) => {
   const className = useMemo(() => {
-    return cn(styles.button, classNameProps);
-  }, [classNameProps, loading, view]);
-  const props = useMemo(() => ({ ...otherProps, className }), [className, otherProps]);
+    return cn(styles.root, classNameProp, {
+      [styles.loading]: loading,
+    });
+  }, [classNameProp, loading, view]);
+  const props = useMemo(() => {
+    return { ...otherProps, className };
+  }, [className, otherProps]);
   const content = useMemo(() => {
     return (
       <Fragment>
@@ -49,7 +53,11 @@ export const Button = ({
 
   if ('href' in props) {
     const { href } = props;
-    return <Link to={href}>{content}</Link>;
+    return (
+      <Link to={href} {...props}>
+        {content}
+      </Link>
+    );
   }
 
   const { type } = props;

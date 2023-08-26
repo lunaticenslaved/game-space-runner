@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 
 import { Button } from '@client/shared/components/button';
 import { StyledLink } from '@client/shared/components/styled-link';
-import { UseFormState } from '@libs/validate-react';
+import { FormState } from '@libs/validate-react';
 
 import styles from './auth-form.module.scss';
 
@@ -13,7 +13,7 @@ export type AuthFormProps = {
   appendText: string;
   appendLink: string;
   appendLinkText: string;
-  form: UseFormState;
+  form: FormState;
   onOAuthSubmit: () => void;
 } & PropsWithChildren;
 

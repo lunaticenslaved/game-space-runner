@@ -7,11 +7,11 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 
 import { createStore } from '@client/shared/store';
-import { PORT, CORS_ORIGIN_WHITELIST } from '@server/constants';
-import { dbConnect } from '@server/db';
-import { addAuthRoutes } from '@server/controllers/auth';
+import { PORT, CORS_ORIGIN_WHITELIST } from '@server/shared/constants';
+import { context } from '@server/shared/context';
 
 import { ROOT_PATH } from './constants';
+import { addRouter } from './actions';
 
 const CLIENT_RENDER_FILE_PATH = path.resolve(ROOT_PATH, 'app/client/index.ssr.tsx');
 const CLIENT_HTML_FILE_PATH = path.resolve(ROOT_PATH, 'index.html');
@@ -27,7 +27,7 @@ export async function createApp() {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
 
-  await dbConnect().then(() => {});
+  await context.prisma.$connect();
 
   const vite = await createViteServer({
     server: { middlewareMode: true },
@@ -37,7 +37,7 @@ export async function createApp() {
 
   app.use(vite.middlewares);
 
-  addAuthRoutes(app);
+  addRouter(app);
 
   // let staticFiles: string[];
 

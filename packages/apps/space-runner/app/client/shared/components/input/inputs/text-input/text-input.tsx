@@ -20,13 +20,9 @@ export const TextInput = ({
   onChange,
 }: TextInputProps) => {
   const [value, setValue] = useState(valueProp);
-
   const handleChange: ChangeEventHandler<HTMLInputElement> = useCallback(
     e => {
-      const { value: newValue } = e.target;
-
-      setValue(newValue);
-
+      setValue(e.target.value);
       if (onChange) onChange(e);
     },
     [onChange]

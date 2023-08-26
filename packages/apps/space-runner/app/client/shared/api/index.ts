@@ -7,6 +7,6 @@ export type QueryHandler<T = void> = {
 
 export const api = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: '/fakeApi' }),
+  baseQuery: fetchBaseQuery({ baseUrl: '/' }),
   endpoints: () => ({}),
 });

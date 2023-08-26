@@ -3,7 +3,7 @@
 $buttonBgColor: $primaryColor;
 $buttonBgColorHonver: $primaryColorDarken;
 
-.button {
+.root {
   display: block;
   background-color: $buttonBgColor;
   color: $white;
@@ -11,21 +11,31 @@ $buttonBgColorHonver: $primaryColorDarken;
   border-radius: 8px;
   text-align: center;
   width: 100%;
+  min-width: max-content;
   text-decoration: none;
   cursor: pointer;
   position: relative;
   padding: 16px 24px;
   font-weight: 600;
   transition: background-color 0.75s ease-out;
-  letter-spacing: 1.2;
 
   &:hover {
     background-color: $buttonBgColorHonver;
   }
 }
 
-.content {
-}
+.loading {
+  .content {
+    opacity: 0;
+  }
 
-.spinner {
+  .spinner {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    top: 25%;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
 }

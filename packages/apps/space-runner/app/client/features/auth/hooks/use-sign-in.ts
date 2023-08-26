@@ -3,33 +3,46 @@ import { useCallback, useMemo } from 'react';
 import { QueryHandler } from '@client/shared/api';
 import { SignInResponse, useSignInMutation } from '@client/shared/api/auth';
 import { validationRules } from '@libs/validate';
-import { usePasswordField, useTextField } from '@libs/validate-react';
+import { FormState, usePasswordField, useTextField } from '@libs/validate-react';
 import { useForm } from '@libs/validate-react';
+import { authApi } from '@shared/api';
 
 export const useSignInForm = ({ onSuccess, onError }: QueryHandler<SignInResponse>) => {
   const [mutate] = useSignInMutation();
 
   const loginField = useTextField({
     name: 'login',
-    rules: [validationRules.required()],
+    rules: [authApi.signIn.validator.login],
   });
   const passwordField = usePasswordField({
     name: 'password',
     rules: [validationRules.required()],
   });
 
-  const signIn = useCallback(async () => {
-    try {
-      const response = await mutate({});
+  const signIn = useCallback(
+    async ({ clear, isSubmitting }: FormState) => {
+      if (isSubmitting) return;
 
-      if (onSuccess) onSuccess(response);
-    } catch {
-      if (onError) onError();
-    }
-  }, []);
+      try {
+        const response = await mutate({
+          login: loginField.value,
+          password: passwordField.value,
+        }).unwrap();
 
-  const fields = useMemo(() => [loginField, passwordField], []);
-  const form = useForm({ fields, onSubmit: signIn });
+        if (onSuccess) onSuccess(response);
+
+        clear();
+      } catch {
+        if (onError) onError();
+      }
+    },
+    [loginField, passwordField]
+  );
+
+  const form = useForm({
+    fields: [loginField, passwordField],
+    onSubmit: signIn,
+  });
 
   return useMemo(
     () => ({
@@ -39,6 +52,6 @@ export const useSignInForm = ({ onSuccess, onError }: QueryHandler<SignInRespons
         password: passwordField,
       },
     }),
-    []
+    [form, loginField, passwordField]
   );
 };

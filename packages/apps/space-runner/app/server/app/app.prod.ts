@@ -6,20 +6,14 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 
-import { createReduxStore } from '@workspace/shared';
-import { dbConnect } from '@db';
-import userRouter from '@routers/UserRouter';
-import topicRouter from '@routers/TopicRouter';
-import commentRouter from '@routers/CommentRouter';
-import replyRouter from '@routers/ReplyRouter';
-import reactionRouter from '@routers/ReactionRouter';
-import emojiReactionRouter from '@routers/EmojiReactionRouter';
-import { PORT, CORS_ORIGIN_WHITELIST } from '@constants';
+import { createStore } from '@client/shared/store';
+import { PORT, CORS_ORIGIN_WHITELIST } from '@server/shared/constants';
+import { context } from '@server/shared/context';
 
-import { CLIENT_PATH } from './constants';
+import { ROOT_PATH } from './constants';
 
-const CLIENT_DIST_PATH = path.resolve(CLIENT_PATH, 'dist');
-const CLIENT_SSR_DIST_PATH = path.resolve(CLIENT_PATH, 'ssr-dist');
+const CLIENT_DIST_PATH = path.resolve(ROOT_PATH, 'dist');
+const CLIENT_SSR_DIST_PATH = path.resolve(ROOT_PATH, 'ssr-dist');
 const CLIENT_RENDER_FILE_PATH = path.resolve(CLIENT_SSR_DIST_PATH, 'client.cjs');
 const CLIENT_HTML_FILE_PATH = path.resolve(CLIENT_DIST_PATH, 'index.html');
 const CLIENT_ASSETS_PATH = path.resolve(CLIENT_DIST_PATH, 'assets');
@@ -39,14 +33,15 @@ export async function createApp() {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
 
-  await dbConnect().then(() => {
-    app.use('/api/v1/user', userRouter);
-    app.use('/api/v1/topic', topicRouter);
-    app.use('/api/v1/comment', commentRouter);
-    app.use('/api/v1/reply', replyRouter);
-    app.use('/api/v1/reaction', reactionRouter);
-    app.use('/api/v1/emoji-reactions', emojiReactionRouter);
-  });
+  await context.prisma.$connect();
+  //   await dbConnect().then(() => {
+  //     app.use('/api/v1/user', userRouter);
+  //     app.use('/api/v1/topic', topicRouter);
+  //     app.use('/api/v1/comment', commentRouter);
+  //     app.use('/api/v1/reply', replyRouter);
+  //     app.use('/api/v1/reaction', reactionRouter);
+  //     app.use('/api/v1/emoji-reactions', emojiReactionRouter);
+  //   });
 
   app.use('/assets', express.static(CLIENT_ASSETS_PATH));
 
@@ -73,7 +68,7 @@ export async function createApp() {
       const template = fs.readFileSync(CLIENT_HTML_FILE_PATH, 'utf-8');
       const render = (await import(CLIENT_RENDER_FILE_PATH)).render;
 
-      const store = createReduxStore();
+      const store = createStore();
       const appHtml = await render(url, store);
       const storeState = store.getState();
       const storeIncrementHtml = `

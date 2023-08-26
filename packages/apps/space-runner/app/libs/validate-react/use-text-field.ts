@@ -17,7 +17,7 @@ type UseTextFieldProps = {
   onBlur?: InputHTMLAttributes<Element>['onBlur'];
 } & FormFieldProps<Value>;
 
-type UseTextFieldState = FormFieldState<
+export type TextFieldState = FormFieldState<
   Value,
   {
     type: 'text';
@@ -29,7 +29,7 @@ type UseTextFieldState = FormFieldState<
   }
 >;
 
-export const useTextField = (props: UseTextFieldProps): UseTextFieldState => {
+export const useTextField = (props: UseTextFieldProps): TextFieldState => {
   const { rules, name, value: initialValue = '' } = props;
 
   const [value, setValue] = useState(initialValue);
@@ -37,14 +37,14 @@ export const useTextField = (props: UseTextFieldProps): UseTextFieldState => {
 
   const onChange: ChangeEventHandler<Element> = useCallback(
     async event => {
-      if (props.onChange) {
-        props.onChange(event);
-      }
-
       const { value } = event.target;
 
       setValue(value);
       setError(await validateValue(value, rules));
+
+      if (props.onChange) {
+        props.onChange(event);
+      }
     },
     [props, rules]
   );
