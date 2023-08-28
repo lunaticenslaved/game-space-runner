@@ -2,7 +2,7 @@
   "name": "workspace",
   "private": true,
   "scripts": {
-    "bootstrap": "yarn && node init.js && npx lerna clean -y && yarn && npx lerna bootstrap",
+    "bootstrap": "yarn -v && yarn && node init.js && npx lerna clean -y && yarn && npx lerna bootstrap",
     "build": "npx lerna run build --scope=space-runner",
     "dev": "npx lerna run dev --scope=space-runner",
     "dev:client": "npx lerna run dev:client --scope=space-runner",
@@ -38,6 +38,5 @@
   },
   "dependencies": {
     "tslib": "^2.3.0"
-  },
-  "packageManager": "yarn@2.4.0"
+  }
 }
