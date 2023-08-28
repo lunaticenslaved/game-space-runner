@@ -17,12 +17,8 @@ export const GamePage = () => {
   const onLoose = useCallback(() => {}, []);
   const onFinish = useCallback(() => {}, []);
 
-  if (!viewer) {
-    return null;
-  }
-
   useEffect(() => {
-    if (ref.current) {
+    if (ref.current && viewer) {
       ref.current.width = window.innerWidth;
       ref.current.height = window.innerHeight - HEADER_HEIGHT;
       const logic = new GameLogic({
@@ -66,6 +62,10 @@ export const GamePage = () => {
       };
     }
   }, [ref]);
+
+  if (!viewer) {
+    return null;
+  }
 
   return <canvas ref={ref} className={styles.container}></canvas>;
 };

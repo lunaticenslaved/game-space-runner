@@ -1,4 +1,3 @@
-import { lazy } from 'react';
 import { hydrateRoot, createRoot } from 'react-dom/client';
 
 import { IS_RUNNING_SSR_IN_BROWSER } from '@client/shared/constants';
