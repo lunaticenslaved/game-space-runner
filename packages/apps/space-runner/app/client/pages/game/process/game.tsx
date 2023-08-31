@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { GameLogic, fullscreenHandler, gameControlHandler } from '@client/entities/game';
-import { useViewer } from '@client/features/auth';
+import { useViewer } from '@client/features/auth/get-viewer';
 
 import styles from './game.module.scss';
 

@@ -11,7 +11,7 @@ import {
 } from '@client/entities/comment';
 import { dateConvert } from '@client/shared/utils/dates';
 import { useGetTopic } from '@client/entities/topic';
-import { useViewer } from '@client/features/auth';
+import { useViewer } from '@client/features/auth/get-viewer';
 
 import styles from './topic.module.scss';
 

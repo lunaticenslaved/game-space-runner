@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { useViewer } from '@client/features/auth';
+import { useViewer } from '@client/features/auth/get-viewer';
 
 import { Account, Loading } from './views';
 import style from './profile.module.scss';

@@ -1,5 +1,5 @@
 import { Button } from '@client/shared/components/button';
-import { useViewer } from '@client/features/auth';
+import { useViewer } from '@client/features/auth/get-viewer';
 import { useAuthNavigation } from '@client/navigation';
 
 import styles from './landing.module.scss';

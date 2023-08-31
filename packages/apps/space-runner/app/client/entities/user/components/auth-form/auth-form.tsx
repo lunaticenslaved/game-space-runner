@@ -14,7 +14,6 @@ export type AuthFormProps = {
   appendLink: string;
   appendLinkText: string;
   form: FormState;
-  onOAuthSubmit: () => void;
 } & PropsWithChildren;
 
 export const AuthForm = ({
@@ -24,7 +23,6 @@ export const AuthForm = ({
   appendText,
   appendLink,
   appendLinkText,
-  onOAuthSubmit,
   form,
   children,
 }: AuthFormProps) => {
@@ -41,9 +39,6 @@ export const AuthForm = ({
 
         <Button className={styles.button} type="submit" loading={isSubmitting}>
           {submitText}
-        </Button>
-        <Button className={styles.button} disabled={isSubmitting} onClick={onOAuthSubmit}>
-          Войти с Yandex
         </Button>
 
         <div className={styles.append}>

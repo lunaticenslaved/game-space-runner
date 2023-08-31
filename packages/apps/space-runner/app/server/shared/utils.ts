@@ -15,7 +15,7 @@ export const createAction =
     try {
       const result = await fn(request, response, context);
 
-      return response.status(300).json({ result, error: null });
+      return response.status(200).json({ result, error: null });
     } catch (err) {
       if (err instanceof ApiError) {
         const error = err as ApiError;

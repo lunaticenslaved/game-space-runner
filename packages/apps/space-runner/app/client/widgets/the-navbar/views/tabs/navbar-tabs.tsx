@@ -2,13 +2,14 @@ import { useMemo } from 'react';
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 
-import { useViewer, useLogout } from '@client/features/auth';
+import { useViewer } from '@client/features/auth/get-viewer';
 import { routes } from '@client/navigation';
-import { Button } from '@client/shared/components/button';
+import { LogoutButton } from '@client/features/auth/logout';
 
 import { filterLinks } from '../../utils';
 
 import styles from './navbar-tabs.module.scss';
+import { ToSignInButton } from '@client/features/auth/sign-in';
 
 const links = [
   { title: 'Главная', route: routes.home },
@@ -20,7 +21,6 @@ const links = [
 
 export const NavbarTabs = () => {
   const { isAuthenticated, access } = useViewer();
-  const { logout } = useLogout();
   const availableLinks = useMemo(() => filterLinks({ links, access }), [isAuthenticated, links]);
 
   return (
@@ -41,13 +41,7 @@ export const NavbarTabs = () => {
         ))}
       </div>
 
-      <div className={styles.button}>
-        {isAuthenticated ? (
-          <Button onClick={logout}>Выйти</Button>
-        ) : (
-          <Button href={routes.auth.signIn.path}>Войти</Button>
-        )}
-      </div>
+      <div className={styles.button}>{isAuthenticated ? <LogoutButton /> : <ToSignInButton />}</div>
     </div>
   );
 };
