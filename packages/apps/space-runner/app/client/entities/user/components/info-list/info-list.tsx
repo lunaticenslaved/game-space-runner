@@ -6,23 +6,8 @@ import styles from './info-list.module.scss';
 
 export type InfoListProps = User;
 
-export const InfoList = ({
-  email,
-  login,
-  firstName: firstName,
-  secondName: secondName,
-  phone,
-}: InfoListProps) => {
-  const items = useMemo(
-    () => [
-      { title: 'Почта', value: email },
-      { title: 'Логин', value: login },
-      { title: 'Имя', value: firstName },
-      { title: 'Фамилия', value: secondName },
-      { title: 'Телефон', value: phone },
-    ],
-    [email, login, firstName, secondName, phone]
-  );
+export const InfoList = ({ login }: InfoListProps) => {
+  const items = useMemo(() => [{ title: 'Логин', value: login }], [login]);
 
   return (
     <ul className={styles.list}>

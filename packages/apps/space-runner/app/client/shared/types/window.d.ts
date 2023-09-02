@@ -1,4 +1,4 @@
-import { RootState } from './store';
+import { RootState } from '@client/shared/store';
 
 declare global {
   interface Window {

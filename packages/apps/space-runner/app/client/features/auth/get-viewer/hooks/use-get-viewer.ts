@@ -1,10 +1,11 @@
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 
-import { QueryHandler } from '@client/shared/api';
 import { AccessLevel } from '@client/shared/navigation';
+import { useAppSelector } from '@client/shared/store';
 
 export const useViewer = () => {
-  const isAuthenticated = useMemo(() => false, []);
+  const viewer = useAppSelector(state => state.state.viewer);
+  const isAuthenticated = useMemo(() => !!viewer, [viewer]);
   const access = useMemo(() => {
     const list = [AccessLevel.Common];
 
@@ -15,21 +16,11 @@ export const useViewer = () => {
     }
 
     return list;
-  }, []);
-
-  const get = useCallback(async ({ onError, onSuccess }: QueryHandler) => {
-    try {
-      if (onSuccess) onSuccess();
-    } catch (error) {
-      console.error(error);
-      if (onError) onError();
-    }
-  }, []);
+  }, [isAuthenticated]);
 
   return {
-    viewer: undefined,
+    viewer,
     isAuthenticated,
     access,
-    get,
   };
 };

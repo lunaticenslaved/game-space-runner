@@ -1,3 +1,5 @@
+import { User } from '@prisma/client';
+
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
@@ -13,4 +15,8 @@ declare global {
   }
 }
 
-export {};
+declare module 'express' {
+  export interface Request {
+    user?: Omit<User, 'password'>;
+  }
+}

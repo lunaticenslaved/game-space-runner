@@ -5,7 +5,7 @@ import UserIcon from '@client/shared/assets/svg/plain/user-icon.svg';
 import styles from './avatar.module.scss';
 
 export type AvatarProps = {
-  link: string | null;
+  link?: string;
 };
 
 export const Avatar = ({ link }: AvatarProps) => {

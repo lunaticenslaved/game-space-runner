@@ -8,11 +8,13 @@ import { useForm, usePasswordField, useTextField } from '@libs/validate-react';
 import { authApi } from '@shared/api';
 import { validationRules } from '@libs/validate';
 import { unwrapOperation } from '@shared/utils';
+import { setViewer, useAppDispatch } from '@client/shared/store';
 
 export const SignInForm = () => {
   const [mutate] = useSignInMutation();
   const [authError, setAuthError] = useState<string>();
   const navigation = useAppNavigation();
+  const dispatch = useAppDispatch();
 
   const loginField = useTextField({
     name: 'login',
@@ -30,7 +32,8 @@ export const SignInForm = () => {
         login: loginField.value,
         password: passwordField.value,
       }),
-      onSuccess: () => {
+      onSuccess: viewer => {
+        dispatch(setViewer(viewer));
         navigation.home.toRoot();
       },
       onError: error => {
@@ -52,7 +55,7 @@ export const SignInForm = () => {
       authError={authError}
       appendLink={routes.auth.signUp.path}
       appendText="Нет аккаунта?"
-      appendLinkText="Загеристрироваться">
+      appendLinkText="Зарегистрироваться">
       <Input.TextInput label="Login" {...loginField.props} />
       <Input.TextInput label="Password" {...passwordField.props} />
     </AuthForm>

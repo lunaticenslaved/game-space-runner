@@ -7,11 +7,13 @@ import { useSignUpMutation } from '@client/shared/api/auth';
 import { useForm, usePasswordField, useTextField } from '@libs/validate-react';
 import { validationRules } from '@libs/validate';
 import { unwrapOperation } from '@shared/utils';
+import { setViewer, useAppDispatch } from '@client/shared/store';
 
 export const SignUpForm = () => {
   const [mutate] = useSignUpMutation();
   const [authError, setAuthError] = useState<string>();
   const navigation = useAppNavigation();
+  const dispatch = useAppDispatch();
 
   const loginField = useTextField({ name: 'login', rules: [validationRules.required()] });
   const passwordField = usePasswordField({ name: 'password', rules: [validationRules.required()] });
@@ -36,7 +38,8 @@ export const SignUpForm = () => {
         login: loginField.value,
         password: passwordField.value,
       }),
-      onSuccess: () => {
+      onSuccess: viewer => {
+        dispatch(setViewer(viewer));
         navigation.home.toRoot();
       },
       onError: error => {

@@ -12,11 +12,11 @@ const element = document.getElementById('root') as HTMLElement;
 const render = async () => {
   console.log('IS_RUNNING_SSR_IN_BROWSER', IS_RUNNING_SSR_IN_BROWSER);
 
-  const app = <App store={createStore()} />;
-
   if (IS_RUNNING_SSR_IN_BROWSER) {
+    const app = <App store={createStore(window.__REDUX_STORE__?.state.viewer)} />;
     hydrateRoot(element, app);
   } else {
+    const app = <App store={createStore()} />;
     createRoot(element).render(app);
   }
 };

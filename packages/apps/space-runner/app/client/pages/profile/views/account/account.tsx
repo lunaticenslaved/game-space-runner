@@ -48,9 +48,7 @@ export const Account = ({ user }: AccountProps) => {
 
       <div className={styles.content}>
         <Avatar link={user.avatar} />
-        <h4 className={styles.userName}>
-          {user.display_name ? user.display_name : `${user.firstName} ${user.secondName}`}
-        </h4>
+        <h4 className={styles.userName}>{user.login}</h4>
 
         <InfoList {...user} />
 

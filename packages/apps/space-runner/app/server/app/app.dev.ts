@@ -5,10 +5,12 @@ import express from 'express';
 import { createServer as createViteServer } from 'vite';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
+import { Request } from 'express';
 
-import { createStore } from '@client/shared/store';
+import { addUserFromCookie } from '@server/middlewares';
 import { PORT, CORS_ORIGIN_WHITELIST } from '@server/shared/constants';
 import { context } from '@server/shared/context';
+import { createStore } from '@client/shared/store';
 
 import { ROOT_PATH } from './constants';
 import { addRouter } from './actions';
@@ -49,8 +51,9 @@ export async function createApp() {
   //   }
   // });
 
-  app.use('*', async (req, res, next) => {
+  app.use('*', addUserFromCookie, async (req: Request, res, next) => {
     const url = req.originalUrl;
+    const user = req.user;
 
     try {
       const template = await vite.transformIndexHtml(
@@ -58,7 +61,12 @@ export async function createApp() {
         fs.readFileSync(CLIENT_HTML_FILE_PATH, 'utf-8')
       );
       const { render } = await vite.ssrLoadModule(CLIENT_RENDER_FILE_PATH);
-      const store = createStore();
+      const store = user
+        ? createStore({
+            id: user.id,
+            login: user.login,
+          })
+        : createStore();
       const appHtml = await render(url, store);
       const storeState = store.getState();
 

@@ -5,11 +5,11 @@ import cn from 'classnames';
 import { useViewer } from '@client/features/auth/get-viewer';
 import { routes } from '@client/shared/navigation';
 import { LogoutButton } from '@client/features/auth/logout';
+import { ToSignInButton } from '@client/features/auth/sign-in';
 
 import { filterLinks } from '../../utils';
 
 import styles from './navbar-tabs.module.scss';
-import { ToSignInButton } from '@client/features/auth/sign-in';
 
 const links = [
   { title: 'Главная', route: routes.home },

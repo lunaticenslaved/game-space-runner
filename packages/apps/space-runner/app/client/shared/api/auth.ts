@@ -25,7 +25,13 @@ export const authApi = api.injectEndpoints({
         method: 'POST',
       }),
     }),
+    logout: build.mutation<void, void>({
+      query: () => ({
+        url: aithApiBase.logout.url.get(),
+        method: 'POST',
+      }),
+    }),
   }),
 });
 
-export const { useSignInMutation, useSignUpMutation } = authApi;
+export const { useSignInMutation, useSignUpMutation, useLogoutMutation } = authApi;
