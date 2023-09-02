@@ -1,6 +1,6 @@
 import { getResourceUrl } from '@client/shared/utils';
 import { Icon } from '@client/shared/components/icon';
-import UserIcon from '@client/shared/assets/svg/plain/user-icon.svg';
+import { ReactComponent as UserIcon } from '@client/shared/assets/svg/plain/user-icon.svg';
 
 import styles from './avatar.module.scss';
 

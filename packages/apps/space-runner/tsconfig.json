@@ -33,6 +33,8 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
 
+    "types": ["vite-plugin-svgr/client"],
+
     "paths": {
       "@client/*": ["./app/client/*"],
       "@libs/*": ["./app/libs/*"],

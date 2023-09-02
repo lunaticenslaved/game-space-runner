@@ -1,4 +1,4 @@
-import { createAction } from '@server/shared/utils';
+import { createAction } from '../_utils';
 
 export const logout = createAction(async (request, response, context) => {
   const user = request.user;

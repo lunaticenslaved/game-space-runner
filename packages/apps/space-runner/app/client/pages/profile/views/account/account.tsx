@@ -5,7 +5,7 @@ import { PasswordEditor } from '@client/features/viewer/edit-password';
 import { AvatarEditor } from '@client/features/viewer/edit-avatar';
 import { Button } from '@client/shared/components/button';
 
-import styles from './Account.module.scss';
+import styles from './account.module.scss';
 
 export interface AccountProps {
   user: User;

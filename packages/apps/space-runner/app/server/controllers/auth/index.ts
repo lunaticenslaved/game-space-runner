@@ -1,5 +1,5 @@
 import { addUserFromCookie } from '@server/middlewares';
-import { createRoutes } from '@server/shared/utils';
+import { createRoutes } from '../_utils';
 import { authApi } from '@shared/api';
 
 import { signIn } from './sign-in';

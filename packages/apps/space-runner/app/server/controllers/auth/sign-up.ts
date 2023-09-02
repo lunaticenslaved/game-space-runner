@@ -1,6 +1,7 @@
 import { ConflictError, ValidationError } from '@shared/errors';
-import { createAction, createHash, validateRequest } from '@server/shared/utils';
 import { SignUpRequest, authApi } from '@shared/api';
+
+import { createAction, createHash, validateRequest } from '../_utils';
 
 import { createTokens, createUserDTO } from './_utils';
 

@@ -1,9 +1,10 @@
+import bcrypt from 'bcrypt';
+
 import { AuthenticationError, ValidationError } from '@shared/errors';
-import { createAction, createHash, validateRequest } from '@server/shared/utils';
 import { SignInRequest, authApi } from '@shared/api';
 
+import { createAction, createHash, validateRequest } from '../_utils';
 import { createTokens, createUserDTO } from './_utils';
-import bcrypt from 'bcrypt';
 
 export const signIn = createAction<SignInRequest>(async ({ body, headers }, response, context) => {
   await validateRequest(authApi.signIn.validator, body);

@@ -15,7 +15,7 @@ import { createStore } from '@client/shared/store';
 import { ROOT_PATH } from './constants';
 import { addRouter } from './actions';
 
-const CLIENT_RENDER_FILE_PATH = path.resolve(ROOT_PATH, 'app/client/index.ssr.tsx');
+const CLIENT_RENDER_FILE_PATH = path.resolve(ROOT_PATH, 'app/client/index.server.tsx');
 const CLIENT_HTML_FILE_PATH = path.resolve(ROOT_PATH, 'index.html');
 
 export async function createApp() {
