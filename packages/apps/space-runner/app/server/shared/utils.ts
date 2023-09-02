@@ -1,17 +1,22 @@
 import { Request, Response, Express } from 'express';
+import bcrypt from 'bcrypt';
+
 import { Context, context } from '@server/shared/context';
 import { OperationResponse, ValidationObject } from '@shared/utils';
-import { ApiError, UnknownError } from '@shared/errors';
+import { ApiError, UnknownError, ValidationError } from '@shared/errors';
 
 export const createAction =
   <TBody = unknown, TResponse = unknown>(
     fn: (
-      request: Request<TBody>,
+      request: Request<unknown, unknown, TBody>,
       response: Response,
       context: Context
     ) => Promise<TResponse> | TResponse
   ) =>
-  async (request: Request<TBody>, response: Response<OperationResponse<TResponse | null>>) => {
+  async (
+    request: Request<unknown, unknown, TBody>,
+    response: Response<OperationResponse<TResponse | null>>
+  ) => {
     try {
       const result = await fn(request, response, context);
 
@@ -53,4 +58,19 @@ export const validateObj = (rules: ValidationObject) => async (values: Record<st
 
 export const createRoutes = (fn: (app: Express) => void) => (app: Express) => {
   fn(app);
+};
+
+export const createHash = async (str: string) => {
+  return bcrypt.hash(str, 10);
+};
+
+export const validateRequest = async (
+  validator: ValidationObject,
+  data: Record<string, unknown>
+) => {
+  const { errors } = await validateObj(validator)(data);
+
+  if (errors) {
+    throw new ValidationError({ errors });
+  }
 };

@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 import { Route } from 'react-router-dom';
 
-import { routes } from '@client/navigation';
+import { routes } from '@client/shared/navigation';
 
 const Error404Page = lazy(() => import('./error-404'));
 const Error500Page = lazy(() => import('./error-500'));

@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { useViewer } from '@client/features/auth/get-viewer';
-import { RouteSetting, routes } from '@client/navigation';
+import { RouteSetting, routes } from '@client/shared/navigation';
 
 export type RouteGuardProps = {
   route: RouteSetting;

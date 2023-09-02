@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 
 import { useViewer } from '@client/features/auth/get-viewer';
-import { routes } from '@client/navigation';
+import { routes } from '@client/shared/navigation';
 import { LogoutButton } from '@client/features/auth/logout';
 
 import { filterLinks } from '../../utils';

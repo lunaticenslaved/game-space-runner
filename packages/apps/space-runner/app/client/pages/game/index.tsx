@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 import { Route } from 'react-router-dom';
 
-import { routes } from '@client/navigation';
+import { routes } from '@client/shared/navigation';
 
 const StartPage = lazy(() => import('./start'));
 const EndPage = lazy(() => import('./end'));

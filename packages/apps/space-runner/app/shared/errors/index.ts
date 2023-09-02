@@ -9,3 +9,11 @@ export class ValidationError extends ApiError {
 export class UnknownError extends ApiError {
   public type = ApiErrorType.UnknownError;
 }
+
+export class AuthenticationError extends ApiError {
+  public type = ApiErrorType.AuthenticationError;
+}
+
+export class ConflictError extends ApiError {
+  public type = ApiErrorType.ConflictError;
+}

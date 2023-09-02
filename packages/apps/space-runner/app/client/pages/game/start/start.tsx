@@ -2,20 +2,20 @@ import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { LevelListType, levelList } from '@client/entities/game';
-import { useGameNavigation } from '@client/navigation';
+import { useAppNavigation } from '@client/shared/navigation';
 import { Input } from '@client/shared/components/input';
 import { Button } from '@client/shared/components/button';
 
 import styles from './start.module.scss';
 
 export function Start() {
-  const gameNavigation = useGameNavigation();
+  const appNavigation = useAppNavigation();
   const [active, setActive] = useState(
     levelList.find(l => l.id === sessionStorage.getItem('level')) || levelList[0]
   );
   const navigate = useNavigate();
   const startGame = useCallback(
-    () => gameNavigation.toGame({ level: active.id }),
+    () => appNavigation.game.toGame({ level: active.id }),
     [navigate, active]
   );
 

@@ -1,7 +1,7 @@
 import { Fragment, useCallback, useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { useGameNavigation } from '@client/navigation';
+import { useAppNavigation } from '@client/shared/navigation';
 import { Button } from '@client/shared/components/button';
 import { gameAudio } from '@client/entities/game';
 
@@ -9,8 +9,8 @@ import styles from './end.module.scss';
 
 export function End() {
   const { state } = useLocation();
-  const navigate = useGameNavigation();
-  const retry = useCallback(() => navigate.toGameStart(state), [navigate, state]);
+  const appNavigation = useAppNavigation();
+  const retry = useCallback(() => appNavigation.game.toGameStart(state), [appNavigation, state]);
 
   const isWin = useMemo(() => !!state?.win, [state?.win]);
 

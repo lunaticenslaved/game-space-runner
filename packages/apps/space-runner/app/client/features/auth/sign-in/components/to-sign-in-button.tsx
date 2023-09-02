@@ -1,4 +1,4 @@
-import { routes } from '@client/navigation';
+import { routes } from '@client/shared/navigation';
 import { Button } from '@client/shared/components/button';
 
 export const ToSignInButton = () => {

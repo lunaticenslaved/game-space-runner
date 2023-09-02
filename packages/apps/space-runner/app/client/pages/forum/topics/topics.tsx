@@ -3,7 +3,7 @@ import { Button } from '@client/shared/components/button';
 import { Grid } from '@client/shared/components/grid';
 import { ViewPlaceholder } from '@client/shared/components/view-placeholder';
 import { useDialog } from '@client/shared/components/dialog';
-import { useForumNavigation } from '@client/navigation';
+import { useAppNavigation } from '@client/shared/navigation';
 import { TopicFormDialog, TopicList, useCreateTopic, useListTopic } from '@client/entities/topic';
 import { useViewer } from '@client/features/auth/get-viewer';
 
@@ -13,7 +13,7 @@ export const ForumPage = () => {
   document.title = 'Forum';
 
   const { isAuthenticated } = useViewer();
-  const navigate = useForumNavigation();
+  const appNavigation = useAppNavigation();
   const {
     isFetching,
     query: fetchTopicList,
@@ -26,7 +26,7 @@ export const ForumPage = () => {
   const { createPost } = useCreateTopic({
     onError: () => alert('Cannot create topic!'),
     onSuccess: topic => {
-      navigate.toTopic(topic);
+      appNavigation.forum.toTopic(topic);
       topicDialog.close();
     },
   });
@@ -59,7 +59,7 @@ export const ForumPage = () => {
                 )}
               </div>
 
-              <TopicList topics={topics} onTopicClick={navigate.toTopic} />
+              <TopicList topics={topics} onTopicClick={appNavigation.forum.toTopic} />
             </Grid.Col>
           </Grid.Row>
         </Grid.Container>

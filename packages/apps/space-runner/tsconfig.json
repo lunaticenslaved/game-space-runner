@@ -8,6 +8,7 @@
     "verbose": false,
     "resolveFullPaths": true
   },
+  "exclude": ["../../../../tsconfig.base.json"],
   "compilerOptions": {
     "target": "es6",
     "lib": ["DOM", "es2019", "esnext.asynciterable"],
@@ -30,6 +31,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
 
     "paths": {
       "@client/*": ["./app/client/*"],
@@ -38,6 +40,6 @@
       "@server/*": ["./app/server/*"]
     }
   },
-  "include": ["app"],
+  "include": ["./app"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

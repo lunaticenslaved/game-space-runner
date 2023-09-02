@@ -3,7 +3,7 @@ pre-commit:
   commands:
     lint:
       glob: '*.{ts,tsx}'
-      run: tsc -p ./packages/client/tsconfig.json --noEmit && tsc -p ./packages/server/tsconfig.json --noEmit && yarn eslint {staged_files}
+      run: tsc -p ./packages/apps/space-runner/tsconfig.json --noEmit && yarn eslint {staged_files}
     prettier:
       glob: '*.{ts,tsx,css,scss}'
       run: yarn prettier -w {staged_files}

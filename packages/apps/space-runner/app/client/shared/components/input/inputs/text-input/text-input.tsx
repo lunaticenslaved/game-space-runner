@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useCallback, useState } from 'react';
+import { ChangeEventHandler, useCallback, useEffect, useState } from 'react';
 
 import { InputWrapper, InputWrapperProps } from '../../components';
 
@@ -27,6 +27,10 @@ export const TextInput = ({
     },
     [onChange]
   );
+
+  useEffect(() => {
+    setValue(valueProp);
+  }, [valueProp]);
 
   return (
     <InputWrapper label={label} error={error}>

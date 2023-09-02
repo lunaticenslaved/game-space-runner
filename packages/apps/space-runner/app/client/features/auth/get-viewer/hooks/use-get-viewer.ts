@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 
 import { QueryHandler } from '@client/shared/api';
-import { AccessLevel } from '@client/navigation';
+import { AccessLevel } from '@client/shared/navigation';
 
 export const useViewer = () => {
   const isAuthenticated = useMemo(() => false, []);

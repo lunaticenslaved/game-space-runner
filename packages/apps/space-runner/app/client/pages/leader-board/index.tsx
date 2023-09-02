@@ -1,4 +1,4 @@
-import { routes } from '@client/navigation';
+import { routes } from '@client/shared/navigation';
 import { lazy } from 'react';
 import { Route } from 'react-router-dom';
 

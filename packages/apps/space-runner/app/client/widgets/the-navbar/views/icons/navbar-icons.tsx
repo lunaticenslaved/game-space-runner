@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
-import { routes } from '@client/navigation';
+import { routes } from '@client/shared/navigation';
 import { useViewer } from '@client/features/auth/get-viewer';
 import HomeSVG from '@client/shared/assets/svg/colored/home-icon.svg';
 import LeaderboardSVG from '@client/shared/assets/svg/colored/leaderboard-icon.svg';

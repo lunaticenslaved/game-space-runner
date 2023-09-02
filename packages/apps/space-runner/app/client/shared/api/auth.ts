@@ -1,16 +1,17 @@
-import { SignInRequest, SignInResponse, authApi as aithApiBase } from '@shared/api';
+import {
+  SignInRequest,
+  SignInResponse,
+  SignUpRequest,
+  SignUpResponse,
+  authApi as aithApiBase,
+} from '@shared/api';
 export type { SignInRequest, SignInResponse } from '@shared/api/auth';
-import { transformResponse } from '@shared/utils';
 
 import { api } from '.';
-
-export type SignUpRequest = {};
-export type SignUpResponse = {};
 
 export const authApi = api.injectEndpoints({
   endpoints: build => ({
     signIn: build.mutation<SignInResponse, SignInRequest>({
-      transformResponse,
       query: body => ({
         body,
         url: aithApiBase.signIn.url.get(),
@@ -18,9 +19,9 @@ export const authApi = api.injectEndpoints({
       }),
     }),
     signUp: build.mutation<SignUpResponse, SignUpRequest>({
-      transformResponse,
-      query: () => ({
-        url: '/example',
+      query: body => ({
+        body,
+        url: aithApiBase.signUp.url.get(),
         method: 'POST',
       }),
     }),

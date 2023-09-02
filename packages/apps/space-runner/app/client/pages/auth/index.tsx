@@ -1,8 +1,8 @@
 import { lazy } from 'react';
 import { Route } from 'react-router-dom';
 
-import { routes } from '@client/navigation';
-import { RouteGuard } from '@client/navigation/route-guard';
+import { routes } from '@client/shared/navigation';
+import { RouteGuard } from '@client/shared/navigation/route-guard';
 
 const SignInPage = lazy(() => import('./sign-in'));
 const SignUpPage = lazy(() => import('./sign-up'));

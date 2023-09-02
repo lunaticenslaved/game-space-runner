@@ -1,4 +1,4 @@
-import { AccessLevel, RouteSetting } from '@client/navigation';
+import { AccessLevel, RouteSetting } from '@client/shared/navigation';
 
 type FilterLinksProps<T> = {
   links: T[];

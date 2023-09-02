@@ -28,6 +28,10 @@ export const useForm = ({ fields, onSubmit: onSubmitProp }: UseFormProps): FormS
     async event => {
       event.preventDefault();
 
+      if (isSubmitting) {
+        return;
+      }
+
       const isFormValid = (await Promise.all(fields.map(field => field.isValid()))).every(
         isValid => isValid
       );

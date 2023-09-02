@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 import { Route } from 'react-router-dom';
 
-import { routes } from '@client/navigation';
+import { routes } from '@client/shared/navigation';
 
 const TopicsPage = lazy(() => import('./topics'));
 const TopicPage = lazy(() => import('./topic'));

@@ -2,7 +2,7 @@ import { Component, ErrorInfo, PropsWithChildren } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Location, useLocation } from 'react-router';
 
-import { routes } from '@client/navigation';
+import { routes } from '@client/shared/navigation';
 import { StyledLink } from '@client/shared/components/styled-link';
 
 import style from './PageErrorBoundary.module.scss';

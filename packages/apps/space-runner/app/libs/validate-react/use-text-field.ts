@@ -78,6 +78,8 @@ export const useTextField = (props: UseTextFieldProps): TextFieldState => {
     },
     isValid,
     value,
-    clear: () => setValue(''),
+    clear: () => {
+      setValue('');
+    },
   };
 };
