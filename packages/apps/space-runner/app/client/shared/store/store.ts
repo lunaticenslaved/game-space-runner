@@ -1,23 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 
+import { api } from '@client/shared/api';
 import { User } from '@client/entities/user';
 
-interface State {
-  viewer?: User;
-}
+import { reducer } from './state';
 
-const initialState: State = {};
+export const createStore = (viewer?: User) => {
+  console.log('INITIAL USER', viewer);
 
-const slice = createSlice({
-  name: 'state',
-  initialState,
-  reducers: {
-    setViewer(state, action: PayloadAction<User | undefined>) {
-      state.viewer = action.payload;
+  return configureStore({
+    reducer: {
+      state: reducer,
+      [api.reducerPath]: api.reducer,
     },
-  },
-});
-
-export const { setViewer } = slice.actions;
-export const reducer = slice.reducer;
+    preloadedState: {
+      state: {
+        viewer,
+      },
+    },
+    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(api.middleware),
+  });
+};
