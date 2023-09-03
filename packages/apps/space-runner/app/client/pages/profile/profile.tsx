@@ -15,7 +15,7 @@ const ProfilePage = () => {
     }
 
     return <Account user={viewer} />;
-  }, []);
+  }, [viewer]);
 
   return <div className={style.page}>{content}</div>;
 };

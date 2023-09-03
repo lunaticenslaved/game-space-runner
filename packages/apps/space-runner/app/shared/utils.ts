@@ -7,6 +7,7 @@ import {
   ConflictError,
   UnknownError,
   ValidationError,
+  NotFoundError,
 } from './errors';
 
 export type ValidationObject = Record<string, Validator<unknown>>;
@@ -16,6 +17,7 @@ const errorsMap: Record<ApiErrorType, (data: ApiError) => ApiError> = {
   [ApiErrorType.ValidationError]: data => new ValidationError(data),
   [ApiErrorType.AuthenticationError]: data => new AuthenticationError(data),
   [ApiErrorType.ConflictError]: data => new ConflictError(data),
+  [ApiErrorType.NotFoundError]: data => new NotFoundError(data),
 };
 
 export type OperationResponse<TData> =
@@ -41,11 +43,11 @@ export type UnwrapOperationProps<T> = {
 export const unwrapOperation = <T>({ response, onSuccess, onError }: UnwrapOperationProps<T>) => {
   if ('data' in response) {
     if (onSuccess) {
-      onSuccess(response.data);
+      onSuccess((response.data as { result: T }).result);
     }
   } else {
     if (onError) {
-      const { error } = (response.error as any).data;
+      const { error } = (response.error as { data: { error: ApiError } }).data;
       const apiError = errorsMap[error.type as ApiErrorType](error);
       onError(apiError);
     }

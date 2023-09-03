@@ -17,3 +17,7 @@ export class AuthenticationError extends ApiError {
 export class ConflictError extends ApiError {
   public type = ApiErrorType.ConflictError;
 }
+
+export class NotFoundError extends ApiError {
+  public type = ApiErrorType.NotFoundError;
+}

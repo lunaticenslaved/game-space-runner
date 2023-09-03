@@ -3,6 +3,7 @@ export enum ApiErrorType {
   UnknownError = 'UnknownError',
   AuthenticationError = 'AuthenticationError',
   ConflictError = 'ConflictError',
+  NotFoundError = 'NotFoundError',
 }
 
 type ApiErrorProps = {

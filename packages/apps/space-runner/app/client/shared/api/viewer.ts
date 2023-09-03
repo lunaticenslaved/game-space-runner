@@ -1,24 +1,26 @@
+import { UpdateViewerInfoRequest, UpdateViewerInfoResponse } from '@shared/api/viewer/update-info';
+import { viewerApi as viewerApiBase } from '@shared/api';
+
 import { api } from '.';
 
-export type UpdateAvatarRequest = {};
-export type UpdateAvatarResponse = {};
+export type UpdateAvatarRequest = object;
+export type UpdateAvatarResponse = object;
 
-export type UpdateInfoRequest = {};
-export type UpdateInfoResponse = {};
+export type UpdatePasswordRequest = object;
+export type UpdatePasswordResponse = object;
 
-export type UpdatePasswordRequest = {};
-export type UpdatePasswordResponse = {};
-
-export const authApi = api.injectEndpoints({
+export const viewerApi = api.injectEndpoints({
   endpoints: build => ({
     updateAvatar: build.mutation<UpdateAvatarResponse, UpdateAvatarRequest>({
       query: () => ({
         url: '/example',
       }),
     }),
-    updateInfo: build.mutation<UpdateInfoResponse, UpdateInfoRequest>({
-      query: () => ({
-        url: '/example',
+    updateInfo: build.mutation<UpdateViewerInfoResponse, UpdateViewerInfoRequest>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: viewerApiBase.updateInfo.url.get(),
       }),
     }),
     updatePassword: build.mutation<UpdatePasswordResponse, UpdatePasswordRequest>({
@@ -30,4 +32,4 @@ export const authApi = api.injectEndpoints({
 });
 
 export const { useUpdateAvatarMutation, useUpdateInfoMutation, useUpdatePasswordMutation } =
-  authApi;
+  viewerApi;

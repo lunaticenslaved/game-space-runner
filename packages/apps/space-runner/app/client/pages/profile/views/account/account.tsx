@@ -23,8 +23,7 @@ export const Account = ({ user }: AccountProps) => {
           user={user}
           isOpen={editUserDialog.isOpen}
           onClose={editUserDialog.close}
-          onSubmitSuccess={editPasswordDialog.close}
-          onSubmitError={() => alert('cannot update info')}
+          onUpdated={editUserDialog.close}
         />
       )}
 

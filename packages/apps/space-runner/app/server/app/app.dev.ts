@@ -11,9 +11,9 @@ import { addUserFromCookie } from '@server/middlewares';
 import { PORT, CORS_ORIGIN_WHITELIST } from '@server/shared/constants';
 import { context } from '@server/shared/context';
 import { createStore } from '@client/shared/store';
+import { addRouter } from '@server/controllers';
 
 import { ROOT_PATH } from './constants';
-import { addRouter } from './actions';
 
 const CLIENT_RENDER_FILE_PATH = path.resolve(ROOT_PATH, 'app/client/index.server.tsx');
 const CLIENT_HTML_FILE_PATH = path.resolve(ROOT_PATH, 'index.html');

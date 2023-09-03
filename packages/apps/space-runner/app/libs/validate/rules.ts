@@ -24,16 +24,6 @@ export const email = (): Validator<string> => {
   };
 };
 
-export const login = (): Validator<string> => {
-  return (value = '') => {
-    if (/^\d+$/.test(value) && /^[a-zA-Z0-9][a-zA-Z0-9_-]{2,19}$/.test(value)) {
-      return null;
-    }
-
-    return 'Требования к логину: от 3 до 20 символов, латиница, может содержать цифры, но не состоять из них, без пробелов, без спецсимволов (допустимы дефис и нижнее подчёркивание)';
-  };
-};
-
 export const name = (): Validator<string> => {
   return (value = '') => {
     if (/^[А-ЯЁA-Z][а-яёa-z]+(-[А-ЯЁA-Z][а-яёa-z]+)?$/.test(value)) {

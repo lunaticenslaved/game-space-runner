@@ -5,9 +5,10 @@ import { Input } from '@client/shared/components/input';
 import { Dialog } from '@client/shared/components/dialog';
 import { User } from '@client/entities/user';
 import { useUpdateInfoMutation } from '@client/shared/api/viewer';
-
-import { validationRules } from '@libs/validate';
+import { unwrapOperation } from '@shared/utils';
 import { useTextField, useForm } from '@libs/validate-react';
+import { viewerApi } from '@shared/api';
+import { setViewer, useAppDispatch } from '@client/shared/store';
 
 import styles from './info-editor.module.scss';
 
@@ -23,35 +24,31 @@ export type InfoEditorProps = {
   user: User;
   isOpen: boolean;
   onClose: () => void;
-  onSubmitSuccess: () => void;
-  onSubmitError: () => void;
+  onUpdated: () => void;
 };
 
-export const InfoEditor = ({
-  user,
-  isOpen,
-  onClose,
-  onSubmitSuccess,
-  onSubmitError,
-}: InfoEditorProps) => {
+export const InfoEditor = ({ user, isOpen, onClose, onUpdated }: InfoEditorProps) => {
   const [mutate] = useUpdateInfoMutation();
+  const dispatch = useAppDispatch();
 
   const loginField = useTextField({
-    value: user.login || '',
+    value: user.login,
     name: 'login',
-    rules: [validationRules.login()],
+    rules: [viewerApi.updateInfo.validator.login],
   });
 
   const onSubmit = useCallback(async () => {
-    try {
-      await mutate({});
-
-      onSubmitSuccess();
-    } catch (error) {
-      console.error(error);
-      onSubmitError();
-    }
-  }, []);
+    unwrapOperation({
+      response: await mutate({
+        login: loginField.value,
+      }),
+      onSuccess: viewer => {
+        dispatch(setViewer(viewer));
+        onUpdated();
+      },
+      onError: () => alert('Cannot update user!'),
+    });
+  }, [loginField.value, onUpdated, dispatch, mutate]);
 
   const { props, isSubmitting } = useForm({
     fields: [loginField],
