@@ -3,20 +3,25 @@ import { useCallback, useMemo, useState } from 'react';
 import { AuthForm } from '@client/entities/user';
 import { Input } from '@client/shared/components/input';
 import { routes, useAppNavigation } from '@client/shared/navigation';
-import { useSignUpMutation } from '@client/shared/api/auth';
 import { useForm, usePasswordField, useTextField } from '@libs/validate-react';
 import { validationRules } from '@libs/validate';
-import { unwrapOperation } from '@shared/utils';
 import { setViewer, useAppDispatch } from '@client/shared/store';
+import { API, API_VALIDATORS, useMutation } from '@shared/api2';
 
 export const SignUpForm = () => {
-  const [mutate] = useSignUpMutation();
+  const mutation = useMutation('sign-up', API.auth.signUp);
   const [authError, setAuthError] = useState<string>();
   const navigation = useAppNavigation();
   const dispatch = useAppDispatch();
 
-  const loginField = useTextField({ name: 'login', rules: [validationRules.required()] });
-  const passwordField = usePasswordField({ name: 'password', rules: [validationRules.required()] });
+  const loginField = useTextField({
+    name: 'login',
+    rules: [API_VALIDATORS.auth.signUp.login],
+  });
+  const passwordField = usePasswordField({
+    name: 'password',
+    rules: [API_VALIDATORS.auth.signUp.password],
+  });
   const passwordConfirmField = usePasswordField({
     name: 'passwordConfirm',
     rules: [
@@ -33,19 +38,21 @@ export const SignUpForm = () => {
 
   const signUp = useCallback(async () => {
     setAuthError(undefined);
-    unwrapOperation({
-      response: await mutate({
+    await mutation.mutateAsync(
+      {
         login: loginField.value,
         password: passwordField.value,
-      }),
-      onSuccess: viewer => {
-        dispatch(setViewer(viewer));
-        navigation.home.toRoot();
       },
-      onError: error => {
-        setAuthError(error.errors.join('\n'));
-      },
-    });
+      {
+        onSuccess(viewer) {
+          dispatch(setViewer(viewer));
+          navigation.home.toRoot();
+        },
+        onError(error) {
+          setAuthError(error.errors.join('\n'));
+        },
+      }
+    );
   }, [loginField, passwordField]);
 
   const form = useForm({ fields, onSubmit: signUp });

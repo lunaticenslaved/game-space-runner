@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import { QueryHandler } from '@client/shared/api';
+import { QueryHandler } from '@shared/api2';
 
 export interface UseCreateCommentProps extends QueryHandler {
   topicId: number;

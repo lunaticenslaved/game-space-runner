@@ -1,5 +1,4 @@
 import { Validator } from '@libs/validate';
-
 import {
   ApiError,
   ApiErrorType,
@@ -10,7 +9,7 @@ import {
   NotFoundError,
   FileNotProvidedError,
   UnauthorizedError,
-} from './errors';
+} from '@shared/errors';
 
 export type ValidationObject = Record<string, Validator<unknown>>;
 
@@ -34,17 +33,7 @@ export type OperationResponse<TData> =
       error: ApiError;
     };
 
-export type UnwrapOperationProps<T> = {
-  response:
-    | { data: T }
-    | {
-        error: unknown;
-      };
-  onSuccess?: (data: T) => void;
-  onError?: (error: ApiError) => void;
-};
-
-export const unwrapError = <TData>(response: OperationResponse<TData>) => {
+const unwrapError = <TData>(response: OperationResponse<TData>) => {
   const error = response.error;
 
   if (!error) {
@@ -54,16 +43,31 @@ export const unwrapError = <TData>(response: OperationResponse<TData>) => {
   return errorsMap[error.type as ApiErrorType](error);
 };
 
-export const unwrapOperation = <T>({ response, onSuccess, onError }: UnwrapOperationProps<T>) => {
-  if ('data' in response) {
-    if (onSuccess) {
-      onSuccess((response.data as { result: T }).result);
+export const createAction = <TResponse, TRequest>(fn: (data: TRequest) => Promise<Response>) => {
+  return async (data: TRequest) => {
+    try {
+      const response = await fn(data);
+      const body = (await response.json()) as OperationResponse<TResponse>;
+
+      if (body.error) {
+        throw unwrapError(body);
+      }
+
+      return body.result;
+    } catch (err) {
+      throw unwrapError(err as OperationResponse<TResponse>);
     }
-  } else {
-    if (onError) {
-      const { error } = (response.error as { data: { error: ApiError } }).data;
-      const apiError = errorsMap[error.type as ApiErrorType](error);
-      onError(apiError);
-    }
-  }
+  };
+};
+
+export const customFetch = async (input: RequestInfo | URL, init?: RequestInit | undefined) => {
+  const response = await fetch(input, {
+    ...init,
+    headers: {
+      'Content-Type': 'application/json',
+      ...init?.headers,
+    },
+  });
+
+  return response;
 };

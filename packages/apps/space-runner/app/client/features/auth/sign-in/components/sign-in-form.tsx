@@ -3,43 +3,43 @@ import { useCallback, useState } from 'react';
 import { AuthForm } from '@client/entities/user';
 import { Input } from '@client/shared/components/input';
 import { routes, useAppNavigation } from '@client/shared/navigation';
-import { useSignInMutation } from '@client/shared/api/auth';
 import { useForm, usePasswordField, useTextField } from '@libs/validate-react';
-import { authApi } from '@shared/api';
-import { validationRules } from '@libs/validate';
-import { unwrapOperation } from '@shared/utils';
 import { setViewer, useAppDispatch } from '@client/shared/store';
+import { API, API_VALIDATORS, useMutation } from '@shared/api2';
 
 export const SignInForm = () => {
-  const [mutate] = useSignInMutation();
+  const mutation = useMutation('sign-in', API.auth.signIn);
   const [authError, setAuthError] = useState<string>();
   const navigation = useAppNavigation();
   const dispatch = useAppDispatch();
 
   const loginField = useTextField({
     name: 'login',
-    rules: [authApi.signIn.validator.login],
+    rules: [API_VALIDATORS.auth.signIn.login],
   });
   const passwordField = usePasswordField({
     name: 'password',
-    rules: [validationRules.required()],
+    rules: [API_VALIDATORS.auth.signIn.password],
   });
 
   const signIn = useCallback(async () => {
     setAuthError(undefined);
-    unwrapOperation({
-      response: await mutate({
+    await mutation.mutateAsync(
+      {
         login: loginField.value,
         password: passwordField.value,
-      }),
-      onSuccess: viewer => {
-        dispatch(setViewer(viewer));
-        navigation.home.toRoot();
       },
-      onError: error => {
-        setAuthError(error.errors.join('\n'));
-      },
-    });
+      {
+        onSuccess(viewer) {
+          console.log(viewer);
+          dispatch(setViewer(viewer));
+          navigation.home.toRoot();
+        },
+        onError(error) {
+          setAuthError(error.errors.join('\n'));
+        },
+      }
+    );
   }, [loginField, passwordField]);
 
   const form = useForm({

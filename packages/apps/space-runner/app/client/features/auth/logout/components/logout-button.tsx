@@ -1,20 +1,18 @@
 import { useCallback } from 'react';
 
 import { Button } from '@client/shared/components/button';
-import { useLogoutMutation } from '@client/shared/api/auth';
-import { unwrapOperation } from '@shared/utils';
 import { useAppNavigation } from '@client/shared/navigation';
 import { setViewer, useAppDispatch } from '@client/shared/store';
+import { API, useMutation } from '@shared/api2';
 
 export const LogoutButton = () => {
-  const [mutate, { isLoading }] = useLogoutMutation();
+  const mutation = useMutation('logout', API.auth.logout);
   const appNavigation = useAppNavigation();
   const dispatch = useAppDispatch();
   const logout = useCallback(async () => {
-    unwrapOperation({
-      response: await mutate(),
-      onSuccess() {
-        dispatch(setViewer(undefined));
+    mutation.mutateAsync(undefined, {
+      onSuccess(viewer) {
+        dispatch(setViewer(viewer));
         appNavigation.home.toRoot();
       },
       onError() {
@@ -25,7 +23,7 @@ export const LogoutButton = () => {
   }, []);
 
   return (
-    <Button onClick={logout} disabled={isLoading} loading={isLoading}>
+    <Button onClick={logout} disabled={mutation.isLoading} loading={mutation.isLoading}>
       Выйти
     </Button>
   );

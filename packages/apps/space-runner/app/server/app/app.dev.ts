@@ -6,6 +6,7 @@ import { createServer as createViteServer } from 'vite';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import { Request } from 'express';
+import fileUpload from 'express-fileupload';
 
 import { addUserFromCookie } from '@server/middlewares';
 import { PORT, CORS_ORIGIN_WHITELIST } from '@server/shared/constants';
@@ -24,10 +25,15 @@ export async function createApp() {
   app.disable('x-powered-by');
   app.enable('trust proxy');
 
+  app.use(
+    fileUpload({
+      createParentPath: true,
+    })
+  );
   app.use(cookieParser());
   app.use(cors({ credentials: true, origin: CORS_ORIGIN_WHITELIST }));
   app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.urlencoded({ extended: true }));
 
   await context.prisma.$connect();
 

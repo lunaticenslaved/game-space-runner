@@ -21,3 +21,11 @@ export class ConflictError extends ApiError {
 export class NotFoundError extends ApiError {
   public type = ApiErrorType.NotFoundError;
 }
+
+export class FileNotProvidedError extends ApiError {
+  public type = ApiErrorType.FileNotProvidedError;
+}
+
+export class UnauthorizedError extends ApiError {
+  public type = ApiErrorType.UnauthorizedError;
+}

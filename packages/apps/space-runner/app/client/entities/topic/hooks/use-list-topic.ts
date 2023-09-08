@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import { QueryHandler } from '@client/shared/api';
+import { QueryHandler } from '@shared/api2';
 
 export const useListTopic = ({ onError, onSuccess }: QueryHandler) => {
   const [isFetching, setFetching] = useState(false);

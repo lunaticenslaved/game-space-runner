@@ -40,13 +40,12 @@ export const useFileField = (props: UseFieldFieldProps): UseFieldFieldState => {
         props.onChange(event);
       }
 
-      const { files } = event.target;
-      const file = files?.item(0) ?? undefined;
+      const file = event.target.files?.[0];
 
       setValue(file);
       setError(await validateValue(file, rules));
     },
-    [props, rules]
+    [props.onChange, rules]
   );
 
   const onBlur: FocusEventHandler<HTMLInputElement> = useCallback(

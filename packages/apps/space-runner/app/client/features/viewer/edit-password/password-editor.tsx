@@ -1,12 +1,11 @@
 import { Button } from '@client/shared/components/button';
 import { Dialog } from '@client/shared/components/dialog';
 import { Input } from '@client/shared/components/input';
-import { useUpdatePasswordMutation } from '@client/shared/api/viewer';
 import { useForm, usePasswordField, useTextField } from '@libs/validate-react';
-import { validationRules } from '@libs/validate';
 
 import styles from './password-editor.module.scss';
 import { useCallback } from 'react';
+import { API, API_VALIDATORS, useMutation } from '@shared/api2';
 
 export type PasswordEditorProps = {
   isOpen: boolean;
@@ -21,16 +20,16 @@ export const PasswordEditor = ({
   onSubmitSuccess,
   onSubmitError,
 }: PasswordEditorProps) => {
-  const [updatePassword] = useUpdatePasswordMutation();
+  const mutation = useMutation('auth-update-password', API.viewer.updatePassword);
   const oldPassField = usePasswordField({
     value: '',
     name: 'oldPassword',
-    rules: [],
+    rules: [API_VALIDATORS.viewer.updatePassword.oldPassword],
   });
   const newPassField = usePasswordField({
     value: '',
     name: 'newPassword',
-    rules: [validationRules.password()],
+    rules: [API_VALIDATORS.viewer.updatePassword.newPassword],
   });
   const repeatPassField = useTextField({
     value: '',
@@ -39,14 +38,21 @@ export const PasswordEditor = ({
   });
 
   const onSubmit = useCallback(async () => {
-    try {
-      await updatePassword({});
-
-      onSubmitSuccess();
-    } catch (error) {
-      console.error(error);
-      onSubmitError();
-    }
+    await mutation.mutateAsync(
+      {
+        oldPassword: oldPassField.value,
+        newPassword: newPassField.value,
+      },
+      {
+        onSuccess() {
+          onSubmitSuccess();
+        },
+        onError(error) {
+          console.error(error);
+          onSubmitError();
+        },
+      }
+    );
   }, []);
 
   const form = useForm({

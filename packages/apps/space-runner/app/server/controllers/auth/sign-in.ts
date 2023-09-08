@@ -1,13 +1,13 @@
 import bcrypt from 'bcrypt';
 
 import { AuthenticationError, ValidationError } from '@shared/errors';
-import { SignInRequest, authApi } from '@shared/api';
+import { SignInRequest, API_VALIDATORS } from '@shared/api2';
 
 import { createAction, createHash, validateRequest } from '../_utils';
 import { createTokens, createUserDTO } from './_utils';
 
 export const signIn = createAction<SignInRequest>(async ({ body, headers }, response, context) => {
-  await validateRequest(authApi.signIn.validator, body);
+  await validateRequest(API_VALIDATORS.auth.signIn, body);
 
   const userAgent = headers['user-agent'];
   const user = await context.prisma.user.findFirst({ where: { login: { equals: body.login } } });

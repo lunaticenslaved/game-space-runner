@@ -3,8 +3,8 @@ import { useCallback } from 'react';
 import { Button } from '@client/shared/components/button';
 import { Dialog } from '@client/shared/components/dialog';
 import { Input } from '@client/shared/components/input';
-import { useUpdateAvatarMutation } from '@client/shared/api/viewer';
 import { useFileField, useForm } from '@libs/validate-react';
+import { API, useMutation } from '@shared/api2';
 
 import styles from './avatar-editor.module.scss';
 
@@ -25,22 +25,33 @@ export const AvatarEditor = ({
   onSubmitError,
   onSubmitSuccess,
 }: AvatarEditorProps) => {
-  const [mutate] = useUpdateAvatarMutation();
-
+  const mutation = useMutation('auth-update-avatar', API.viewer.updateAvatar);
   const fileField = useFileField({
     name: 'file',
     rules: [value => (value ? null : 'Выберите файл')],
   });
 
   const editAvatar = useCallback(async () => {
-    try {
-      await mutate({});
+    console.log(fileField.value);
 
-      onSubmitSuccess();
-    } catch (error) {
-      console.error(error);
-      onSubmitError();
+    if (!fileField.value) {
+      return;
     }
+
+    await mutation.mutateAsync(
+      {
+        file: fileField.value,
+      },
+      {
+        onSuccess() {
+          onSubmitSuccess();
+        },
+        onError(error) {
+          console.error(error);
+          onSubmitError();
+        },
+      }
+    );
   }, []);
 
   const form = useForm({
