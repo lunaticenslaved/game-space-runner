@@ -14,6 +14,13 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 1,
     'react-hooks/rules-of-hooks': 'error', // For checking rules of hooks
     'react-hooks/exhaustive-deps': 'error', // For checking hook dependencies
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ]
   },
   ignorePatterns: ['dist', 'node_modules'],
 };
