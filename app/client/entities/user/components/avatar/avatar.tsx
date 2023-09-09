@@ -1,4 +1,3 @@
-import { getResourceUrl } from '@client/shared/utils';
 import { Icon } from '@client/shared/components/icon';
 import { ReactComponent as UserIcon } from '@client/shared/assets/svg/plain/user-icon.svg';
 
@@ -12,7 +11,7 @@ export const Avatar = ({ link }: AvatarProps) => {
   if (link) {
     return (
       <div className={styles.avatar}>
-        <img className={styles.image} src={getResourceUrl(link)} />
+        <img className={styles.image} src={link} />
       </div>
     );
   }

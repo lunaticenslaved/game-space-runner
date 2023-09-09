@@ -1,3 +1,7 @@
+import path from 'path';
+
+export const ROOT_PATH = path.resolve(__dirname, '../../../');
+
 export const APP_ENV = process.env.APP_ENV;
 export const IS_DEV = APP_ENV === 'dev';
 
@@ -8,3 +12,9 @@ export const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 export const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
 export const ACCESS_TOKEN_EXPIRES_IN = process.env.ACCESS_TOKEN_EXPIRES_IN;
 export const REFRESH_TOKEN_EXPIRES_IN = process.env.REFRESH_TOKEN_EXPIRES_IN;
+
+export const OBJECT_STORAGE_REGION = process.env.OBJECT_STORAGE_REGION;
+export const OBJECT_STORAGE_ENDPOINT = process.env.OBJECT_STORAGE_ENDPOINT;
+export const OBJECT_STORAGE_AVATARS_NAME = process.env.OBJECT_STORAGE_AVATARS_NAME;
+export const OBJECT_STORAGE_AVATARS_SECRET = process.env.OBJECT_STORAGE_AVATARS_SECRET;
+export const OBJECT_STORAGE_AVATARS_KEY_ID = process.env.OBJECT_STORAGE_AVATARS_KEY_ID;

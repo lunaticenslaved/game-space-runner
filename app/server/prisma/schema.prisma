@@ -33,7 +33,7 @@ model Session {
 model Avatar {
   id String @id @default(uuid())
 
-  path String @db.Text
+  link String @db.Text
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String

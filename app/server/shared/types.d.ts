@@ -11,6 +11,12 @@ declare global {
       ACCESS_TOKEN_EXPIRES_IN: string;
       REFRESH_TOKEN_EXPIRES_IN: string;
       PORT?: string;
+
+      OBJECT_STORAGE_REGION: string;
+      OBJECT_STORAGE_ENDPOINT: string;
+      OBJECT_STORAGE_AVATARS_NAME: string;
+      OBJECT_STORAGE_AVATARS_KEY_ID: string;
+      OBJECT_STORAGE_AVATARS_SECRET: string;
     }
   }
 }

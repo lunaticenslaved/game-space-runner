@@ -1,11 +1,11 @@
 export type User = {
   id: string;
   login: string;
-  avatar?: Avatar;
+  avatars: Avatar[];
 };
 
 export type Avatar = {
   id: string;
-  path: string;
+  link: string;
   userId: string;
 };

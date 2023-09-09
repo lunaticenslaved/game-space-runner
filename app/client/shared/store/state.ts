@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import { User } from '@client/entities/user';
+import { User } from '@shared/models/user';
 
 export interface State {
   viewer?: User;

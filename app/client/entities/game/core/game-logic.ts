@@ -1,4 +1,4 @@
-import { User } from '@client/entities/user';
+import { User } from '@shared/models/user';
 
 import { GenericObject } from './generic-object';
 import { PlayerFigure } from './player-figure';

@@ -14,7 +14,7 @@ export const authActions = {
       body: JSON.stringify(data),
     });
   }),
-  logout: createAction<SignUpResponse, void>(async () => {
+  logout: createAction<void, void>(async () => {
     return await customFetch('/api/auth/logout', {
       method: 'POST',
     });

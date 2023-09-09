@@ -1,11 +1,10 @@
+import { User } from '@shared/models/user';
+
 export type UpdateViewerInfoRequest = {
   login: string;
 };
 
-export type UpdateViewerInfoResponse = {
-  id: string;
-  login: string;
-};
+export type UpdateViewerInfoResponse = User;
 
 export type UpdateViewerAvatarRequest = {
   file: File;

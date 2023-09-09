@@ -13,8 +13,7 @@ import { PORT, CORS_ORIGIN_WHITELIST } from '@server/shared/constants';
 import { context } from '@server/shared/context';
 import { createStore } from '@client/shared/store';
 import { addRouter } from '@server/controllers';
-
-import { ROOT_PATH } from './constants';
+import { ROOT_PATH } from '@server/shared/constants';
 
 const CLIENT_RENDER_FILE_PATH = path.resolve(ROOT_PATH, 'app/client/index.server.tsx');
 const CLIENT_HTML_FILE_PATH = path.resolve(ROOT_PATH, 'index.html');
@@ -25,11 +24,7 @@ export async function createApp() {
   app.disable('x-powered-by');
   app.enable('trust proxy');
 
-  app.use(
-    fileUpload({
-      createParentPath: true,
-    }),
-  );
+  app.use(fileUpload());
   app.use(cookieParser());
   app.use(cors({ credentials: true, origin: CORS_ORIGIN_WHITELIST }));
   app.use(bodyParser.json());
@@ -59,20 +54,24 @@ export async function createApp() {
 
   app.use('*', addUserFromCookie, async (req: Request, res, next) => {
     const url = req.originalUrl;
-    const user = req.user;
 
     try {
       const template = await vite.transformIndexHtml(
         url,
         fs.readFileSync(CLIENT_HTML_FILE_PATH, 'utf-8'),
       );
-      const { render } = await vite.ssrLoadModule(CLIENT_RENDER_FILE_PATH);
-      const store = user
-        ? createStore({
-            id: user.id,
-            login: user.login,
+      const user = req.user
+        ? await context.prisma.user.findFirst({
+            where: { id: req.user.id },
+            select: {
+              id: true,
+              login: true,
+              avatars: true,
+            },
           })
-        : createStore();
+        : undefined;
+      const { render } = await vite.ssrLoadModule(CLIENT_RENDER_FILE_PATH);
+      const store = user ? createStore(user) : createStore();
       const appHtml = await render(url, store);
       const storeState = store.getState();
 

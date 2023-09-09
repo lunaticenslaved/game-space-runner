@@ -31,7 +31,6 @@ export const SignInForm = () => {
       },
       {
         onSuccess(viewer) {
-          console.log(viewer);
           dispatch(setViewer(viewer));
           navigation.home.toRoot();
         },

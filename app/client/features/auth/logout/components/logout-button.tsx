@@ -11,8 +11,8 @@ export const LogoutButton = () => {
   const dispatch = useAppDispatch();
   const logout = useCallback(async () => {
     mutation.mutateAsync(undefined, {
-      onSuccess(viewer) {
-        dispatch(setViewer(viewer));
+      onSuccess() {
+        dispatch(setViewer(undefined));
         appNavigation.home.toRoot();
       },
       onError() {

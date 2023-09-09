@@ -8,8 +8,7 @@ import bodyParser from 'body-parser';
 import { createStore } from '@client/shared/store';
 import { PORT, CORS_ORIGIN_WHITELIST } from '@server/shared/constants';
 import { context } from '@server/shared/context';
-
-import { ROOT_PATH } from './constants';
+import { ROOT_PATH } from '@server/shared/constants';
 
 const CLIENT_DIST_PATH = path.resolve(ROOT_PATH, 'dist');
 const CLIENT_SSR_DIST_PATH = path.resolve(ROOT_PATH, 'ssr-dist');

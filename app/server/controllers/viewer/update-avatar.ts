@@ -4,24 +4,27 @@ import { createAction } from '@server/controllers/_utils';
 import { FileNotProvidedError } from '@shared/errors';
 import { getUserFromRequest } from '@server/shared/utils';
 import { Avatar } from '@prisma/client';
+// import { generateFilePath } from '@server/shared/files';
+import { objectStorage } from '@server/shared/object-storage';
 
 export type UploadFileResponse = Avatar;
 
 export const updateAvatar = createAction(async (request, _, context) => {
-  const file = request.files?.[0] as UploadedFile | undefined;
+  const file = request.files?.file as UploadedFile | undefined;
   const user = getUserFromRequest(request);
 
   if (!file) {
-    throw new FileNotProvidedError({ errors: ['File not provided!'], status: 400 });
+    throw new FileNotProvidedError({
+      errors: ['File not provided!'],
+      status: 400,
+    });
   }
 
-  const path = './uploads/' + file.name;
-
-  file.mv(path);
+  const { link } = await objectStorage.avatar.uploadFile(file);
 
   const createdFile = await context.prisma.avatar.create({
     data: {
-      path,
+      link,
       user: { connect: { id: user.id } },
     },
   });

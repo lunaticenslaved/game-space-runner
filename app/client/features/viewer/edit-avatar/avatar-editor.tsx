@@ -16,7 +16,7 @@ export type AvatarEditorProps = {
   isOpen: boolean;
   onClose: () => void;
   onSubmitSuccess: () => void;
-  onSubmitError: () => void;
+  onSubmitError?: () => void;
 };
 
 export const AvatarEditor = ({
@@ -32,8 +32,6 @@ export const AvatarEditor = ({
   });
 
   const editAvatar = useCallback(async () => {
-    console.log(fileField.value);
-
     if (!fileField.value) {
       return;
     }
@@ -47,8 +45,11 @@ export const AvatarEditor = ({
           onSubmitSuccess();
         },
         onError(error) {
-          console.error(error);
-          onSubmitError();
+          alert(error.errors[0]);
+
+          if (onSubmitError) {
+            onSubmitError();
+          }
         },
       },
     );

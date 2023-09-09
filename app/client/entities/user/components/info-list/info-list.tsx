@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { User } from '../..';
+import { User } from '@shared/models/user';
 
 import styles from './info-list.module.scss';
 

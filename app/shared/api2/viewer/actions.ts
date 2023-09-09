@@ -16,9 +16,12 @@ export const viewerActions = {
     });
   }),
   updateAvatar: createAction<UpdateViewerAvatarResponse, UpdateViewerAvatarRequest>(async data => {
+    const formData = new FormData();
+    formData.append('file', data.file);
+
     return await customFetch('/api/viewer/avatar', {
       method: 'POST',
-      body: JSON.stringify(data),
+      body: formData,
     });
   }),
   updatePassword: createAction<UpdateViewerPasswordResponse, UpdateViewerPasswordRequest>(

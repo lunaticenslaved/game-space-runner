@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { Button } from '@client/shared/components/button';
 import { Input } from '@client/shared/components/input';
 import { Dialog } from '@client/shared/components/dialog';
-import { User } from '@client/entities/user';
+import { User } from '@shared/models/user';
 import { useTextField, useForm } from '@libs/validate-react';
 import { setViewer, useAppDispatch } from '@client/shared/store';
 import { API, API_VALIDATORS, useMutation } from '@shared/api2';
