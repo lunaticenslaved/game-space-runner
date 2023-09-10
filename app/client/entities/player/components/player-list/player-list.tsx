@@ -1,6 +1,6 @@
-import { Avatar } from '@client/entities/user';
+import { Avatar } from '@client/shared/components/avatar';
 
-import { Player } from '../..';
+import { Player, PlayerIcon } from '../..';
 
 import styles from './player-list.module.scss';
 
@@ -22,7 +22,7 @@ export const PlayerList = ({ players }: PlayerListProps) => {
             <div className={styles.playerCardCol}>{position}</div>
             <div className={styles.playerCardCol}>
               <div className={styles.playerInfo}>
-                <Avatar link={imgSrc} />
+                <Avatar link={imgSrc} placeholderIcon={<PlayerIcon.Placeholder />} />
                 <div className={styles.playerName}>{login}</div>
               </div>
             </div>

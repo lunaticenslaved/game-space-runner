@@ -48,7 +48,7 @@ export const PasswordEditor = ({
           onSubmitSuccess();
         },
         onError(error) {
-          console.error(error);
+          alert(error.errors[0]);
           onSubmitError();
         },
       },

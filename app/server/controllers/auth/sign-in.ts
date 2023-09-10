@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import { AuthenticationError, ValidationError } from '@shared/errors';
 import { SignInRequest, API_VALIDATORS, SignInResponse } from '@shared/api2';
 
-import { createAction, createHash, validateRequest } from '../_utils';
+import { createAction, validateRequest } from '../_utils';
 import { createTokens } from './_utils';
 
 export const signIn = createAction<SignInRequest, SignInResponse>(
@@ -24,17 +24,16 @@ export const signIn = createAction<SignInRequest, SignInResponse>(
       throw new AuthenticationError({ errors: [`User with the login '${body.login}' not found`] });
     }
 
-    const receivedPassword = await createHash(body.password);
     const { password: savedPassword, ...savedUser } = user;
 
-    if (await bcrypt.compare(receivedPassword, savedPassword)) {
+    if (!(await bcrypt.compare(body.password, savedPassword))) {
       throw new AuthenticationError({ errors: [`Invalid login or password`] });
     }
 
     const { refreshToken, accessToken } = createTokens();
 
     // find a session for user and agent
-    let session = await context.prisma.session.findFirst({
+    const session = await context.prisma.session.findFirst({
       where: {
         userAgent: { equals: userAgent },
         userId: { equals: user.id },
@@ -42,7 +41,7 @@ export const signIn = createAction<SignInRequest, SignInResponse>(
     });
 
     if (session) {
-      // update session with new tockens
+      // update session with new tokens
       await context.prisma.session.update({
         where: { id: session.id },
         data: {
@@ -52,7 +51,7 @@ export const signIn = createAction<SignInRequest, SignInResponse>(
       });
     } else {
       // save new session
-      session = await context.prisma.session.create({
+      await context.prisma.session.create({
         data: {
           user: { connect: { id: user.id } },
           accessToken,

@@ -11,7 +11,7 @@ import {
 export const viewerActions = {
   updateInfo: createAction<UpdateViewerInfoResponse, UpdateViewerInfoRequest>(async data => {
     return await customFetch('/api/viewer/info', {
-      method: 'POST',
+      method: 'PUT',
       body: JSON.stringify(data),
     });
   }),
@@ -20,14 +20,14 @@ export const viewerActions = {
     formData.append('file', data.file);
 
     return await customFetch('/api/viewer/avatar', {
-      method: 'POST',
+      method: 'PUT',
       body: formData,
     });
   }),
   updatePassword: createAction<UpdateViewerPasswordResponse, UpdateViewerPasswordRequest>(
     async data => {
       return await customFetch('/api/viewer/password', {
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify(data),
       });
     },

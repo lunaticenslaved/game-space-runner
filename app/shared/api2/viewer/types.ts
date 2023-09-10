@@ -10,10 +10,7 @@ export type UpdateViewerAvatarRequest = {
   file: File;
 };
 
-export type UpdateViewerAvatarResponse = {
-  id: string;
-  login: string;
-};
+export type UpdateViewerAvatarResponse = User;
 
 export type UpdateViewerPasswordRequest = {
   oldPassword: string;

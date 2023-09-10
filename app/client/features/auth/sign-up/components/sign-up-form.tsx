@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 
-import { AuthForm } from '@client/entities/user';
+import { UserEntity } from '@client/entities/user';
 import { Input } from '@client/shared/components/input';
 import { routes, useAppNavigation } from '@client/shared/navigation';
 import { useForm, usePasswordField, useTextField } from '@libs/validate-react';
@@ -58,7 +58,7 @@ export const SignUpForm = () => {
   const form = useForm({ fields, onSubmit: signUp });
 
   return (
-    <AuthForm
+    <UserEntity.AuthForm
       title="Регистрация"
       submitText="Зарегистрироваться"
       authError={authError}
@@ -69,6 +69,6 @@ export const SignUpForm = () => {
       <Input.TextInput label="Логин" {...loginField.props} />
       <Input.TextInput label="Пароль" {...passwordField.props} />
       <Input.TextInput label="Повторите пароль" {...passwordConfirmField.props} />
-    </AuthForm>
+    </UserEntity.AuthForm>
   );
 };

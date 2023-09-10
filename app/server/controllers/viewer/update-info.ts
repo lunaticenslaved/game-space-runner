@@ -1,15 +1,11 @@
 import { UpdateViewerInfoRequest, API_VALIDATORS, UpdateViewerInfoResponse } from '@shared/api2';
+import { getUserFromRequest } from '@server/shared/utils';
 
 import { createAction, validateRequest } from '../_utils';
-import { AuthenticationError } from '@shared/errors';
 
 export const updateInfo = createAction<UpdateViewerInfoRequest, UpdateViewerInfoResponse>(
   async (request, _, context) => {
-    const user = request.user;
-
-    if (!user) {
-      throw new AuthenticationError({ errors: ['User not found!'] });
-    }
+    const user = getUserFromRequest(request);
 
     await validateRequest(API_VALIDATORS.viewer.updateInfo, request.body);
 

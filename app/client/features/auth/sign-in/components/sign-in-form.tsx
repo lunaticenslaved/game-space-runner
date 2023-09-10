@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import { AuthForm } from '@client/entities/user';
+import { UserEntity } from '@client/entities/user';
 import { Input } from '@client/shared/components/input';
 import { routes, useAppNavigation } from '@client/shared/navigation';
 import { useForm, usePasswordField, useTextField } from '@libs/validate-react';
@@ -47,7 +47,7 @@ export const SignInForm = () => {
   });
 
   return (
-    <AuthForm
+    <UserEntity.AuthForm
       title="Вход"
       submitText="Войти"
       form={form}
@@ -57,6 +57,6 @@ export const SignInForm = () => {
       appendLinkText="Зарегистрироваться">
       <Input.TextInput label="Login" {...loginField.props} />
       <Input.TextInput label="Password" {...passwordField.props} />
-    </AuthForm>
+    </UserEntity.AuthForm>
   );
 };
