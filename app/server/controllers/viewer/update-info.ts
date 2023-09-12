@@ -1,4 +1,4 @@
-import { UpdateViewerInfoRequest, API_VALIDATORS, UpdateViewerInfoResponse } from '@shared/api2';
+import { UpdateViewerInfoRequest, API, UpdateViewerInfoResponse } from '@shared/api';
 import { getUserFromRequest } from '@server/shared/utils';
 
 import { createAction, validateRequest } from '../_utils';
@@ -7,7 +7,7 @@ export const updateInfo = createAction<UpdateViewerInfoRequest, UpdateViewerInfo
   async (request, _, context) => {
     const user = getUserFromRequest(request);
 
-    await validateRequest(API_VALIDATORS.viewer.updateInfo, request.body);
+    await validateRequest(API.viewer.updateInfo.validators, request.body);
 
     const updatedUser = await context.prisma.user.update({
       where: { id: user.id },

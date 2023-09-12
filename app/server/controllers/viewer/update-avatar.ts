@@ -4,7 +4,7 @@ import { createAction } from '@server/controllers/_utils';
 import { FileNotProvidedError } from '@shared/errors';
 import { getUserFromRequest } from '@server/shared/utils';
 import { objectStorage } from '@server/shared/object-storage';
-import { UpdateViewerAvatarRequest, UpdateViewerAvatarResponse } from '@shared/api2';
+import { UpdateViewerAvatarRequest, UpdateViewerAvatarResponse } from '@shared/api';
 
 export const updateAvatar = createAction<UpdateViewerAvatarRequest, UpdateViewerAvatarResponse>(
   async (request, _, context) => {

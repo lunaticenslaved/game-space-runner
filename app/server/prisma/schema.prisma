@@ -13,6 +13,8 @@ model User {
   password String    @db.Text
   sessions Session[]
   avatars  Avatar[]
+  posts    Post[]
+  comment  Comment[]
 
   @@map("users")
 }
@@ -39,4 +41,38 @@ model Avatar {
   userId String
 
   @@map("avatars")
+}
+
+model Post {
+  id String @id @default(uuid())
+
+  title   String @db.VarChar(255)
+  content String @db.Text
+
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId String
+
+  createdAt DateTime @default(now()) @db.Date
+  updatedAt DateTime @default(now()) @db.Date
+
+  comments Comment[]
+
+  @@map("posts")
+}
+
+model Comment {
+  id String @id @default(uuid())
+
+  text String @db.Text
+
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId String
+
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+
+  createdAt DateTime @default(now()) @db.Date
+  updatedAt DateTime @default(now()) @db.Date
+
+  @@map("comments")
 }

@@ -1,25 +1,25 @@
 import { useCallback, useState } from 'react';
 
-import { UserEntity } from '@client/entities/user';
+import { UserComponent } from '@client/entities/user';
 import { Input } from '@client/shared/components/input';
 import { routes, useAppNavigation } from '@client/shared/navigation';
 import { useForm, usePasswordField, useTextField } from '@libs/validate-react';
 import { setViewer, useAppDispatch } from '@client/shared/store';
-import { API, API_VALIDATORS, useMutation } from '@shared/api2';
+import { API, useMutation } from '@shared/api';
 
 export const SignInForm = () => {
-  const mutation = useMutation('sign-in', API.auth.signIn);
+  const mutation = useMutation('sign-in', API.auth.signIn.action);
   const [authError, setAuthError] = useState<string>();
   const navigation = useAppNavigation();
   const dispatch = useAppDispatch();
 
   const loginField = useTextField({
     name: 'login',
-    rules: [API_VALIDATORS.auth.signIn.login],
+    rules: [API.auth.signIn.validators.login],
   });
   const passwordField = usePasswordField({
     name: 'password',
-    rules: [API_VALIDATORS.auth.signIn.password],
+    rules: [API.auth.signIn.validators.password],
   });
 
   const signIn = useCallback(async () => {
@@ -47,7 +47,7 @@ export const SignInForm = () => {
   });
 
   return (
-    <UserEntity.AuthForm
+    <UserComponent.AuthForm
       title="Вход"
       submitText="Войти"
       form={form}
@@ -57,6 +57,6 @@ export const SignInForm = () => {
       appendLinkText="Зарегистрироваться">
       <Input.TextInput label="Login" {...loginField.props} />
       <Input.TextInput label="Password" {...passwordField.props} />
-    </UserEntity.AuthForm>
+    </UserComponent.AuthForm>
   );
 };

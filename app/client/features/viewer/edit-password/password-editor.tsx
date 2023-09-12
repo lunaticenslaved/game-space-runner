@@ -5,7 +5,7 @@ import { useForm, usePasswordField, useTextField } from '@libs/validate-react';
 
 import styles from './password-editor.module.scss';
 import { useCallback } from 'react';
-import { API, API_VALIDATORS, useMutation } from '@shared/api2';
+import { API, useMutation } from '@shared/api';
 
 export type PasswordEditorProps = {
   isOpen: boolean;
@@ -20,16 +20,16 @@ export const PasswordEditor = ({
   onSubmitSuccess,
   onSubmitError,
 }: PasswordEditorProps) => {
-  const mutation = useMutation('auth-update-password', API.viewer.updatePassword);
+  const mutation = useMutation('auth-update-password', API.viewer.updatePassword.action);
   const oldPassField = usePasswordField({
     value: '',
     name: 'oldPassword',
-    rules: [API_VALIDATORS.viewer.updatePassword.oldPassword],
+    rules: [API.viewer.updatePassword.validators.oldPassword],
   });
   const newPassField = usePasswordField({
     value: '',
     name: 'newPassword',
-    rules: [API_VALIDATORS.viewer.updatePassword.newPassword],
+    rules: [API.viewer.updatePassword.validators.newPassword],
   });
   const repeatPassField = useTextField({
     value: '',

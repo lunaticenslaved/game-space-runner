@@ -1,4 +1,4 @@
-import { UserEntity } from '@client/entities/user';
+import { UserComponent } from '@client/entities/user';
 import { useDialog } from '@client/shared/components/dialog';
 import { InfoEditor } from '@client/features/viewer/edit-info';
 import { PasswordEditor } from '@client/features/viewer/edit-password';
@@ -46,10 +46,10 @@ export const Account = ({ user }: AccountProps) => {
       )}
 
       <div className={styles.content}>
-        <UserEntity.Avatar link={user.avatars[0]?.link} />
+        <UserComponent.Avatar link={user.avatars[0]?.link} />
         <h4 className={styles.userName}>{user.login}</h4>
 
-        <UserEntity.InfoList {...user} />
+        <UserComponent.InfoList {...user} />
 
         <div className={styles.buttons}>
           <Button onClick={editUserDialog.open}>Изменить данные</Button>

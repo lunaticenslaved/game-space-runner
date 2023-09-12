@@ -1,26 +1,26 @@
 import { useCallback, useMemo, useState } from 'react';
 
-import { UserEntity } from '@client/entities/user';
+import { UserComponent } from '@client/entities/user';
 import { Input } from '@client/shared/components/input';
 import { routes, useAppNavigation } from '@client/shared/navigation';
 import { useForm, usePasswordField, useTextField } from '@libs/validate-react';
 import { validationRules } from '@libs/validate';
 import { setViewer, useAppDispatch } from '@client/shared/store';
-import { API, API_VALIDATORS, useMutation } from '@shared/api2';
+import { API, useMutation } from '@shared/api';
 
 export const SignUpForm = () => {
-  const mutation = useMutation('sign-up', API.auth.signUp);
+  const mutation = useMutation('sign-up', API.auth.signUp.action);
   const [authError, setAuthError] = useState<string>();
   const navigation = useAppNavigation();
   const dispatch = useAppDispatch();
 
   const loginField = useTextField({
     name: 'login',
-    rules: [API_VALIDATORS.auth.signUp.login],
+    rules: [API.auth.signUp.validators.login],
   });
   const passwordField = usePasswordField({
     name: 'password',
-    rules: [API_VALIDATORS.auth.signUp.password],
+    rules: [API.auth.signUp.validators.password],
   });
   const passwordConfirmField = usePasswordField({
     name: 'passwordConfirm',
@@ -58,7 +58,7 @@ export const SignUpForm = () => {
   const form = useForm({ fields, onSubmit: signUp });
 
   return (
-    <UserEntity.AuthForm
+    <UserComponent.AuthForm
       title="Регистрация"
       submitText="Зарегистрироваться"
       authError={authError}
@@ -69,6 +69,6 @@ export const SignUpForm = () => {
       <Input.TextInput label="Логин" {...loginField.props} />
       <Input.TextInput label="Пароль" {...passwordField.props} />
       <Input.TextInput label="Повторите пароль" {...passwordConfirmField.props} />
-    </UserEntity.AuthForm>
+    </UserComponent.AuthForm>
   );
 };

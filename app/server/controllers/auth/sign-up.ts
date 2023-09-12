@@ -1,5 +1,5 @@
 import { ConflictError, ValidationError } from '@shared/errors';
-import { SignUpRequest, API_VALIDATORS, SignUpResponse } from '@shared/api2';
+import { SignUpRequest, API, SignUpResponse } from '@shared/api';
 
 import { createAction, createHash, validateRequest } from '../_utils';
 
@@ -7,7 +7,7 @@ import { createTokens } from './_utils';
 
 export const signUp = createAction<SignUpRequest, SignUpResponse>(
   async ({ body, headers }, response, context) => {
-    await validateRequest(API_VALIDATORS.auth.signUp, body);
+    await validateRequest(API.auth.signUp.validators, body);
 
     const user = await context.prisma.user.findFirst({
       where: { login: { equals: body.login } },

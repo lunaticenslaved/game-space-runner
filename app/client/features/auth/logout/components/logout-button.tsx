@@ -3,10 +3,10 @@ import { useCallback } from 'react';
 import { Button } from '@client/shared/components/button';
 import { useAppNavigation } from '@client/shared/navigation';
 import { setViewer, useAppDispatch } from '@client/shared/store';
-import { API, useMutation } from '@shared/api2';
+import { API, useMutation } from '@shared/api';
 
 export const LogoutButton = () => {
-  const mutation = useMutation('logout', API.auth.logout);
+  const mutation = useMutation('logout', API.auth.logout.action);
   const appNavigation = useAppNavigation();
   const dispatch = useAppDispatch();
   const logout = useCallback(async () => {

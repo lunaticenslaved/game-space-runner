@@ -10,8 +10,8 @@ export const routes = {
   },
   leaderBoard: { path: '/leader-board', access: AccessLevel.Common },
   forum: {
-    root: { path: '/topics', access: AccessLevel.Common },
-    topic: { path: '/topics/:topicId', access: AccessLevel.Common },
+    root: { path: '/posts', access: AccessLevel.Common },
+    post: { path: '/posts/:postId', access: AccessLevel.Common },
   },
   auth: {
     signIn: { path: '/auth/sign-in', access: AccessLevel.Public },

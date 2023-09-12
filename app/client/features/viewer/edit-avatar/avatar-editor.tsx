@@ -4,7 +4,7 @@ import { Button } from '@client/shared/components/button';
 import { Dialog } from '@client/shared/components/dialog';
 import { Input } from '@client/shared/components/input';
 import { useFileField, useForm } from '@libs/validate-react';
-import { API, useMutation } from '@shared/api2';
+import { API, useMutation } from '@shared/api';
 
 import styles from './avatar-editor.module.scss';
 
@@ -25,7 +25,7 @@ export const AvatarEditor = ({
   onSubmitError,
   onSubmitSuccess,
 }: AvatarEditorProps) => {
-  const mutation = useMutation('auth-update-avatar', API.viewer.updateAvatar);
+  const mutation = useMutation('auth-update-avatar', API.viewer.updateAvatar.action);
   const fileField = useFileField({
     name: 'file',
     rules: [value => (value ? null : 'Выберите файл')],

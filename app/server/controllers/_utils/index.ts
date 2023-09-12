@@ -2,19 +2,19 @@ import { Request, Response, Express } from 'express';
 import bcrypt from 'bcrypt';
 
 import { Context, context } from '@server/shared/context';
-import { OperationResponse, ValidationObject } from '@shared/utils';
+import { OperationResponse, ValidationObject } from '@shared/api/_utils';
 import { ApiError, UnknownError, ValidationError } from '@shared/errors';
 
 export const createAction =
-  <TBody = unknown, TResponse = unknown>(
+  <TBody = unknown, TResponse = unknown, TParams = unknown>(
     fn: (
-      request: Request<unknown, unknown, TBody>,
+      request: Request<TParams, unknown, TBody>,
       response: Response,
       context: Context,
     ) => Promise<TResponse> | TResponse,
   ) =>
   async (
-    request: Request<unknown, unknown, TBody>,
+    request: Request<TParams, unknown, TBody>,
     response: Response<OperationResponse<TResponse | null>>,
   ) => {
     try {

@@ -2,11 +2,7 @@ import bcrypt from 'bcrypt';
 
 import { createAction, createHash, validateRequest } from '@server/controllers/_utils';
 import { getUserFromRequest } from '@server/shared/utils';
-import {
-  API_VALIDATORS,
-  UpdateViewerPasswordRequest,
-  UpdateViewerPasswordResponse,
-} from '@shared/api2';
+import { API, UpdateViewerPasswordRequest, UpdateViewerPasswordResponse } from '@shared/api';
 import { AuthenticationError } from '@shared/errors';
 
 export const updatePassword = createAction<
@@ -14,7 +10,7 @@ export const updatePassword = createAction<
   UpdateViewerPasswordResponse
 >(async (request, _, context) => {
   // TODO: наверное стоит это в экшн добавить
-  await validateRequest(API_VALIDATORS.viewer.updatePassword, request.body);
+  await validateRequest(API.viewer.updatePassword.validators, request.body);
 
   const user = await context.prisma.user.findFirst({
     where: {

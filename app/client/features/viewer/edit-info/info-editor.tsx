@@ -6,7 +6,7 @@ import { Dialog } from '@client/shared/components/dialog';
 import { User } from '@shared/models/user';
 import { useTextField, useForm } from '@libs/validate-react';
 import { setViewer, useAppDispatch } from '@client/shared/store';
-import { API, API_VALIDATORS, useMutation } from '@shared/api2';
+import { API, useMutation } from '@shared/api';
 
 import styles from './info-editor.module.scss';
 
@@ -26,13 +26,13 @@ export type InfoEditorProps = {
 };
 
 export const InfoEditor = ({ user, isOpen, onClose, onUpdated }: InfoEditorProps) => {
-  const mutation = useMutation('auth-update-info', API.viewer.updateInfo);
+  const mutation = useMutation('auth-update-info', API.viewer.updateInfo.action);
   const dispatch = useAppDispatch();
 
   const loginField = useTextField({
     value: user.login,
     name: 'login',
-    rules: [API_VALIDATORS.viewer.updateInfo.login],
+    rules: [API.viewer.updateInfo.validators.login],
   });
 
   const onSubmit = useCallback(async () => {

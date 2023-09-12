@@ -1,10 +1,8 @@
-import { useEffect } from 'react';
 import { Button } from '@client/shared/components/button';
 import { Grid } from '@client/shared/components/grid';
-import { ViewPlaceholder } from '@client/shared/components/view-placeholder';
 import { useDialog } from '@client/shared/components/dialog';
 import { useAppNavigation } from '@client/shared/navigation';
-import { TopicFormDialog, TopicList, useCreateTopic, useListTopic } from '@client/entities/topic';
+import { PostsList, PostFormDialog } from '@client/features/forum';
 import { useViewer } from '@client/features/auth/get-viewer';
 
 import styles from './topics.module.scss';
@@ -14,56 +12,32 @@ export const ForumPage = () => {
 
   const { isAuthenticated } = useViewer();
   const appNavigation = useAppNavigation();
-  const {
-    isFetching,
-    query: fetchTopicList,
-    topics,
-  } = useListTopic({
-    onSuccess: () => null,
-    onError: () => alert('Cannot get topic list!'),
-  });
   const topicDialog = useDialog();
-  const { createPost } = useCreateTopic({
-    onError: () => alert('Cannot create topic!'),
-    onSuccess: topic => {
-      appNavigation.forum.toTopic(topic);
-      topicDialog.close();
-    },
-  });
-
-  useEffect(() => {
-    fetchTopicList();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <div className={styles.page}>
-      <TopicFormDialog
+      <PostFormDialog
         isOpen={topicDialog.isOpen}
-        onSubmit={createPost}
+        onSubmit={appNavigation.forum.toPost}
         onClose={topicDialog.close}
       />
 
-      {isFetching ? (
-        <ViewPlaceholder />
-      ) : (
-        <Grid.Container width={'full'} className={styles.container}>
-          <Grid.Row justify="center">
-            <Grid.Col width={9}>
-              <div className={styles.header}>
-                <h1 className={styles.title}>Форум</h1>
-                {isAuthenticated && (
-                  <div className={styles.actions}>
-                    <Button children="Создать топик" onClick={topicDialog.open} />
-                  </div>
-                )}
-              </div>
+      <Grid.Container width={'full'} className={styles.container}>
+        <Grid.Row justify="center">
+          <Grid.Col width={9}>
+            <div className={styles.header}>
+              <h1 className={styles.title}>Форум</h1>
+              {isAuthenticated && (
+                <div className={styles.actions}>
+                  <Button children="Создать топик" onClick={topicDialog.open} />
+                </div>
+              )}
+            </div>
 
-              <TopicList topics={topics} onTopicClick={appNavigation.forum.toTopic} />
-            </Grid.Col>
-          </Grid.Row>
-        </Grid.Container>
-      )}
+            <PostsList onPostClick={appNavigation.forum.toPost} />
+          </Grid.Col>
+        </Grid.Row>
+      </Grid.Container>
     </div>
   );
 };

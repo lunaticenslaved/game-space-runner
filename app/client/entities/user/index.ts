@@ -8,7 +8,7 @@ import { InfoList } from './components/info-list';
 
 import { ReactComponent as Placeholder } from '@client/shared/assets/svg/plain/user-icon.svg';
 
-export const UserEntity = {
+export const UserComponent = {
   Avatar: UserAvatar,
   AuthForm,
   InfoList,
