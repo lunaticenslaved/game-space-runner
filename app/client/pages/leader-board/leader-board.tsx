@@ -1,20 +1,17 @@
-import { useEffect } from 'react';
-
 import { Grid } from '@client/shared/components/grid';
-import { Input } from '@client/shared/components/input';
-import { PlayerList, usePlayersList } from '@client/entities/player';
+import { PlayerList } from '@client/entities/player';
+import { API, useQuery } from '@shared/api';
 
 import styles from './leader-board.module.scss';
 
 const LeaderBoardPage = () => {
   document.title = 'LeaderBoard';
 
-  const { query, players } = usePlayersList();
+  const { data } = useQuery('get-players', () => API.players.getPlayers.action());
 
-  useEffect(() => {
-    query();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  if (!data) {
+    return <p>Loading players...</p>;
+  }
 
   return (
     <Grid.Container width={'full'} className={styles.leaderBoard}>
@@ -22,10 +19,7 @@ const LeaderBoardPage = () => {
         <Grid.Col width={6}>
           <h1 className={styles.title}>Лидерборд</h1>
           <h3 className={styles.subTitle}>Максимальное количество очков за игру</h3>
-          <div className={styles.searchBar}>
-            <Input.TextInput name="search" label="Поиск игрока" />
-          </div>
-          <PlayerList players={players} />
+          <PlayerList players={data.players} />
         </Grid.Col>
       </Grid.Row>
     </Grid.Container>

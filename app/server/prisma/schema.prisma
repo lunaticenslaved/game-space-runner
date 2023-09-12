@@ -15,6 +15,7 @@ model User {
   avatars  Avatar[]
   posts    Post[]
   comment  Comment[]
+  Player   Player[]
 
   @@map("users")
 }
@@ -75,4 +76,15 @@ model Comment {
   updatedAt DateTime @default(now()) @db.Date
 
   @@map("comments")
+}
+
+model Player {
+  id String @id @default(uuid())
+
+  score Int @db.Integer
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @unique
+
+  @@map("players")
 }

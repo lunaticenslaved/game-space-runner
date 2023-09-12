@@ -5,6 +5,7 @@ import { GameLogic, fullscreenHandler, gameControlHandler } from '@client/entiti
 import { useViewer } from '@client/features/auth/get-viewer';
 
 import styles from './game.module.scss';
+import { API, useMutation } from '@shared/api';
 
 const HEADER_HEIGHT = 120;
 
@@ -13,9 +14,11 @@ export const GamePage = () => {
   const [game, setGame] = useState<GameLogic | null>(null);
   const { state } = useLocation();
   const { viewer } = useViewer();
+  const mutation = useMutation('save-score', (score: number) =>
+    API.players.savePlayer.action({ score }),
+  );
   const onWin = useCallback(() => {}, []);
   const onLoose = useCallback(() => {}, []);
-  const onFinish = useCallback(() => {}, []);
 
   useEffect(() => {
     if (ref.current && viewer) {
@@ -28,13 +31,13 @@ export const GamePage = () => {
         viewer,
         onWin,
         onLoose,
-        onFinish,
+        onFinish: score => mutation.mutate(score),
       });
       setGame(logic);
       logic.init();
       logic.animate();
     }
-  }, [onFinish, onLoose, onWin, state?.level, viewer]);
+  }, [mutation, onLoose, onWin, state?.level, viewer]);
 
   useEffect(() => {
     const keyEventsHandler = gameControlHandler(game);
