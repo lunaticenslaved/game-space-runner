@@ -40,7 +40,7 @@ const enterFullScreen = (element: DocumentElementWithFullscreen) => {
   }
 };
 
-export const toggleFullscreen = (element: DocumentElementWithFullscreen) => {
+const toggleFullscreen = (element: DocumentElementWithFullscreen) => {
   if (isFullScreen()) {
     exitFullScreen();
   } else {

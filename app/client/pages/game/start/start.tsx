@@ -1,49 +1,61 @@
 import { useCallback, useState } from 'react';
 
-import { LevelListType, levelList } from '@client/entities/game';
+import { Level } from '@client/features/game';
 import { useAppNavigation } from '@client/shared/navigation';
 import { Input } from '@client/shared/components/input';
-import { Button } from '@client/shared/components/button';
 
-import styles from './start.module.scss';
+import { useViewer } from '@client/features/auth/get-viewer';
+import { GameLayout } from '@client/widgets/page-layouts';
+
+const levels = [
+  { id: Level.First, title: 'First' },
+  { id: Level.Secord, title: 'Second' },
+  { id: Level.Third, title: 'Third' },
+];
 
 export function Start() {
   const appNavigation = useAppNavigation();
-  const [active, setActive] = useState(
-    levelList.find(l => l.id === sessionStorage.getItem('level')) || levelList[0],
-  );
-  const startGame = useCallback(
-    () => appNavigation.game.toGame({ level: active.id }),
-    [appNavigation.game, active.id],
-  );
+  const { viewer } = useViewer();
+  const [level, setLevel] = useState((sessionStorage.getItem('level') || Level.First) as Level);
+  const startGame = useCallback(() => {
+    if (level) {
+      appNavigation.game.toGame({ level });
+    }
+  }, [appNavigation.game, level]);
 
   const updateActive = useCallback(
-    (act: LevelListType | null) => {
-      const level = act || active;
-      document.body.dataset.level = level.id;
-      sessionStorage.setItem('level', level.id);
-      setActive(level);
+    (value?: Level) => {
+      const newLevel = value || level;
+
+      setLevel(newLevel);
+      document.body.dataset.level = newLevel;
+      sessionStorage.setItem('level', newLevel);
     },
-    [active],
+    [level],
   );
+
+  if (!viewer) {
+    throw new Error('Cannot play not authenticated!');
+  }
 
   // TODO добавить useSelect
   // TODO добавить форму
 
   return (
-    <>
-      <h3 className={styles.title}>Привет, user</h3>
-      <p className={styles.text}>Выбери уровень и начни игру)</p>
-      <Input.Select<LevelListType>
-        label="Уровень"
-        name="level"
-        items={levelList}
-        value={active}
-        onChange={updateActive}
-      />
-      <Button className={styles.btn} onClick={startGame}>
-        Начать
-      </Button>
-    </>
+    <GameLayout
+      header={`Привет, ${viewer.login}`}
+      description="Выбери уровень и начни игру"
+      content={
+        <Input.Select<Level>
+          label="Уровень"
+          name="level"
+          items={levels}
+          value={level}
+          onChange={updateActive}
+        />
+      }
+      buttonText="Начать"
+      onButtonClick={startGame}
+    />
   );
 }

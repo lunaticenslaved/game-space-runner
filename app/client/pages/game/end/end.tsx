@@ -1,11 +1,10 @@
-import { Fragment, useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { useAppNavigation } from '@client/shared/navigation';
-import { Button } from '@client/shared/components/button';
-import { gameAudio } from '@client/entities/game';
+import { Game } from '@client/features/game';
 
-import styles from './end.module.scss';
+import { GameLayout } from '@client/widgets/page-layouts';
 
 export function End() {
   const { state } = useLocation();
@@ -15,17 +14,14 @@ export function End() {
   const isWin = useMemo(() => !!state?.win, [state?.win]);
 
   useEffect(() => {
-    isWin ? gameAudio.finishGame(0.5) : gameAudio.gameOver(0.5);
+    isWin ? Game.audio.finish(0.5) : Game.audio.gameOver(0.5);
   }, [isWin]);
 
   return (
-    <Fragment>
-      <h3 className={styles.title}>
-        {isWin ? 'Ну что за чемпион!' : 'Ого, вау, вот эта попытка!'}
-      </h3>
-      <Button className={styles.btn} onClick={retry}>
-        Повторить
-      </Button>
-    </Fragment>
+    <GameLayout
+      header={isWin ? 'Ну что за чемпион!' : 'Вот эта попытка!'}
+      buttonText="Повторить"
+      onButtonClick={retry}
+    />
   );
 }

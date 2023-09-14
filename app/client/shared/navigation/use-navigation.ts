@@ -28,7 +28,8 @@ export const useAppNavigation = () => {
           navigate(path(routes.game.root.path), { state: { level } }),
         toGameStart: ({ level }: { level: string }) =>
           navigate(path(routes.game.start.path), { state: { level } }),
-        toGameEnd: () => navigate(path(routes.game.end.path)),
+        toGameEnd: ({ win }: { win: boolean }) =>
+          navigate(path(routes.game.end.path), { state: { win } }),
       },
       profile: {
         toProfile: () => navigate(path(routes.profile.root.path)),

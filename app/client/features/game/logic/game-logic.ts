@@ -1,17 +1,12 @@
-import { User } from '@shared/models/user';
-
-import { GenericObject } from './generic-object';
-import { PlayerFigure } from './player-figure';
-import { Level } from './levels-config';
-import { getMovePlayerCondition } from '../utils/get-move-condition';
-import { getLevel } from '..';
-import { Keys } from '../types';
+import { GameObject } from './game-object';
+import { PlayerFigure } from '../player';
+import { getMovePlayerCondition, Keys } from './movements';
+import { getLevelConfig, Level } from '../levels';
 
 export type GameLogicProps = {
   level: Level;
   canvas: HTMLCanvasElement;
   context: CanvasRenderingContext2D;
-  viewer: User;
   onWin: (level: Level) => void;
   onLoose: (level: Level) => void;
   onFinish: (score: number) => void;
@@ -39,8 +34,8 @@ export class GameLogic {
   context: CanvasRenderingContext2D;
   finishPoint: number | undefined;
   player: PlayerFigure | undefined;
-  finishObject: GenericObject | undefined;
-  genericObjects: GenericObject[] = [];
+  finishObject: GameObject | undefined;
+  genericObjects: GameObject[] = [];
   keys: Keys = {
     right: {
       presed: false,
@@ -49,9 +44,8 @@ export class GameLogic {
       presed: false,
     },
   };
-  viewer: User;
 
-  constructor({ canvas, level, context, onWin, onLoose, onFinish, viewer }: GameLogicProps) {
+  constructor({ canvas, level, context, onWin, onLoose, onFinish }: GameLogicProps) {
     this.canvas = canvas;
     this.context = context;
     this.player = undefined;
@@ -59,7 +53,6 @@ export class GameLogic {
     this.onLoose = onLoose;
     this.onFinish = onFinish;
     this.level = level;
-    this.viewer = viewer;
   }
 
   init = () => {
@@ -71,10 +64,17 @@ export class GameLogic {
         canvas: this.canvas,
         context: this.context,
       });
-      const { elements, finishPoint } = getLevel(this.context, this.level, this.canvas.height);
-      this.finishPoint = finishPoint;
+      const levelConfig = getLevelConfig(this.level, this.canvas.height);
+      const elements = levelConfig.items.map(
+        item =>
+          new GameObject({
+            context: this.context,
+            ...item,
+          }),
+      );
+      this.finishPoint = levelConfig.finishPoint;
       this.genericObjects = elements;
-      this.finishObject = elements.find((i: GenericObject) => i.type === 'finish');
+      this.finishObject = elements.find((i: GameObject) => i.type === 'finish');
     }
   };
 
@@ -120,7 +120,7 @@ export class GameLogic {
           position.y + height + velocity.y >= y &&
           position.x + width >= x &&
           position.x + width >= x &&
-          position.x <= x + platform.width
+          position.x <= x + platform.size.width
         ) {
           velocity.y = 0;
         }
@@ -200,10 +200,10 @@ export class GameLogic {
     const { player, finishObject, finishPoint, scrollOffset } = this;
 
     if (player && finishObject && finishPoint) {
-      const rightFinishCrossing = scrollOffset <= finishPoint + finishObject.width;
+      const rightFinishCrossing = scrollOffset <= finishPoint + finishObject.size.width;
       const leftFinishCrossing = scrollOffset > finishPoint;
       const bottomFinishCrossing =
-        player.position.y <= finishObject.position.y + finishObject.height;
+        player.position.y <= finishObject.position.y + finishObject.size.height;
       const topFinishCrossing = player.position.y >= finishObject.position.y - player.height;
 
       if (leftFinishCrossing && bottomFinishCrossing && rightFinishCrossing && topFinishCrossing) {
@@ -222,11 +222,11 @@ export class GameLogic {
     return false;
   };
 
-  private _moveObject = (item: GenericObject) => {
+  private _moveObject = (item: GameObject) => {
     if (this.keys.right.presed) {
-      item.position.x -= this.player!.speed * item.speedKoef;
+      item.position.x -= this.player!.speed * item.speedCoef;
     } else if (this.keys.left.presed && this.scrollOffset > 0) {
-      item.position.x += this.player!.speed * item.speedKoef;
+      item.position.x += this.player!.speed * item.speedCoef;
     }
   };
 

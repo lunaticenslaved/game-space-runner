@@ -1,9 +1,10 @@
-import { createImage } from '../utils/create-image';
-import spriteStandRight from '@client/shared/assets/png/spriteStandRight.png';
-import spriteStandLeft from '@client/shared/assets/png/spriteStandLeft.png';
-import spriteRunRight from '@client/shared/assets/png/spriteRunRight.png';
-import spriteRunLeft from '@client/shared/assets/png/spriteRunLeft.png';
+import { createImage } from '../utils';
 import { GAME_GRAVITY } from '../contants';
+
+import spriteStandRight from './spriteStandRight.png';
+import spriteStandLeft from './spriteStandLeft.png';
+import spriteRunRight from './spriteRunRight.png';
+import spriteRunLeft from './spriteRunLeft.png';
 
 const FRAMECUT_FOR_STAND = 59;
 const FRAMECUT_FOR_RUN = 29;
@@ -46,6 +47,7 @@ export class PlayerFigure {
   readonly canvas?: HTMLCanvasElement;
   scrollOffset: number;
   readonly context: CanvasRenderingContext2D | null;
+
   constructor({ scrollOffset, canvas, context }: PlayerFigureProps) {
     this.context = context;
     this.scrollOffset = scrollOffset;
@@ -123,6 +125,7 @@ export class PlayerFigure {
     } else {
       this.velocity.y = 0;
     }
+
     this.draw();
   }
 }

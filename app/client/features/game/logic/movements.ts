@@ -1,5 +1,13 @@
-import { Keys } from '../types';
-import { PlayerFigure } from '../core/player-figure';
+import { PlayerFigure } from '../player';
+
+export type Keys = {
+  right: Key;
+  left: Key;
+};
+
+type Key = {
+  presed: boolean;
+};
 
 type Flow = 'right' | 'left';
 type Action = 'stand' | 'run';
@@ -11,12 +19,14 @@ export const getMovePlayerCondition = (keys: Keys, player: PlayerFigure, current
     player.crop = player.sprites[action].crop;
     player.width = player.sprites[action].width;
   };
+
   const getMoveToCondition = (flow: Flow, action: Action, reverse?: boolean) => {
     const isPressed = reverse ? !keys[flow].presed : keys[flow].presed;
     return (
       isPressed && currentKey === flow && player.currentSprite !== player.sprites[action][flow]
     );
   };
+
   if (getMoveToCondition('right', 'run')) {
     moveTo('right', 'run');
   } else if (getMoveToCondition('left', 'run')) {

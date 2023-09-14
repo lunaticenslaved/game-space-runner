@@ -1,43 +1,51 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { GameLogic, fullscreenHandler, gameControlHandler } from '@client/entities/game';
-import { useViewer } from '@client/features/auth/get-viewer';
+import { GameLogic, gameControlHandler } from '@client/features/game';
+import { Game } from '@client/features/game';
 
 import styles from './game.module.scss';
 import { API, useMutation } from '@shared/api';
-
-const HEADER_HEIGHT = 120;
+import { useAppNavigation } from '@client/shared/navigation';
 
 export const GamePage = () => {
+  const appNavigation = useAppNavigation();
   const ref = useRef<HTMLCanvasElement>(null);
   const [game, setGame] = useState<GameLogic | null>(null);
   const { state } = useLocation();
-  const { viewer } = useViewer();
-  const mutation = useMutation('save-score', (score: number) =>
+  const { mutate } = useMutation('save-score', (score: number) =>
     API.players.savePlayer.action({ score }),
   );
-  const onWin = useCallback(() => {}, []);
-  const onLoose = useCallback(() => {}, []);
+  const onWin = useCallback(() => {
+    appNavigation.game.toGameEnd({ win: true });
+  }, [appNavigation]);
+  const onLoose = useCallback(() => {
+    appNavigation.game.toGameEnd({ win: false });
+  }, [appNavigation]);
+  const onFinish = useCallback(
+    (score: number) => {
+      mutate(score);
+    },
+    [mutate],
+  );
 
   useEffect(() => {
-    if (ref.current && viewer) {
-      ref.current.width = window.innerWidth;
-      ref.current.height = window.innerHeight - HEADER_HEIGHT;
+    if (ref.current) {
+      ref.current.width = ref.current.offsetWidth;
+      ref.current.height = ref.current.offsetHeight;
       const logic = new GameLogic({
         level: state?.level || sessionStorage.getItem('level') || 'first',
         canvas: ref.current,
         context: ref.current.getContext('2d')!,
-        viewer,
         onWin,
         onLoose,
-        onFinish: score => mutation.mutate(score),
+        onFinish,
       });
       setGame(logic);
       logic.init();
       logic.animate();
     }
-  }, [mutation, onLoose, onWin, state?.level, viewer]);
+  }, [onFinish, onLoose, onWin, state?.level]);
 
   useEffect(() => {
     const keyEventsHandler = gameControlHandler(game);
@@ -57,7 +65,7 @@ export const GamePage = () => {
 
   useEffect(() => {
     if (ref) {
-      const keydownHandler = fullscreenHandler(ref.current);
+      const keydownHandler = Game.fullscreen.handle(ref.current);
       window.addEventListener('keydown', keydownHandler);
 
       return () => {
@@ -66,9 +74,9 @@ export const GamePage = () => {
     }
   }, [ref]);
 
-  if (!viewer) {
-    return null;
-  }
-
-  return <canvas ref={ref} className={styles.container}></canvas>;
+  return (
+    <div className={styles.container}>
+      <canvas ref={ref} className={styles.canvas} />
+    </div>
+  );
 };

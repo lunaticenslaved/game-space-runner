@@ -1,10 +1,10 @@
 import { TextInput, TextInputProps } from './inputs/text-input';
 import { TextArea, TextAreaProps } from './inputs/text-area';
-import { Select, SelectProps, SelectItem } from './inputs/select';
+import { Select, SelectProps, SelectValueType } from './inputs/select';
 import { FileInput, FileInputProps } from './inputs/file-input';
 
 export class Input {
-  public static Select<T extends SelectItem>(props: SelectProps<T>) {
+  public static Select<T extends SelectValueType>(props: SelectProps<T>) {
     return <Select<T> {...props} />;
   }
 
