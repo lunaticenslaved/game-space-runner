@@ -2,7 +2,6 @@
   "ts-node": {
     "require": ["tsconfig-paths/register"],
     "files": true,
-    "esm": true
   },
   "tsc-alias": {
     "verbose": false,
