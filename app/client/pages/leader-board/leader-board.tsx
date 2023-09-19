@@ -1,6 +1,7 @@
 import { Grid } from '@client/shared/components/grid';
 import { PlayerList } from '@client/entities/player';
 import { API, useQuery } from '@shared/api';
+import { ViewPlaceholder } from '@client/shared/components/view-placeholder';
 
 import styles from './leader-board.module.scss';
 
@@ -10,7 +11,7 @@ const LeaderBoardPage = () => {
   const { data } = useQuery('get-players', () => API.players.getPlayers.action());
 
   if (!data) {
-    return <p>Loading players...</p>;
+    return <ViewPlaceholder />;
   }
 
   return (

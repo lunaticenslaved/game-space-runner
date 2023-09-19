@@ -3,8 +3,8 @@
 .playListHeader {
   display: flex;
   align-items: center;
-  background-color: $gray-400;
   padding: $spacing-2;
+  color: $white;
 
   & .playListHeaderCol {
     min-width: auto;
@@ -24,10 +24,27 @@
   }
 }
 
+.playerCard {
+  display: flex;
+  align-items: center;
+  padding-right: 24px;
+  color: $white;
+}
+
+.playerInfo {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+
+.playerName {
+  margin-left: 24px;
+}
+
 .playListBody {
   display: flex;
   flex-direction: column;
-  height: calc(100% - 348px);
   padding-top: $spacing-2;
   gap: $spacing-2;
   overflow: auto;

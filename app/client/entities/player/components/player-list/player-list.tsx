@@ -4,16 +4,39 @@ import { Player } from '@shared/models';
 import { PlayerIcon } from '@client/entities/player';
 
 import styles from './player-list.module.scss';
+import { ChangeEventHandler, useCallback, useMemo, useState } from 'react';
 
 export type PlayerListProps = {
   players: Player[];
 };
 
 export const PlayerList = ({ players }: PlayerListProps) => {
+  const [search, setSearch] = useState('');
+  const updateSearch: ChangeEventHandler<HTMLInputElement> = useCallback(e => {
+    setSearch(e.target.value || '');
+  }, []);
+
+  const filteredPlayers = useMemo(() => {
+    if (!search) {
+      return players;
+    }
+
+    const clearedSearch = search.toLowerCase().trim();
+
+    return players.filter(({ user }) => {
+      return user.login.toLowerCase().includes(clearedSearch);
+    });
+  }, [players, search]);
+
   return (
     <>
       <div className={styles.searchBar}>
-        <Input.TextInput name="search" label="Поиск игрока" />
+        <Input.TextInput
+          name="search"
+          label="Поиск игрока"
+          value={search}
+          onChange={updateSearch}
+        />
       </div>
       <div className={styles.playListHeader}>
         <div className={styles.playListHeaderCol}>Позиция</div>
@@ -21,15 +44,17 @@ export const PlayerList = ({ players }: PlayerListProps) => {
         <div className={styles.playListHeaderCol}>Кол-во очков</div>
       </div>
       <div className={styles.playListBody}>
-        {players.map(({ id, user, score }) => (
+        {filteredPlayers.map(({ id, user, score }) => (
           <div key={id} className={styles.playerCard}>
-            <div className={styles.playerCardCol}>
-              <div className={styles.playerInfo}>
-                <Avatar link={user.avatars[0]?.link} placeholderIcon={<PlayerIcon.Placeholder />} />
-                <div className={styles.playerName}>{user.login}</div>
-              </div>
+            <div className={styles.playerInfo}>
+              <Avatar
+                link={user.avatars[0]?.link}
+                size={64}
+                placeholderIcon={<PlayerIcon.Placeholder />}
+              />
+              <div className={styles.playerName}>{user.login}</div>
             </div>
-            <div className={styles.playerCardCol}>{score}</div>
+            <div className={styles.playerScore}>{score}</div>
           </div>
         ))}
       </div>
