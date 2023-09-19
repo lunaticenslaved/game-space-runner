@@ -3,6 +3,11 @@ import { generatePath as path, useNavigate } from 'react-router';
 
 import { routes } from '@client/shared/navigation';
 
+type GameState = {
+  level?: string;
+  win?: boolean;
+};
+
 export const useAppNavigation = () => {
   const navigate = useNavigate();
 
@@ -24,12 +29,9 @@ export const useAppNavigation = () => {
         toPost: ({ id }: { id: string }) => navigate(path(routes.forum.post.path, { postId: id })),
       },
       game: {
-        toGame: ({ level }: { level: string }) =>
-          navigate(path(routes.game.root.path), { state: { level } }),
-        toGameStart: ({ level }: { level: string }) =>
-          navigate(path(routes.game.start.path), { state: { level } }),
-        toGameEnd: ({ win }: { win: boolean }) =>
-          navigate(path(routes.game.end.path), { state: { win } }),
+        toGame: (state?: GameState) => navigate(path(routes.game.root.path), { state }),
+        toGameStart: (state?: GameState) => navigate(path(routes.game.start.path), { state }),
+        toGameEnd: (state?: GameState) => navigate(path(routes.game.end.path), { state }),
       },
       profile: {
         toProfile: () => navigate(path(routes.profile.root.path)),

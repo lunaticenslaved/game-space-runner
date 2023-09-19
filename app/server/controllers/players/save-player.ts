@@ -2,7 +2,7 @@ import { createAction } from '@server/controllers/_utils';
 import { getUserFromRequest } from '@server/shared/utils';
 import { SavePlayerResponse, SavePlayerRequest } from '@shared/api';
 
-export const savePlayers = createAction<SavePlayerRequest, SavePlayerResponse>(
+export const savePlayer = createAction<SavePlayerRequest, SavePlayerResponse>(
   async (request, _, context) => {
     const user = getUserFromRequest(request);
 
