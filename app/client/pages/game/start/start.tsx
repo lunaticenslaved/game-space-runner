@@ -18,9 +18,7 @@ export function Start() {
   const { viewer } = useViewer();
   const [level, setLevel] = useState((sessionStorage.getItem('level') || Level.First) as Level);
   const startGame = useCallback(() => {
-    if (level) {
-      appNavigation.game.toGame({ level });
-    }
+    appNavigation.game.toGame({ level });
   }, [appNavigation.game, level]);
 
   const updateActive = useCallback(
@@ -37,9 +35,6 @@ export function Start() {
   if (!viewer) {
     throw new Error('Cannot play not authenticated!');
   }
-
-  // TODO добавить useSelect
-  // TODO добавить форму
 
   return (
     <GameLayout
