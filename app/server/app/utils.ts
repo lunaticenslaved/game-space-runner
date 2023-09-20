@@ -7,7 +7,7 @@ import fileUpload from 'express-fileupload';
 import { CORS_ORIGIN_WHITELIST } from '@server/shared/constants';
 import { context } from '@server/shared/context';
 import { createStore } from '@client/shared/store';
-import { addUserFromCookie } from '@server/middlewares';
+import { addHeaders, addUserFromCookie } from '@server/middlewares';
 
 export function configureApp(app: Express) {
   app.disable('x-powered-by');
@@ -23,6 +23,7 @@ export function configureApp(app: Express) {
   );
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(addHeaders);
 }
 
 type RenderHTMLProps = {
