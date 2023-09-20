@@ -37,6 +37,7 @@ export async function createApp() {
       vite.transformIndexHtml(url, fs.readFileSync(CLIENT_HTML_FILE_PATH, 'utf-8')),
     renderFn: (await vite.ssrLoadModule(CLIENT_RENDER_FILE_PATH)).render,
     onError: vite.ssrFixStacktrace,
+    createStore: (await import('@client/shared/store')).createStore,
   });
 
   app.listen(PORT, () => {

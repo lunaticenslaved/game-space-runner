@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import express from 'express';
 
-import { createStore } from '@client/shared/store';
 import { PORT } from '@server/shared/constants';
 import { context } from '@server/shared/context';
 import { ROOT_PATH } from '@server/shared/constants';
@@ -53,6 +52,7 @@ export async function createApp() {
 
       const template = fs.readFileSync(CLIENT_HTML_FILE_PATH, 'utf-8');
       const render = (await import(CLIENT_RENDER_FILE_PATH)).render;
+      const createStore = (await import('@client/shared/store')).createStore;
 
       const store = createStore();
       const appHtml = await render(url, store);

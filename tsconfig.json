@@ -40,6 +40,7 @@
     "experimentalDecorators": true,
 
     /* Paths */
+    "outDir": "dist",
     "rootDir": ".",
     "baseUrl": ".",
     "paths": {

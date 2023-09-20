@@ -6,7 +6,6 @@ import fileUpload from 'express-fileupload';
 
 import { CORS_ORIGIN_WHITELIST } from '@server/shared/constants';
 import { context } from '@server/shared/context';
-import { createStore } from '@client/shared/store';
 import { addHeaders, addUserFromCookie } from '@server/middlewares';
 
 export function configureApp(app: Express) {
@@ -30,10 +29,11 @@ type RenderHTMLProps = {
   app: Express;
   renderFn: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   getContent(url: string): Promise<string> | string;
+  createStore(args?: unknown): any; // eslint-disable-line @typescript-eslint/no-explicit-any
   onError(error: Error): void;
 };
 
-export function addSSRRoute({ app, getContent, onError, renderFn }: RenderHTMLProps) {
+export function addSSRRoute({ app, getContent, onError, renderFn, createStore }: RenderHTMLProps) {
   app.use('*', addUserFromCookie, async (req: Request, res, next) => {
     try {
       const url = req.originalUrl;
