@@ -1,14 +1,12 @@
-import cors from 'cors';
 import fs from 'fs';
 import path from 'path';
 import express from 'express';
-import cookieParser from 'cookie-parser';
-import bodyParser from 'body-parser';
 
 import { createStore } from '@client/shared/store';
-import { PORT, CORS_ORIGIN_WHITELIST } from '@server/shared/constants';
+import { PORT } from '@server/shared/constants';
 import { context } from '@server/shared/context';
 import { ROOT_PATH } from '@server/shared/constants';
+import { configureApp } from '@server/app/utils';
 
 const CLIENT_DIST_PATH = path.resolve(ROOT_PATH, 'dist');
 const CLIENT_SSR_DIST_PATH = path.resolve(ROOT_PATH, 'ssr-dist');
@@ -19,17 +17,7 @@ const CLIENT_ASSETS_PATH = path.resolve(CLIENT_DIST_PATH, 'assets');
 export async function createApp() {
   const app = express();
 
-  app.disable('x-powered-by');
-  app.enable('trust proxy');
-  app.use(cookieParser());
-  app.use(
-    cors({
-      credentials: true,
-      origin: CORS_ORIGIN_WHITELIST,
-    }),
-  );
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: false }));
+  configureApp(app);
 
   await context.prisma.$connect();
   //   await dbConnect().then(() => {
