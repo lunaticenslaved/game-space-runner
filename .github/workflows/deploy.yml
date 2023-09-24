@@ -1,25 +1,34 @@
 name: Push to GitHub Container Registry
 
 on:
-  pull_request:
   push:
     branches:
       - main
 
-
 jobs:
-  build-and-push:
-    name: Build image & push
+  lint:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set Node.JS environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - run: npm ci
+      - run: npm run lint
+  
+  build:
+    needs: lint
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: set lower case owner name
+      - name: Set lower case owner name
         run: |
           echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
         env:
@@ -32,19 +41,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push client image
+      - name: Build and push image
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: Dockerfile.client
+          file: Dockerfile
           push: true
           tags: ghcr.io/${{ env.OWNER_LC }}/${{ github.event.repository.name }}/client:${{ github.sha }}
-
-      - name: Build and push server image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: Dockerfile.server
-          push: true
-          tags: ghcr.io/${{ env.OWNER_LC }}/${{ github.event.repository.name }}/server:${{ github.sha }} 
-
