@@ -1,4 +1,4 @@
-ARG NODE_VERSION=16
+ARG NODE_VERSION=20
 
 
 FROM node:$NODE_VERSION-buster as builder
@@ -7,8 +7,8 @@ WORKDIR /app
 
 COPY . .
 
-RUN yarn bootstrap \
-    && yarn build \
+RUN npm ci \
+    && npm rn build \
     && chmod +x utils/wait-for.sh \
     && apt update \
     && apt install -y netcat-openbsd

@@ -2,24 +2,21 @@ name: Lint
 
 on:
   pull_request:
-  push:
     branches:
       - main
-      - dev
+  push:
+    branches:
+      - '!main'
 
 jobs:
-  eslint:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 20
       - name: Install main deps
-        run: yarn
-      - name: Initialize
-        run: yarn lerna bootstrap
+        run: npm ci
       - name: Lint
-        run: yarn lint
-      - name: Test
-        run: yarn test
+        run: npm run lint
