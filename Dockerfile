@@ -8,7 +8,8 @@ WORKDIR /app
 COPY . .
 
 RUN npm ci \
-    && npm rn build \
+    && npm run db:generate \
+    && npm run build \
     && chmod +x utils/wait-for.sh \
     && apt update \
     && apt install -y netcat-openbsd

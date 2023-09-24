@@ -22,7 +22,7 @@ services:
       - prakticum
     depends_on:
       - postgres
-    command: ./utils/wait-for.sh postgres:${POSTGRES_PORT} -- node /app/packages/server/dist/index.js
+    command: ./utils/wait-for.sh postgres:${POSTGRES_PORT} -- node /dist/server/index.js
 
   postgres:
     container_name: prakticum-database
