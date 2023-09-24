@@ -4,7 +4,7 @@ import { UserComponent } from '@client/entities/user';
 import { Input } from '@client/shared/components/input';
 import { routes, useAppNavigation } from '@client/shared/navigation';
 import { useForm, usePasswordField, useTextField } from '@libs/validate-react';
-import { setViewer, useAppDispatch } from '@client/shared/store';
+import { setViewer, useAppDispatch } from '@shared/store';
 import { API, useMutation } from '@shared/api';
 
 export const SignInForm = () => {

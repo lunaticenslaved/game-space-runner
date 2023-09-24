@@ -1,7 +1,6 @@
 import path from 'path';
 
 export const ROOT_PATH = path.resolve(__dirname, '../../../');
-
 export const APP_ENV = process.env.APP_ENV;
 export const IS_DEV = APP_ENV === 'dev';
 

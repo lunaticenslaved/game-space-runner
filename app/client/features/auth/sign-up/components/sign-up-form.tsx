@@ -5,7 +5,7 @@ import { Input } from '@client/shared/components/input';
 import { routes, useAppNavigation } from '@client/shared/navigation';
 import { useForm, usePasswordField, useTextField } from '@libs/validate-react';
 import { validationRules } from '@libs/validate';
-import { setViewer, useAppDispatch } from '@client/shared/store';
+import { setViewer, useAppDispatch } from '@shared/store';
 import { API, useMutation } from '@shared/api';
 
 export const SignUpForm = () => {

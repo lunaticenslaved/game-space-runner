@@ -8,9 +8,11 @@ import { context } from '@server/shared/context';
 import { addRouter } from '@server/controllers';
 import { ROOT_PATH } from '@server/shared/constants';
 
-import { addSSRRoute, configureApp, loadStaticFiles } from './utils';
+import { addSSRRoute, configureApp } from './utils';
 
-const CLIENT_RENDER_FILE_PATH = path.resolve(ROOT_PATH, 'app/client/index.server.tsx');
+const APP_PATH = path.resolve(ROOT_PATH, 'app');
+const CLIENT_RENDER_FILE_PATH = path.resolve(APP_PATH, 'client/index.server');
+const CLIENT_STORE_FILE_PATH = path.resolve(APP_PATH, 'shared/store/index');
 const CLIENT_HTML_FILE_PATH = path.resolve(ROOT_PATH, 'index.html');
 
 export async function createApp() {
@@ -21,6 +23,7 @@ export async function createApp() {
     server: { middlewareMode: true },
     root: ROOT_PATH,
     appType: 'custom',
+    configFile: 'vite.client.config.ts',
   });
 
   app.use(vite.middlewares);
@@ -29,20 +32,18 @@ export async function createApp() {
 
   addRouter(app);
 
-  loadStaticFiles(app);
-
   addSSRRoute({
     app,
     getContent: async url =>
       vite.transformIndexHtml(url, fs.readFileSync(CLIENT_HTML_FILE_PATH, 'utf-8')),
     renderFn: (await vite.ssrLoadModule(CLIENT_RENDER_FILE_PATH)).render,
     onError: vite.ssrFixStacktrace,
-    createStore: (await import('@client/shared/store')).createStore,
+    createStore: (await vite.ssrLoadModule(CLIENT_STORE_FILE_PATH)).createStore,
   });
 
   app.listen(PORT, () => {
     console.log(
-      `  ➜ 🎸 Server is listening on port: ${PORT}. Use this server: http://localhost:${PORT}`,
+      `  ➜ 🎸 [DEV] Server is listening on port: ${PORT}. Use this server: http://localhost:${PORT}`,
     );
   });
 }

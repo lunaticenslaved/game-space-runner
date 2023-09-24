@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 
 import { Button } from '@client/shared/components/button';
 import { useAppNavigation } from '@client/shared/navigation';
-import { setViewer, useAppDispatch } from '@client/shared/store';
+import { setViewer, useAppDispatch } from '@shared/store';
 import { API, useMutation } from '@shared/api';
 
 export const LogoutButton = () => {

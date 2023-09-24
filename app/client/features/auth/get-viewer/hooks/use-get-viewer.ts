@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 import { AccessLevel } from '@client/shared/navigation';
-import { useAppSelector } from '@client/shared/store';
+import { useAppSelector } from '@shared/store';
 
 export const useViewer = () => {
   const viewer = useAppSelector(state => state.state.viewer);

@@ -5,7 +5,7 @@ import { Input } from '@client/shared/components/input';
 import { Dialog } from '@client/shared/components/dialog';
 import { User } from '@shared/models/user';
 import { useTextField, useForm } from '@libs/validate-react';
-import { setViewer, useAppDispatch } from '@client/shared/store';
+import { setViewer, useAppDispatch } from '@shared/store';
 import { API, useMutation } from '@shared/api';
 
 import styles from './info-editor.module.scss';

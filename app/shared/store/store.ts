@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { User } from '@shared/models/user';
+import { User } from '../models/user';
 
 import { reducer } from './state';
 

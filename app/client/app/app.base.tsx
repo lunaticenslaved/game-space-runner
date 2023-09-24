@@ -3,7 +3,7 @@ import { Routes } from 'react-router-dom';
 import { Provider as StoreProvider } from 'react-redux';
 
 import { Pages } from '@client/pages';
-import { RootStore } from '@client/shared/store';
+import { RootStore } from '@shared/store';
 
 import '@client/shared/styles/index.scss';
 

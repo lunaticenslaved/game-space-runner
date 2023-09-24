@@ -10,7 +10,6 @@
   "compilerOptions": {
     "target": "es6",
     "lib": ["DOM", "es2019", "esnext.asynciterable"],
-    "module": "ESNext",
     "skipLibCheck": true,
     "composite": false,
     "declaration": false,
@@ -20,6 +19,7 @@
     /* Bundler mode */
     "useDefineForClassFields": false,
     "esModuleInterop": true,
+    "module": "ESNext",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
@@ -41,7 +41,7 @@
 
     /* Paths */
     "outDir": "dist",
-    "rootDir": ".",
+    "rootDir": "./app",
     "baseUrl": ".",
     "paths": {
       "@client/*": ["./app/client/*"],

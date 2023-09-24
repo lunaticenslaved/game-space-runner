@@ -3,10 +3,12 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import fileUpload from 'express-fileupload';
+import fs from 'fs';
 
 import { CORS_ORIGIN_WHITELIST } from '@server/shared/constants';
 import { context } from '@server/shared/context';
 import { addHeaders, addUserFromCookie } from '@server/middlewares';
+import { resolve } from 'path';
 
 export function configureApp(app: Express) {
   app.disable('x-powered-by');
@@ -30,12 +32,39 @@ type RenderHTMLProps = {
   renderFn: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   getContent(url: string): Promise<string> | string;
   createStore(args?: unknown): any; // eslint-disable-line @typescript-eslint/no-explicit-any
-  onError(error: Error): void;
+  onError?(error: Error): void;
+  assetsFolder?: string;
 };
 
-export function addSSRRoute({ app, getContent, onError, renderFn, createStore }: RenderHTMLProps) {
+export function addSSRRoute({
+  app,
+  getContent,
+  onError,
+  renderFn,
+  createStore,
+  assetsFolder,
+}: RenderHTMLProps) {
+  let staticFiles: string[] = [];
+
+  if (assetsFolder) {
+    fs.readdir(assetsFolder, (err, files) => {
+      if (!err) {
+        staticFiles = files;
+      } else {
+        console.error('Ошибка при чтении папки:', err);
+      }
+    });
+  }
+
   app.use('*', addUserFromCookie, async (req: Request, res, next) => {
     try {
+      const filePath = staticFiles.find(file => req.baseUrl.endsWith(file));
+
+      if (filePath && assetsFolder) {
+        res.sendFile(resolve(assetsFolder, filePath));
+        return;
+      }
+
       const url = req.originalUrl;
       const userId = req.user?.id;
       const user = userId
@@ -64,19 +93,11 @@ export function addSSRRoute({ app, getContent, onError, renderFn, createStore }:
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
-      onError(e as Error);
+      if (onError) {
+        onError(e as Error);
+      }
+
       next(e);
     }
   });
-}
-
-export function loadStaticFiles(_: Express) {
-  // let staticFiles: string[];
-  // fs.readdir(CLIENT_SSR_DIST_PATH, (err, files) => {
-  //   if (!err) {
-  //     staticFiles = files;
-  //   } else {
-  //     console.error('Ошибка при чтении папки:', err);
-  //   }
-  // });
 }

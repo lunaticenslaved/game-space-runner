@@ -1,8 +1,9 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    // "target": "esnext",
-    "module": "commonjs",
-    "types": ["node"]
-  }
+    "module": "CommonJS",
+    "types": ["node"],
+    "outDir": "../../dist",
+  },
+  "exclude": ["../client"]
 }
