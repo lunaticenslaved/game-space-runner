@@ -6,51 +6,51 @@ volumes:
 
 services:
   server:
-    container_name: prakticum-server
-    image: prakticum-server
+    container_name: game-runner-server
+    image: game-runner-server
     build:
       context: .
-      dockerfile: Dockerfile.server
+      dockerfile: Dockerfile
       args:
-        SERVER_PORT: ${SERVER_PORT}
+        PORT: ${PORT}
     restart: always
     ports:
-      - '${SERVER_PORT}:${SERVER_PORT}'
+      - '${PORT}:${PORT}'
     env_file:
       - ./.env
     networks:
-      - prakticum
+      - game-runner
     depends_on:
       - postgres
-    command: ./utils/wait-for.sh postgres:${POSTGRES_PORT} -- node /dist/server/index.js
+    command: ./utils/wait-for.sh postgres:${POSTGRES_PORT} -- npm run deploy
 
   postgres:
-    container_name: prakticum-database
+    container_name: game-runner-database
     image: postgres:14
     ports:
       - '${POSTGRES_PORT}:${POSTGRES_PORT}'
     env_file:
       - ./.env
     volumes:
-      - ./tmp/pgdata:/var/lib/postgresql/data
+      - ../tmp/pgdata:/var/lib/postgresql/data
     networks:
-      - prakticum
+      - game-runner
 
   pgadmin:
-    container_name: pgadmin
+    container_name: game-runner-pgadmin
     image: dpage/pgadmin4:7.4
     restart: always
     env_file:
       - ./.env
     ports:
-      - '8080:80'
+      - '${PGADMIN_LISTEN_PORT}:${PGADMIN_LISTEN_PORT}'
     volumes:
       - pgadmin-data:/var/lib/pgadmin
     depends_on:
       - postgres
     networks:
-      - prakticum
+      - game-runner
 
 networks:
-  prakticum:
+  game-runner:
     driver: bridge
