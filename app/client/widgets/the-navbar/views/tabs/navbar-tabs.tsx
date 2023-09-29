@@ -9,7 +9,7 @@ import { ToSignInButton } from '@client/features/auth/sign-in';
 
 import { filterLinks } from '../../utils';
 
-import styles from './navbar-tabs.module.scss';
+import './navbar-tabs.scss';
 
 const links = [
   { title: 'Главная', route: routes.home },
@@ -24,16 +24,16 @@ export const NavbarTabs = () => {
   const availableLinks = useMemo(() => filterLinks({ links, access }), [access]);
 
   return (
-    <div className={styles.navbar}>
-      <div className={styles.links}>
+    <div className="the-navbar-tabs">
+      <div className="the-navbar-tabs__links">
         {availableLinks.map(({ title, route: { path } }) => (
           <NavLink
             key={title}
             to={path}
             className={({ isActive }) =>
               cn({
-                [styles.linkItem]: true,
-                [styles.linkItemActive]: isActive,
+                'the-navbar-tabs__link-item': true,
+                'the-navbar-tabs__link-item--active': isActive,
               })
             }>
             {title}
@@ -41,7 +41,7 @@ export const NavbarTabs = () => {
         ))}
       </div>
 
-      <div className={styles.button}>{isAuthenticated ? <LogoutButton /> : <ToSignInButton />}</div>
+      {isAuthenticated ? <LogoutButton /> : <ToSignInButton />}
     </div>
   );
 };

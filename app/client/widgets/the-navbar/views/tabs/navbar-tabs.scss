@@ -1,0 +1,56 @@
+@import '@client/shared/styles/variables.scss';
+
+:root {
+  --the-navbar-tabs-item-color: var(--primary-color);
+  --the-navbar-tabs-item-bg--active: var(--primary-color);
+  --the-navbar-tabs-item-bg-opacity--active: 0.2;
+  --the-navbar-tabs-item-font-weight: 600;
+  --the-navbar-tabs-item-padding-x: 24px;
+  --the-navbar-tabs-item-padding-y: 0;
+  --the-navbar-tabs-padding-right: 12px;
+  --the-navbar-tabs-height: 72px;
+}
+
+.the-navbar-tabs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: var(--the-navbar-tabs-padding-right);
+  height: var(--the-navbar-tabs-height);
+  min-height: var(--the-navbar-tabs-height);
+  max-height: var(--the-navbar-tabs-height);
+
+  &__links {
+    display: flex;
+    align-self: stretch;
+  }
+
+  &__link-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+
+    padding: var(--the-navbar-tabs-item-padding-y) var(--the-navbar-tabs-item-padding-x);
+    color: var(--the-navbar-tabs-item-color);
+    font-weight: var(--the-navbar-tabs-item-font-weight);
+
+    &--active {
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: var(--the-navbar-tabs-item-bg--active);
+        opacity: var(--the-navbar-tabs-item-bg-opacity--active);
+      }
+    }
+  }
+}
+
+
+
