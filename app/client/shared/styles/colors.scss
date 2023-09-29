@@ -38,3 +38,11 @@ $scrollbar-track-bg: $white;
 
 /* Text */
 $color-gray-text: $gray-800;
+
+
+:root {
+    --primary-color: #564282;
+    --primary-color--darken: #322858;
+
+    --on-primary-color: #fff;
+}

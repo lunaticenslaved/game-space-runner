@@ -1,0 +1,56 @@
+@import '@client/shared/styles/variables.scss';
+
+:root {
+  --button-bg-color: var(--primary-color);
+  --button-bg-color--hover: var(--primary-color--darken);
+
+  --button-color: var(--on-primary-color);
+  --button-font-weight: 600;
+
+  --button-border-radius: 12px;
+  --button-padding-x: 16px;
+  --button-padding-y: 24px;
+
+  --button-transition: background 0.75s ease-out;
+}
+
+.button {
+  display: block;
+  border: none;
+  text-align: center;
+  width: 100%;
+  min-width: max-content;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  max-width: max-content;
+
+  background-color: var(--button-bg-color);
+  color: var(--button-color);
+  border-radius: var(--button-border-radius);
+  padding: var(--button-padding-x) var(--button-padding-y);
+  font-weight: var(--button-font-weight);
+  transition: var(--button-transition);
+
+  &:hover {
+    background-color: var(--button-bg-color--hover);
+  }
+
+
+  &--loading {
+    .button__content {
+      opacity: 0;
+    }
+
+    .button__spinner {
+      position: absolute;
+      margin-left: auto;
+      margin-right: auto;
+      top: 25%;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+  }
+}
+

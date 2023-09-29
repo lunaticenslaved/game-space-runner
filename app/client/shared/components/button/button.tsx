@@ -10,7 +10,7 @@ import cn from 'classnames';
 
 import { Spinner } from '../spinner';
 
-import styles from './button.module.scss';
+import './button.scss';
 
 type OwnButtonProps = {
   disabled?: boolean;
@@ -18,13 +18,21 @@ type OwnButtonProps = {
   className?: string;
 } & PropsWithChildren;
 
-type HTMLButtonProps = OwnButtonProps &
+type NarrowButtonProps = OwnButtonProps &
   Pick<ButtonHTMLAttributes<HTMLButtonElement>, 'type' | 'onClick'>;
-type HTMLLinkProps = OwnButtonProps & {
+type NarrowLinkProps = OwnButtonProps & {
   href: string;
 } & Pick<AnchorHTMLAttributes<HTMLAnchorElement>, 'onClick'>;
 
-export type ButtonProps = HTMLButtonProps | HTMLLinkProps;
+export type ButtonProps = NarrowButtonProps | NarrowLinkProps;
+
+function isLink(props: ButtonProps): props is NarrowLinkProps {
+  return 'href' in props;
+}
+
+function isButton(props: ButtonProps): props is NarrowButtonProps {
+  return !isLink(props);
+}
 
 export const Button = ({
   loading,
@@ -32,25 +40,25 @@ export const Button = ({
   className: classNameProp,
   ...otherProps
 }: ButtonProps) => {
-  const className = useMemo(() => {
-    return cn(styles.root, classNameProp, {
-      [styles.loading]: loading,
-    });
-  }, [classNameProp, loading]);
-  const props = useMemo(() => {
-    return { ...otherProps, className };
-  }, [className, otherProps]);
+  const props: ButtonProps = useMemo(
+    () => ({
+      ...otherProps,
+      className: cn('button', classNameProp, { 'button--loading': loading }),
+    }),
+    [classNameProp, loading, otherProps],
+  );
   const content = useMemo(() => {
     return (
       <Fragment>
-        <div className={styles.content}>{children}</div>
-        <div className={styles.spinner}>{loading ? <Spinner /> : null}</div>
+        <div className="button__content">{children}</div>
+        <div className="button__spinner">{loading ? <Spinner /> : null}</div>
       </Fragment>
     );
   }, [children, loading]);
 
-  if ('href' in props) {
+  if (isLink(props)) {
     const { href } = props;
+
     return (
       <Link to={href} {...props}>
         {content}
@@ -58,11 +66,15 @@ export const Button = ({
     );
   }
 
-  const { type } = props;
+  if (isButton(props)) {
+    const { type } = props;
 
-  return (
-    <button type={type} {...props}>
-      {content}
-    </button>
-  );
+    return (
+      <button type={type} {...props}>
+        {content}
+      </button>
+    );
+  }
+
+  return null;
 };
