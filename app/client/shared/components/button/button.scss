@@ -23,7 +23,6 @@
   text-decoration: none;
   cursor: pointer;
   position: relative;
-  max-width: max-content;
 
   background-color: var(--button-bg-color);
   color: var(--button-color);
@@ -36,6 +35,13 @@
     background-color: var(--button-bg-color--hover);
   }
 
+  &--full-width {
+    width: 100%;
+  }
+
+  &--auto-width {
+    max-width: max-content;
+  }
 
   &--loading {
     .button__content {

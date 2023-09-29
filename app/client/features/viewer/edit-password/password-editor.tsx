@@ -71,7 +71,7 @@ export const PasswordEditor = ({
         <Input.TextInput {...newPassField.props} label="Новый пароль" />
         <Input.TextInput {...repeatPassField.props} label="Повторите пароль" />
 
-        <Button type="submit" loading={form.isSubmitting} disabled={form.isSubmitting}>
+        <Button type="submit" width="full" loading={form.isSubmitting} disabled={form.isSubmitting}>
           Редактировать
         </Button>
       </form>

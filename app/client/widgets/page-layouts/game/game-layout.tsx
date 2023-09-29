@@ -26,7 +26,7 @@ export function GameLayout({
         <h3 className={styles.title}>{header}</h3>
         {!!description && <p className={styles.text}>{description}</p>}
         {content}
-        <Button className={styles.btn} onClick={onButtonClick}>
+        <Button width="full" className={styles.btn} onClick={onButtonClick}>
           {buttonText}
         </Button>
       </Card>

@@ -37,7 +37,7 @@ export const AuthForm = ({
 
         <div className={styles.error}>{authError}</div>
 
-        <Button className={styles.button} type="submit" loading={isSubmitting}>
+        <Button className={styles.button} type="submit" width="full" loading={isSubmitting}>
           {submitText}
         </Button>
 

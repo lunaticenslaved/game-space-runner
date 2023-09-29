@@ -62,7 +62,7 @@ export const PostFormDialog = ({ isOpen, onSubmit, onClose }: PostFormDialogProp
       <form {...props}>
         <Input.TextInput {...titleField.props} label="Тема" />
         <Input.TextArea {...contentField.props} label="Контент" />
-        <Button type="submit" loading={isSubmitting} disabled={isSubmitting}>
+        <Button type="submit" loading={isSubmitting} width="full" disabled={isSubmitting}>
           Создать
         </Button>
       </form>

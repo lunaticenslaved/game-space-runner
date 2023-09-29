@@ -16,6 +16,7 @@ type OwnButtonProps = {
   disabled?: boolean;
   loading?: boolean;
   className?: string;
+  width?: 'full' | 'auto';
 } & PropsWithChildren;
 
 type NarrowButtonProps = OwnButtonProps &
@@ -37,15 +38,20 @@ function isButton(props: ButtonProps): props is NarrowButtonProps {
 export const Button = ({
   loading,
   children,
-  className: classNameProp,
+  className,
+  width = 'auto',
   ...otherProps
 }: ButtonProps) => {
   const props: ButtonProps = useMemo(
     () => ({
       ...otherProps,
-      className: cn('button', classNameProp, { 'button--loading': loading }),
+      className: cn('button', className, {
+        'button--loading': loading,
+        'button--full-width': width === 'full',
+        'button--auto-width': width === 'auto',
+      }),
     }),
-    [classNameProp, loading, otherProps],
+    [className, loading, otherProps, width],
   );
   const content = useMemo(() => {
     return (

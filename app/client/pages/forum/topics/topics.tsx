@@ -29,7 +29,7 @@ export const ForumPage = () => {
               <h1 className={styles.title}>Форум</h1>
               {isAuthenticated && (
                 <div className={styles.actions}>
-                  <Button children="Создать топик" onClick={topicDialog.open} />
+                  <Button children="Создать топик" width="full" onClick={topicDialog.open} />
                 </div>
               )}
             </div>

@@ -67,7 +67,7 @@ export const InfoEditor = ({ user, isOpen, onClose, onUpdated }: InfoEditorProps
       <form {...props}>
         <Input.TextInput {...loginField.props} label="Логин" />
 
-        <Button type="submit" loading={isSubmitting} disabled={isSubmitting}>
+        <Button type="submit" width="full" loading={isSubmitting} disabled={isSubmitting}>
           Редактировать
         </Button>
       </form>

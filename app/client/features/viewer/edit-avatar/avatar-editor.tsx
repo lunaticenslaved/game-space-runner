@@ -69,7 +69,7 @@ export const AvatarEditor = ({
       <form {...form.props}>
         <Input.File {...fileField.props} label="Новый аватар" />
 
-        <Button type="submit" loading={form.isSubmitting} disabled={form.isSubmitting}>
+        <Button type="submit" width="full" loading={form.isSubmitting} disabled={form.isSubmitting}>
           Редактировать
         </Button>
       </form>

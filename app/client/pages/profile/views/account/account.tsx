@@ -52,9 +52,15 @@ export const Account = ({ user }: AccountProps) => {
         <UserComponent.InfoList {...user} />
 
         <div className={styles.buttons}>
-          <Button onClick={editUserDialog.open}>Изменить данные</Button>
-          <Button onClick={editPasswordDialog.open}>Изменить пароль</Button>
-          <Button onClick={editAvatarDialog.open}>Изменить аватар</Button>
+          <Button width="full" onClick={editUserDialog.open}>
+            Изменить данные
+          </Button>
+          <Button width="full" onClick={editPasswordDialog.open}>
+            Изменить пароль
+          </Button>
+          <Button width="full" onClick={editAvatarDialog.open}>
+            Изменить аватар
+          </Button>
         </div>
       </div>
     </div>
