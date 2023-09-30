@@ -2,7 +2,8 @@ import { Button } from '@client/shared/components/button';
 import { Grid } from '@client/shared/components/grid';
 import { useDialog } from '@client/shared/components/dialog';
 import { useAppNavigation } from '@client/shared/navigation';
-import { PostsList, PostFormDialog } from '@client/features/forum';
+import { PostFormDialog } from '@client/features/forum';
+import { PostsList } from '@client/entities/post';
 import { useViewer } from '@client/features/auth/get-viewer';
 
 import styles from './topics.module.scss';

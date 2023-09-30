@@ -33,15 +33,10 @@ export const PlayerList = ({ players }: PlayerListProps) => {
       <div className={styles.searchBar}>
         <Input.TextInput
           name="search"
-          label="Поиск игрока"
+          placeholder="Поиск игрока"
           value={search}
           onChange={updateSearch}
         />
-      </div>
-      <div className={styles.playListHeader}>
-        <div className={styles.playListHeaderCol}>Позиция</div>
-        <div className={styles.playListHeaderCol}>Игрок</div>
-        <div className={styles.playListHeaderCol}>Кол-во очков</div>
       </div>
       <div className={styles.playListBody}>
         {filteredPlayers.map(({ id, user, score }) => (
@@ -54,7 +49,7 @@ export const PlayerList = ({ players }: PlayerListProps) => {
               />
               <div className={styles.playerName}>{user.login}</div>
             </div>
-            <div className={styles.playerScore}>{score}</div>
+            <div className={styles.playerScore}>{score} points</div>
           </div>
         ))}
       </div>

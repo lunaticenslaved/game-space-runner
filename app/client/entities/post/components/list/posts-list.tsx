@@ -4,10 +4,10 @@ import { VirtualTable } from '@client/shared/components/table';
 import { IColumnProps } from '@client/shared/components/table/components/Row';
 import { Post } from '@shared/models/post';
 import { dateConvert } from '@client/shared/utils/dates';
-
-import styles from './posts-list.module.scss';
 import { API, useQuery } from '@shared/api';
 import { ViewPlaceholder } from '@client/shared/components/view-placeholder';
+
+import styles from './posts-list.module.scss';
 
 export interface PostsListProps {
   onPostClick: (topic: Post) => void;

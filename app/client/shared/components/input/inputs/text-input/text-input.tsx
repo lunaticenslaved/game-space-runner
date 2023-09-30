@@ -7,6 +7,7 @@ import styles from './text-input.module.scss';
 export type TextInputProps = {
   name: string;
   value?: string;
+  placeholder?: string;
   type?: 'text' | 'password';
   onChange?: ChangeEventHandler<HTMLInputElement>;
 } & Omit<InputWrapperProps, 'children'>;
@@ -15,6 +16,7 @@ export const TextInput = ({
   error,
   label,
   name,
+  placeholder,
   value: valueProp = '',
   type = 'text',
   onChange,
@@ -38,6 +40,7 @@ export const TextInput = ({
         type={type}
         name={name}
         value={value}
+        placeholder={placeholder}
         className={styles.input}
         onChange={handleChange}
       />
