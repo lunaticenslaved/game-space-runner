@@ -1,0 +1,37 @@
+:root {
+  --card-margin-x: 28px;
+  --card-margin-y: 28px;
+  --card-title-font-color: var(--on-primary-color);
+  --card-subtitle-font-color: var(--on-primary-color);
+  --card-body-font-color: var(--on-primary-color);
+  --card-bg: #191c2c;
+  --card-border-radius: 12px;
+  --card-shadow: 0px 8px 24px var(--secondary-color)
+}
+
+.card {
+  border-radius: var(--card-border-radius);
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    margin: var(--card-margin-y) var(--card-margin-x);
+    color: var(--card-title-font-color)
+  }
+
+  &__subtitle {
+    margin: var(--card-margin-y) var(--card-margin-x);
+    color: var(--card-subtitle-font-color)
+  }
+
+  &__body {
+    margin: var(--card-margin-y) var(--card-margin-x);
+    color: var(--card-body-font-color)
+  }
+
+  &__footer {
+    margin: var(--card-margin-y) var(--card-margin-x);
+  }
+}

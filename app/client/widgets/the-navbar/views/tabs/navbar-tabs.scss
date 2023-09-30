@@ -1,5 +1,3 @@
-@import '@client/shared/styles/variables.scss';
-
 :root {
   --the-navbar-tabs-item-color: var(--primary-color);
   --the-navbar-tabs-item-bg--active: var(--primary-color);
@@ -36,18 +34,8 @@
     font-weight: var(--the-navbar-tabs-item-font-weight);
 
     &--active {
-      position: relative;
-
-      &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        background-color: var(--the-navbar-tabs-item-bg--active);
-        opacity: var(--the-navbar-tabs-item-bg-opacity--active);
-      }
+      color: var(--secondary-color);
+      text-shadow: var(--secondary-color) 0px 4px 28px;
     }
   }
 }

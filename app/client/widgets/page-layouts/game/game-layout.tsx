@@ -23,12 +23,16 @@ export function GameLayout({
   return (
     <div className={styles.root}>
       <Card>
-        <h3 className={styles.title}>{header}</h3>
-        {!!description && <p className={styles.text}>{description}</p>}
-        {content}
-        <Button width="full" className={styles.btn} onClick={onButtonClick}>
-          {buttonText}
-        </Button>
+        <Card.Title title={header}></Card.Title>
+        <Card.Subtitle>
+          {!!description && <p className={styles.text}>{description}</p>}
+        </Card.Subtitle>
+        <Card.Body>{content}</Card.Body>
+        <Card.Footer>
+          <Button width="full" className={styles.btn} onClick={onButtonClick}>
+            {buttonText}
+          </Button>
+        </Card.Footer>
       </Card>
     </div>
   );
