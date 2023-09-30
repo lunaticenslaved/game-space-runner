@@ -16,14 +16,31 @@ export const getPosts = createAction<void, GetPostsResponse, unknown>(async (__,
       },
       createdAt: true,
       updatedAt: true,
+      _count: {
+        select: {
+          comments: true,
+        },
+      },
+      comments: {
+        orderBy: {
+          createdAt: 'desc',
+        },
+        take: 1,
+      },
     },
   });
 
   return {
-    posts: posts.map(post => ({
+    posts: posts.map(({ _count, comments: [lastComment], ...post }) => ({
       ...post,
       createdAt: post.createdAt.toISOString(),
       updatedAt: post.updatedAt.toISOString(),
+      count: _count,
+      lastComment: lastComment
+        ? {
+            createdAt: lastComment.createdAt.toISOString(),
+          }
+        : undefined,
     })),
   };
 });

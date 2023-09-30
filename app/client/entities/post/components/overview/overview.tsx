@@ -1,9 +1,14 @@
 import cn from 'classnames';
+import block from 'bem-cn-lite';
 
 import { dateConvert } from '@client/shared/utils/dates';
 import { API, useQuery } from '@shared/api';
 
-import styles from './post-overview.module.scss';
+import './overview.scss';
+
+const overview = block('entities-post-overview');
+const header = block('entities-post-overview__header');
+const content = block('entities-post-overview__content');
 
 export type PostOverviewProps = {
   postId: string;
@@ -18,16 +23,16 @@ export const PostOverview = ({ postId, className }: PostOverviewProps) => {
   }
 
   return (
-    <section className={cn(styles.container, className)}>
-      <div className={styles.header}>
-        <time className={styles.createdAt} dateTime={post.createdAt}>
+    <section className={cn(overview(), className)}>
+      <div className={header()}>
+        <time className={header('created')} dateTime={post.createdAt}>
           {dateConvert(post.createdAt)}
         </time>
 
-        <h1 className={styles.title}>{post.title}</h1>
+        <h1 className={header('title')}>{post.title}</h1>
       </div>
 
-      <div className={styles.content}>{post.content}</div>
+      <div className={content()}>{post.content}</div>
     </section>
   );
 };

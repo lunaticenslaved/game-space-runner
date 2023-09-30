@@ -1,12 +1,17 @@
 import { useCallback } from 'react';
 import cn from 'classnames';
+import block from 'bem-cn-lite';
 
 import { API, useMutation, useQuery } from '@shared/api';
 
 import { Empty, List } from './views';
 import { CommentInput } from './components/comment-input';
 
-import styles from './comments-list.module.scss';
+import './list.scss';
+
+const bList = block('entities-comment-list');
+const bHeader = block('entities-comment-list__header');
+const bContent = block('entities-comment-list__content');
 
 export interface CommentsListProps {
   postId: string;
@@ -45,13 +50,17 @@ export const CommentsList = ({ postId, className }: CommentsListProps) => {
   const { comments } = data;
 
   return (
-    <section className={cn(styles.root, className)}>
-      <div className={styles.header}>
+    <section className={cn(bList(), className)}>
+      <div className={bHeader()}>
         <h4>Комментарии</h4>
       </div>
 
       {comments.length === 0 && <Empty />}
-      {comments.length > 0 && <List comments={comments} />}
+      {comments.length > 0 && (
+        <div className={bContent()}>
+          <List comments={comments} />
+        </div>
+      )}
 
       <CommentInput onSubmit={createComment} />
     </section>
