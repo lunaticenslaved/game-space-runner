@@ -1,0 +1,17 @@
+@import '@client/shared/styles/index.scss';
+
+.pages-index {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background: $backgroundImg;
+
+    &__navbar {
+        position: absolute;
+    }
+
+    &__content {
+        flex: 1 1 auto;
+        overflow-y: auto;
+    }
+}

@@ -9,7 +9,9 @@ export type AuthLayoutProps = PropsWithChildren;
 export const AuthLayout = ({ children }: AuthLayoutProps) => {
   return (
     <div className={styles.root}>
-      <Card className={styles.card}>{children}</Card>
+      <Card className={styles.card}>
+        <Card.Body>{children}</Card.Body>
+      </Card>
     </div>
   );
 };

@@ -1,11 +1,11 @@
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import svgr from 'vite-plugin-svgr';
+import svgLoader from '@andylacko/vite-svg-react-loader';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), svgr()],
+  plugins: [svgLoader(), react()],
   mode: process.env.NODE_ENV,
   build: {
     outDir: 'dist/client/spa',

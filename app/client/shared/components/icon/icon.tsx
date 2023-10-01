@@ -6,14 +6,14 @@ import styles from './icon.module.scss';
 export type IconProps = {
   icon: ReactNode;
   className?: string;
-  size?: number;
+  size?: number | 'max';
 };
 
 export const Icon = ({ icon, className: classNameProp, size = 24 }: IconProps) => {
   const style = useMemo(
     () => ({
-      width: `${size}px`,
-      height: `${size}px`,
+      width: size === 'max' ? '100%' : `${size}px`,
+      height: size === 'max' ? '100%' : `${size}px`,
     }),
     [size],
   );

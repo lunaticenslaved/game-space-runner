@@ -10,7 +10,7 @@ import { CardProps } from './types';
 import './card.scss';
 
 export const Card = ({ className, ...otherProps }: CardProps) => {
-  const classes = useMemo(() => cn(['card', className]), [className]);
+  const classes = useMemo(() => cn('card', className), [className]);
 
   return <div {...otherProps} className={classes} />;
 };

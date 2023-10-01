@@ -1,19 +1,20 @@
 :root {
-  --card-margin-x: 28px;
-  --card-margin-y: 28px;
+  --card-margin-x: 40px;
+  --card-margin-y: 40px;
   --card-title-font-color: var(--on-primary-color);
   --card-subtitle-font-color: var(--on-primary-color);
   --card-body-font-color: var(--on-primary-color);
   --card-bg: var(--surface-color);
-  --card-border-radius: 12px;
-  --card-shadow: 0px 8px 24px var(--secondary-color)
+  --card-border-radius: 48px;
+  --card-shadow: 0px 0px 8px var(--secondary-color);
+  --card-backdrop-filter: blur(4px);
 }
 
 .card {
   border-radius: var(--card-border-radius);
-  background: var(--card-bg);
   box-shadow: var(--card-shadow);
-
+  backdrop-filter: var(--card-backdrop-filter);
+                                                                                                                           
   &__title {
     display: flex;
     justify-content: space-between;
