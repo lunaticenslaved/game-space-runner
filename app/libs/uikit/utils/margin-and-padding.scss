@@ -1,0 +1,36 @@
+$base-space: 4px;
+
+@for $i from 1 through 32 {
+    .mb-#{$i} { margin-bottom: calc($base-space * $i) !important; }
+    .pb-#{$i} { padding-bottom: calc($base-space * $i) !important; }
+
+    .mt-#{$i} { margin-top: calc($base-space * $i) !important; }
+    .pt-#{$i} { padding-top: calc($base-space * $i) !important; }
+
+    .ml-#{$i} { margin-left: calc($base-space * $i) !important; }
+    .pl-#{$i} { padding-left: calc($base-space * $i) !important; }
+
+    .mr-#{$i} { margin-right: calc($base-space * $i) !important; }
+    .pr-#{$i} { padding-right: calc($base-space * $i) !important; }
+
+    .m-#{$i} { margin: calc($base-space * $i) !important; }
+    .p-#{$i} { padding: calc($base-space * $i) !important; }
+
+    .mx-#{$i} {
+        margin-left: calc($base-space * $i) !important;
+        margin-right: calc($base-space * $i) !important;
+    }
+    .px-#{$i} {
+        padding-left: calc($base-space * $i) !important;
+        padding-right: calc($base-space * $i) !important;
+    }
+
+    .my-#{$i} {
+        margin-top: calc($base-space * $i) !important;
+        margin-bottom: calc($base-space * $i) !important;
+    }
+    .py-#{$i} {
+        padding-top: calc($base-space * $i) !important;
+        padding-bottom: calc($base-space * $i) !important;
+    }
+}

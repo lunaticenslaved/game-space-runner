@@ -2,14 +2,14 @@ import cn from 'classnames';
 import React, { useMemo } from 'react';
 
 import { bCol } from '../classes';
-import { FlexProps, flex, WidthProps, width, Span, span } from '../../../utils';
+import { FlexProps, flex, WidthProps, width, ColsSpan, cols } from '../../../utils';
 
 export type ColProps = FlexProps &
   WidthProps & {
     children?: React.ReactNode;
     className?: string;
     dataTestId?: string;
-    span?: Span;
+    cols?: ColsSpan;
   };
 
 export const Col: React.FC<ColProps> = ({
@@ -17,7 +17,7 @@ export const Col: React.FC<ColProps> = ({
   className,
 
   // span
-  span: cols,
+  cols: colsSpan,
 
   // flex
   justifyContent,
@@ -29,7 +29,12 @@ export const Col: React.FC<ColProps> = ({
   minWidth,
   width: widthProp,
 }) => {
-  const classes = cn(bCol(), flex({ justifyContent, alignContent, grow }), span(cols), className);
+  const classes = cn(
+    bCol(),
+    flex({ justifyContent, alignContent, grow }),
+    cols(colsSpan),
+    className,
+  );
   const style = useMemo(
     () =>
       width({

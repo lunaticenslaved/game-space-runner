@@ -1,0 +1,22 @@
+$span: 24;
+
+@for $i from 1 through $span {
+    .cols-#{$i} { flex-basis: calc(100% / $span * $i) !important; }
+}
+
+
+.align-content-center { align-content: center; }
+.align-content-start { align-content: flex-start; }
+.align-content-end { align-content: flex-end; }
+
+.justify-content-center { justify-content: center; }
+.justify-content-start { justify-content: flex-start; }
+.justify-content-end { justify-content: flex-end; }
+.justify-content-space-around { justify-content: space-around; }
+.justify-content-space-between { justify-content: space-between; }
+
+.grow-0 { flex-grow: 0; }
+.grow-1 { flex-grow: 1; }
+
+.shrink-0 { flex-shrink: 0; }
+.shrink-1 { flex-shrink: 1; }
