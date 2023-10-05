@@ -1,0 +1,5 @@
+@for $i from 1 through 12 {
+    .elevate-#{$i} {
+        box-shadow: 0px calc(1px * $i) calc(4px * $i) var(--shadow-color);
+    }
+}

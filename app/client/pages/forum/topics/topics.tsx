@@ -26,7 +26,7 @@ export const ForumPage = () => {
 
       <Grid height="full">
         <Grid.Row grow={1} alignContent="center" justifyContent="center">
-          <Grid.Col span={18} alignContent="end">
+          <Grid.Col cols={18} alignContent="end">
             <div className={styles.header}>
               <h1>Форум</h1>
               {isAuthenticated && (
@@ -36,7 +36,7 @@ export const ForumPage = () => {
             <Card>
               <Card.Body>
                 <Grid.Row>
-                  <Grid.Col span={12}>
+                  <Grid.Col cols={12}>
                     <PostsList onPostSelect={appNavigation.forum.toPost} />
                   </Grid.Col>
                 </Grid.Row>
