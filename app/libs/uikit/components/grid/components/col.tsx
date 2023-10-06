@@ -2,9 +2,9 @@ import cn from 'classnames';
 import React, { useMemo } from 'react';
 
 import { bCol } from '../classes';
-import { FlexProps, flex, WidthProps, width, ColsSpan, cols } from '../../../utils';
+import { FlexChildProps, flex, WidthProps, width, ColsSpan, cols } from '../../../utils';
 
-export type ColProps = FlexProps &
+export type ColProps = FlexChildProps &
   WidthProps & {
     children?: React.ReactNode;
     className?: string;
@@ -12,38 +12,9 @@ export type ColProps = FlexProps &
     cols?: ColsSpan;
   };
 
-export const Col: React.FC<ColProps> = ({
-  children,
-  className,
-
-  // span
-  cols: colsSpan,
-
-  // flex
-  justifyContent,
-  alignContent,
-  grow,
-
-  // width
-  maxWidth,
-  minWidth,
-  width: widthProp,
-}) => {
-  const classes = cn(
-    bCol(),
-    flex({ justifyContent, alignContent, grow }),
-    cols(colsSpan),
-    className,
-  );
-  const style = useMemo(
-    () =>
-      width({
-        maxWidth,
-        minWidth,
-        width: widthProp,
-      }),
-    [maxWidth, minWidth, widthProp],
-  );
+export const Col: React.FC<ColProps> = ({ children, className, ...otherProps }) => {
+  const classes = cn(bCol(), flex(otherProps), cols(otherProps.cols), className);
+  const style = useMemo(() => width(otherProps), [otherProps]);
 
   return (
     <div className={classes} style={style}>

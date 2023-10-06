@@ -21,7 +21,7 @@ export const Overview: Story = {
       </div>
       <div style={{ marginBottom: '20px' }}>
         <h3>Custom radius</h3>
-        <Avatar radius="md" placeholderIcon={null} />
+        <Avatar rounded="md" placeholderIcon={null} />
       </div>
     </ThemeContextProvider>
   ),

@@ -2,12 +2,12 @@ import { ReactNode, useMemo } from 'react';
 import cn from 'classnames';
 import block from 'bem-cn-lite';
 
-import { RadiusProp, rounded } from '../../utils';
+import { RoundedProps, useStyles } from '../../utils';
 import { Icon } from '../icon';
 
 import './avatar.scss';
 
-export type AvatarProps = RadiusProp & {
+export type AvatarProps = RoundedProps & {
   link?: string;
   placeholderIcon: ReactNode;
   size?: number;
@@ -20,23 +20,18 @@ export const Avatar = ({
   link,
   placeholderIcon,
   className,
-  radius = 'circle',
   size = 120,
+  ...otherProps
 }: AvatarProps) => {
-  const style = useMemo(
-    () => ({
-      width: `${size}px`,
-      height: `${size}px`,
-    }),
-    [size],
+  const { classes, styles } = useStyles(
+    otherProps,
+    cn(bAvatar(), className),
+    useMemo(() => ({ width: `${size}px`, height: `${size}px` }), [size]),
   );
-  const classes = useMemo(() => {
-    return cn(className, bAvatar(), rounded(radius));
-  }, [className, radius]);
 
   if (link) {
     return (
-      <div className={classes} style={style}>
+      <div className={classes} style={styles}>
         <img className={bAvatar('image')} src={link} />
       </div>
     );

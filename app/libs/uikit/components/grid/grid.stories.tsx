@@ -7,8 +7,8 @@ import { ThemeContextProvider } from '../../theme';
 
 import { Grid } from './grid';
 
-const meta: Meta<typeof Grid> = {
-  component: Grid,
+const meta: Meta<typeof Grid.Row> = {
+  component: Grid.Row,
 };
 
 export default meta;
@@ -27,14 +27,15 @@ export const Overview: Story = {
     <ThemeContextProvider>
       {grids.map(rows => (
         <div style={{ marginBottom: '20px' }}>
-          <Grid>
+          <Container>
             {rows.map((cols, row) => (
               <Grid.Row key={row}>
                 {cols.map(col => (
                   <Grid.Col key={`${row}-${col}`} cols={(24 / cols.length) as ColsSpan}>
                     <Container
+                      display="flex"
                       justifyContent="center"
-                      alignContent="center"
+                      alignItems="center"
                       padding={4}
                       backgroundColor="secondary">
                       {row}-{col}
@@ -43,7 +44,7 @@ export const Overview: Story = {
                 ))}
               </Grid.Row>
             ))}
-          </Grid>
+          </Container>
         </div>
       ))}
     </ThemeContextProvider>

@@ -2,13 +2,13 @@ import { AnchorHTMLAttributes, ButtonHTMLAttributes, Fragment, ReactNode, useMem
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
-import { RadiusProp, rounded } from '../../utils';
+import { RoundedProps, useStyles } from '../../utils';
 import { useTheme } from '../../theme';
 import { Progress } from '../progress';
 
 import './button.scss';
 
-type OwnButtonProps = RadiusProp & {
+type OwnButtonProps = RoundedProps & {
   disabled?: boolean;
   loading?: boolean;
   className?: string;
@@ -38,22 +38,23 @@ export const Button = ({
   className,
   width = 'auto',
   disabled,
-  radius = 'sm',
+  rounded = 'md',
   ...otherProps
 }: ButtonProps) => {
   const { theme } = useTheme();
-  const props: ButtonProps = useMemo(
-    () => ({
-      ...otherProps,
-      disabled,
-      className: cn('button', className, rounded(radius), {
-        'button--disabled': disabled,
-        'button--loading': loading,
-        'button--full-width': width === 'full',
-        'button--auto-width': width === 'auto',
-      }),
+  const { classes } = useStyles(
+    { ...otherProps, rounded },
+    cn('button', className, {
+      'button--disabled': disabled,
+      'button--loading': loading,
+      'button--full-width': width === 'full',
+      'button--auto-width': width === 'auto',
     }),
-    [className, disabled, loading, otherProps, radius, width],
+  );
+  console.log(classes);
+  const props: ButtonProps = useMemo(
+    () => ({ ...otherProps, disabled, className: classes }),
+    [classes, disabled, otherProps],
   );
   const content = useMemo(() => {
     return (
