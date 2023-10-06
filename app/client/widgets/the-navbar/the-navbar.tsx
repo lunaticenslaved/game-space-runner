@@ -24,7 +24,7 @@ const links = [
   { title: 'Игра', route: routes.game.start, icon: <HomeSVG /> },
   { title: 'Лидерборд', route: routes.leaderBoard, icon: <LeaderBoardSVG /> },
   { title: 'Профиль', route: routes.profile.root, icon: <ProfileSVG /> },
-  { title: 'Форум', route: routes.profile.root, icon: <SettingsSVG /> },
+  { title: 'Форум', route: routes.forum.root, icon: <SettingsSVG /> },
 ];
 
 export type TheNavbarProps = {

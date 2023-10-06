@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import React, { useMemo } from 'react';
+import React, { CSSProperties, useMemo } from 'react';
 
 import { ResponsivePropertyType, AlignContentType, JustifyContentType } from '../../types';
 import { getClassNames } from '../../utils';
@@ -18,6 +18,7 @@ export type RowProps = {
   className?: string;
   children?: React.ReactNode;
   dataTestId?: string;
+  grow?: number;
 };
 
 export const Row: React.FC<RowProps> = ({
@@ -25,6 +26,7 @@ export const Row: React.FC<RowProps> = ({
   gutter = 16,
   height,
   align,
+  grow,
   justify,
   children,
   className,
@@ -53,9 +55,15 @@ export const Row: React.FC<RowProps> = ({
     }),
     [dataTestId],
   );
+  const style = useMemo(
+    (): CSSProperties => ({
+      flexGrow: grow,
+    }),
+    [grow],
+  );
 
   return (
-    <Component className={classes} {...attributes}>
+    <Component className={classes} style={style} {...attributes}>
       {children}
     </Component>
   );

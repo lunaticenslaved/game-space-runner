@@ -1,38 +1,33 @@
 :root {
-  --card-margin-x: 40px;
-  --card-margin-y: 40px;
+  --card-gap-x: 40px;
+  --card-gap-y: 40px;
   --card-title-font-color: var(--on-primary-color);
   --card-subtitle-font-color: var(--on-primary-color);
   --card-body-font-color: var(--on-primary-color);
   --card-bg: var(--surface-color);
   --card-border-radius: 48px;
   --card-shadow: 0px 0px 8px var(--secondary-color);
-  --card-backdrop-filter: blur(4px);
+  --card-backdrop-filter: blur(16px);
 }
 
 .card {
   border-radius: var(--card-border-radius);
   box-shadow: var(--card-shadow);
   backdrop-filter: var(--card-backdrop-filter);
+  color: var(--card-body-font-color);
                                                                                                                            
   &__title {
     display: flex;
     justify-content: space-between;
-    margin: var(--card-margin-y) var(--card-margin-x);
+    padding: var(--card-gap-y) var(--card-gap-x);
     color: var(--card-title-font-color)
   }
 
-  &__subtitle {
-    margin: var(--card-margin-y) var(--card-margin-x);
-    color: var(--card-subtitle-font-color)
+  &__part {
+    padding: var(--card-gap-y) var(--card-gap-x);
   }
 
-  &__body {
-    margin: var(--card-margin-y) var(--card-margin-x);
-    color: var(--card-body-font-color)
-  }
-
-  &__footer {
-    margin: var(--card-margin-y) var(--card-margin-x);
+  &__part + &__part {
+    padding-top: 0;
   }
 }

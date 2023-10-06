@@ -23,9 +23,9 @@ export const ForumPage = () => {
         onClose={topicDialog.close}
       />
 
-      <Grid.Container width={'full'} className={styles.container}>
-        <Grid.Row justify="center">
-          <Grid.Col width={9}>
+      <Grid.Container width={'full'} height="full" className={styles.container}>
+        <Grid.Row>
+          <Grid.Col width={12}>
             <div className={styles.header}>
               <h1 className={styles.title}>Форум</h1>
               {isAuthenticated && (
@@ -34,8 +34,12 @@ export const ForumPage = () => {
                 </div>
               )}
             </div>
+          </Grid.Col>
+        </Grid.Row>
 
-            <PostsList onPostClick={appNavigation.forum.toPost} />
+        <Grid.Row grow={1} align="middle" justify="center">
+          <Grid.Col justify="center">
+            <PostsList onPostSelect={appNavigation.forum.toPost} />
           </Grid.Col>
         </Grid.Row>
       </Grid.Container>

@@ -7,7 +7,7 @@ export const Title = ({ title, level = 'h3', onClose }: CardTitleProps) => {
   const header = useMemo(() => createElement(level, {}, title), [level, title]);
 
   return (
-    <div className="card__title">
+    <div className="card__title card__part">
       {header}
       {!!onClose && <Button onClick={onClose}>Close</Button>}
     </div>

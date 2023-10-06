@@ -3,14 +3,9 @@
 .input {
   border: none;
   background: $darkPurple;
-  border: 1px solid $primaryColor;
   border-radius: $baseBorderRadius;
   color: $white;
   padding: 16px;
   min-width: 100%;
   box-sizing: border-box;
-
-  &:focus {
-    outline: none;
-  }
 }

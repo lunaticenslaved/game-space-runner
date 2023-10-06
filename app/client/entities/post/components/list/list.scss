@@ -3,9 +3,7 @@ $padding: 20px;
 
 .entities-post-list {
     color: var(--on-primary-color);
-    background-color: var(--background-color);
-    padding: $padding $padding;
-    border-radius: $radius;
+    width: 720px;
 
     &__item {
         padding: $padding $padding;
@@ -13,7 +11,6 @@ $padding: 20px;
         display: flex;
         align-items: center;
         border-radius: $radius;
-        background-color: var(--surface-color);
 
         &:not(:last-child) {
             margin-bottom: $padding;

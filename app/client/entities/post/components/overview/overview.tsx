@@ -11,12 +11,22 @@ const header = block('entities-post-overview__header');
 const content = block('entities-post-overview__content');
 
 export type PostOverviewProps = {
-  postId: string;
+  postId?: string;
   className?: string;
 };
 
 export const PostOverview = ({ postId, className }: PostOverviewProps) => {
-  const { data: post } = useQuery('get-post', () => API.posts.getPost.action({ id: postId }));
+  const { data: post } = useQuery(
+    ['get-post', postId],
+    () => API.posts.getPost.action({ id: postId || '' }),
+    {
+      enabled: !!postId,
+    },
+  );
+
+  if (!postId) {
+    return <p>No post</p>;
+  }
 
   if (!post) {
     return <p>Loading post...</p>;

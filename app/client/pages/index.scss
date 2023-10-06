@@ -6,10 +6,6 @@
     width: 100%;
     background: $backgroundImg;
 
-    &__navbar {
-        position: absolute;
-    }
-
     &__content {
         flex: 1 1 auto;
         overflow-y: auto;
