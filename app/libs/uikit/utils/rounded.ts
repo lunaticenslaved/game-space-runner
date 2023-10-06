@@ -1,11 +1,15 @@
 import './rounded.scss';
 
-export type Radius = '0' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'pill' | 'circle';
+export type Rounded = '0' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'pill' | 'circle';
 
-export const rounded = (val: Radius) => {
-  return `rounded-${val}`;
+export const rounded = ({ rounded }: RoundedProps) => {
+  if (!rounded) {
+    return undefined;
+  }
+
+  return `rounded-${rounded}`;
 };
 
-export type RadiusProp = {
-  radius?: Radius;
+export type RoundedProps = {
+  rounded?: Rounded;
 };

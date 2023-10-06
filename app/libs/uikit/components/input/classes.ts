@@ -6,4 +6,4 @@ import { rounded } from '../../utils';
 const bInput_ = block('field__input');
 
 export const bInput = (args?: Parameters<typeof bInput_>) =>
-  cn(block('field__input')(...(args || [])), rounded('sm'));
+  cn(block('field__input')(...(args || [])), rounded({ rounded: 'sm' }));

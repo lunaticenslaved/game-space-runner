@@ -35,7 +35,7 @@ export const Overview: Story = {
       </div>
       <div style={{ marginBottom: '20px' }}>
         <h3>Pill Radius Button</h3>
-        <Button radius="pill">Pill Radius</Button>
+        <Button rounded="pill">Pill Radius</Button>
       </div>
     </ThemeContextProvider>
   ),

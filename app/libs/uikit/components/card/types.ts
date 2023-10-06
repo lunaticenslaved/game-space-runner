@@ -1,15 +1,14 @@
 import { ReactNode } from 'react';
 
 import { DialogInterface } from '../dialog';
-import { ElevationProp, RadiusProp } from '../../utils';
+import { ElevationProp, HeightProps, RoundedProps, WidthProps } from '../../utils';
 
-export type CardProps = RadiusProp &
-  ElevationProp & {
+export type CardProps = RoundedProps &
+  ElevationProp &
+  WidthProps &
+  HeightProps & {
     tag?: 'div' | 'dialog';
     loading?: boolean;
-    maxWidth?: string | number;
-    minWidth?: string | number;
-    width?: string | number;
     className?: string;
     children?: ReactNode;
     onClick?(): void;

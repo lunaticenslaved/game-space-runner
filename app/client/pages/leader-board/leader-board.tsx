@@ -2,6 +2,7 @@ import { Grid } from '@libs/uikit/components/grid';
 import { PlayerList } from '@client/entities/player';
 import { API, useQuery } from '@shared/api';
 import { Placeholder } from '@libs/uikit/components/placeholder';
+import { Container } from '@libs/uikit/components/container';
 
 import './leader-board.scss';
 
@@ -15,13 +16,13 @@ const LeaderBoardPage = () => {
   }
 
   return (
-    <Grid height="full" className="page-leader-board">
+    <Container height="100%" className="page-leader-board">
       <Grid.Row justifyContent="center">
         <Grid.Col cols={12}>
           <PlayerList players={data.players} />
         </Grid.Col>
       </Grid.Row>
-    </Grid>
+    </Container>
   );
 };
 

@@ -1,26 +1,30 @@
 import { ReactNode } from 'react';
-import cn from 'classnames';
 
-import { FlexProps, MarginAndPaddingProps, flex, marginAndPadding } from '../../utils';
+import {
+  FlexParentProps,
+  HeightProps,
+  MarginAndPaddingProps,
+  WidthProps,
+  BackgroundProps,
+  DisplayProps,
+  useStyles,
+} from '../../utils';
 
-import './container.scss';
-import { BackgroundProps, background } from '../../utils/background';
-
-export type ContainerProps = FlexProps &
+export type ContainerProps = FlexParentProps &
   MarginAndPaddingProps &
-  BackgroundProps & {
+  BackgroundProps &
+  HeightProps &
+  DisplayProps &
+  WidthProps & {
     children?: ReactNode;
+    className?: string;
   };
 
-export const Container = ({ children, ...otherProps }: ContainerProps) => {
+export const Container = ({ children, className, ...otherProps }: ContainerProps) => {
+  const { classes, styles } = useStyles(otherProps, className);
+
   return (
-    <div
-      className={cn(
-        flex(otherProps),
-        marginAndPadding(otherProps),
-        background(otherProps),
-        'flex',
-      )}>
+    <div style={styles} className={classes}>
       {children}
     </div>
   );

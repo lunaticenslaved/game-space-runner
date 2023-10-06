@@ -5,7 +5,6 @@ import { Dialog, useDialog } from '@libs/uikit/components/dialog';
 import { Input } from '@libs/uikit/components/input';
 import { useForm, useTextField } from '@libs/validate-react';
 
-import styles from './post-form-dialog.module.scss';
 import { Post } from '@shared/models/post';
 import { API, useMutation } from '@shared/api';
 
@@ -61,7 +60,7 @@ export const PostFormDialog = ({ isOpen, onSubmit, onClose }: PostFormDialogProp
   });
 
   return (
-    <Dialog dialog={dialog} width={900} maxWidth={900} minWidth={300} contentClass={styles.dialog}>
+    <Dialog dialog={dialog} width={900} maxWidth={900} minWidth={300}>
       <form {...props}>
         <Dialog.Title dialog={dialog}>Новый пост</Dialog.Title>
         <Dialog.Body>

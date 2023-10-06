@@ -2,7 +2,7 @@ import cn from 'classnames';
 
 import './flex.scss';
 
-export type AlignContent = 'start' | 'center' | 'end';
+export type AlignItems = 'start' | 'center' | 'end' | 'stretch';
 export type JustifyContent = 'start' | 'center' | 'end' | 'space-around' | 'space-between';
 export type FlexGrow = 0 | 1;
 export type FlexShrink = 0 | 1;
@@ -14,18 +14,29 @@ export const cols = (cols?: ColsSpan) => {
   return `cols-${cols}`;
 };
 
-export type FlexProps = {
-  alignContent?: AlignContent;
+export type FlexParentProps = {
+  flexDirection?: 'row' | 'column';
+  alignItems?: AlignItems;
   justifyContent?: JustifyContent;
+};
+
+export type FlexChildProps = {
   grow?: FlexGrow;
   shrink?: FlexShrink;
 };
 
-export function flex({ alignContent, justifyContent, grow, shrink }: FlexProps) {
+export function flex({
+  alignItems,
+  justifyContent,
+  grow,
+  shrink,
+  flexDirection,
+}: FlexParentProps & FlexChildProps) {
   return cn({
-    [`align-content-${alignContent}`]: !!alignContent,
+    [`flex-direction-${flexDirection}`]: !!flexDirection,
+    [`align-items-${alignItems}`]: !!alignItems,
     [`justify-content-${justifyContent}`]: !!justifyContent,
-    [`grow-${flex}`]: typeof grow === 'number',
+    [`grow-${grow}`]: typeof grow === 'number',
     [`shrink-${shrink}`]: typeof shrink === 'number',
   });
 }
