@@ -17,7 +17,7 @@ const LeaderBoardPage = () => {
   return (
     <Grid.Container width="full" height="full" className="page-leader-board">
       <Grid.Row justify="center">
-        <Grid.Col width={6}>
+        <Grid.Col span={12}>
           <PlayerList players={data.players} />
         </Grid.Col>
       </Grid.Row>

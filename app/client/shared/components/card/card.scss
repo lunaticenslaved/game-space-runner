@@ -6,7 +6,7 @@
   --card-body-font-color: var(--on-primary-color);
   --card-bg: var(--surface-color);
   --card-border-radius: 48px;
-  --card-shadow: 0px 0px 8px var(--secondary-color);
+  --card-shadow: 0px 0px 8px var(--surface-color);
   --card-backdrop-filter: blur(16px);
 }
 
@@ -15,6 +15,7 @@
   box-shadow: var(--card-shadow);
   backdrop-filter: var(--card-backdrop-filter);
   color: var(--card-body-font-color);
+  background-color: var(--card-bg);
                                                                                                                            
   &__title {
     display: flex;

@@ -5,6 +5,7 @@ import { useAppNavigation } from '@client/shared/navigation';
 import { PostFormDialog } from '@client/features/forum';
 import { PostsList } from '@client/entities/post';
 import { useViewer } from '@client/features/auth/get-viewer';
+import { Card } from '@client/shared/components/card';
 
 import styles from './topics.module.scss';
 
@@ -23,23 +24,24 @@ export const ForumPage = () => {
         onClose={topicDialog.close}
       />
 
-      <Grid.Container width={'full'} height="full" className={styles.container}>
-        <Grid.Row>
-          <Grid.Col width={12}>
+      <Grid.Container width={'full'} height="full">
+        <Grid.Row grow={1} align="middle" justify="center">
+          <Grid.Col span={18} align="bottom">
             <div className={styles.header}>
-              <h1 className={styles.title}>Форум</h1>
+              <h1>Форум</h1>
               {isAuthenticated && (
-                <div className={styles.actions}>
-                  <Button children="Создать топик" width="full" onClick={topicDialog.open} />
-                </div>
+                <Button children="Создать топик" width="auto" onClick={topicDialog.open} />
               )}
             </div>
-          </Grid.Col>
-        </Grid.Row>
-
-        <Grid.Row grow={1} align="middle" justify="center">
-          <Grid.Col justify="center">
-            <PostsList onPostSelect={appNavigation.forum.toPost} />
+            <Card>
+              <Card.Body>
+                <Grid.Row>
+                  <Grid.Col span={12}>
+                    <PostsList onPostSelect={appNavigation.forum.toPost} />
+                  </Grid.Col>
+                </Grid.Row>
+              </Card.Body>
+            </Card>
           </Grid.Col>
         </Grid.Row>
       </Grid.Container>
