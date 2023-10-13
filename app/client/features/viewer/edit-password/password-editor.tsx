@@ -1,4 +1,4 @@
-import { Button } from '@client/shared/components/button';
+import { Button } from '@libs/uikit/components/button';
 import { Dialog } from '@client/shared/components/dialog';
 import { Input } from '@client/shared/components/input';
 import { useForm, usePasswordField, useTextField } from '@libs/validate-react';

@@ -1,11 +1,11 @@
-import { Button } from '@client/shared/components/button';
+import { Button } from '@libs/uikit/components/button';
 import { Grid } from '@client/shared/components/grid';
 import { useDialog } from '@client/shared/components/dialog';
 import { useAppNavigation } from '@client/shared/navigation';
 import { PostFormDialog } from '@client/features/forum';
 import { PostsList } from '@client/entities/post';
 import { useViewer } from '@client/features/auth/get-viewer';
-import { Card } from '@client/shared/components/card';
+import { Card } from '@libs/uikit/components/card';
 
 import styles from './topics.module.scss';
 

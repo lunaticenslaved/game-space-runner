@@ -1,21 +1,15 @@
-:root {
-  --card-gap-x: 40px;
-  --card-gap-y: 40px;
-  --card-title-font-color: var(--on-primary-color);
-  --card-subtitle-font-color: var(--on-primary-color);
-  --card-body-font-color: var(--on-primary-color);
-  --card-bg: var(--surface-color);
-  --card-border-radius: 48px;
-  --card-shadow: 0px 0px 8px var(--surface-color);
-  --card-backdrop-filter: blur(16px);
-}
-
 .card {
   border-radius: var(--card-border-radius);
   box-shadow: var(--card-shadow);
   backdrop-filter: var(--card-backdrop-filter);
   color: var(--card-body-font-color);
-  background-color: var(--card-bg);
+  background-color: var(--card-bg-color);
+  position: relative;
+  overflow: hidden;
+
+  &__loader {
+    position: absolute;
+  }
                                                                                                                            
   &__title {
     display: flex;

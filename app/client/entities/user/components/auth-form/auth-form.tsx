@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-import { Button } from '@client/shared/components/button';
+import { Button } from '@libs/uikit/components/button';
 import { StyledLink } from '@client/shared/components/styled-link';
 import { FormItem } from '@libs/validate-react';
 

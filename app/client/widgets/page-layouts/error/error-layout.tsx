@@ -1,4 +1,4 @@
-import { Button } from '@client/shared/components/button';
+import { Button } from '@libs/uikit/components/button';
 
 import styles from './error-layout.module.scss';
 

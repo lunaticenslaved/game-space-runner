@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { Button } from '@client/shared/components/button';
+import { Button } from '@libs/uikit/components/button';
 import { Input } from '@client/shared/components/input';
 import { Dialog } from '@client/shared/components/dialog';
 import { User } from '@shared/models/user';

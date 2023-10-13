@@ -1,7 +1,7 @@
 import block from 'bem-cn-lite';
 
 import { PostItemProps } from '@client/entities/post/components/item/types';
-import { Card } from '@client/shared/components/card';
+import { Card } from '@libs/uikit/components/card';
 
 import './card.scss';
 

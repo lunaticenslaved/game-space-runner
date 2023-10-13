@@ -3,7 +3,7 @@ import { useDialog } from '@client/shared/components/dialog';
 import { InfoEditor } from '@client/features/viewer/edit-info';
 import { PasswordEditor } from '@client/features/viewer/edit-password';
 import { AvatarEditor } from '@client/features/viewer/edit-avatar';
-import { Button } from '@client/shared/components/button';
+import { Button } from '@libs/uikit/components/button';
 import { User } from '@shared/models/user';
 
 import styles from './account.module.scss';

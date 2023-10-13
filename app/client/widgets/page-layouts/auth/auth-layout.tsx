@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-import { Card } from '@client/shared/components/card';
+import { Card } from '@libs/uikit/components/card';
 
 import styles from './auth-layout.module.scss';
 

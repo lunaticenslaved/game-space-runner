@@ -1,0 +1,19 @@
+@import '../../../../styles/index.scss';
+
+.progress-circular {
+  border: var(--spinner-width) solid var(--spinner-color);
+  border-bottom-color: transparent !important;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation var(--spinner-speed) linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

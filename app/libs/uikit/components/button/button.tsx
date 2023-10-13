@@ -1,14 +1,9 @@
-import {
-  AnchorHTMLAttributes,
-  ButtonHTMLAttributes,
-  Fragment,
-  PropsWithChildren,
-  useMemo,
-} from 'react';
+import { AnchorHTMLAttributes, ButtonHTMLAttributes, Fragment, ReactNode, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
-import { Spinner } from '../spinner';
+import { useTheme } from '../../theme';
+import { Progress } from '../progress';
 
 import './button.scss';
 
@@ -17,7 +12,8 @@ type OwnButtonProps = {
   loading?: boolean;
   className?: string;
   width?: 'full' | 'auto';
-} & PropsWithChildren;
+  children?: ReactNode;
+};
 
 type NarrowButtonProps = OwnButtonProps &
   Pick<ButtonHTMLAttributes<HTMLButtonElement>, 'type' | 'onClick'>;
@@ -40,27 +36,48 @@ export const Button = ({
   children,
   className,
   width = 'auto',
+  disabled,
   ...otherProps
 }: ButtonProps) => {
+  const { theme } = useTheme();
   const props: ButtonProps = useMemo(
     () => ({
       ...otherProps,
+      disabled,
       className: cn('button', className, {
+        'button--disabled': disabled,
         'button--loading': loading,
         'button--full-width': width === 'full',
         'button--auto-width': width === 'auto',
       }),
     }),
-    [className, loading, otherProps, width],
+    [className, disabled, loading, otherProps, width],
   );
   const content = useMemo(() => {
     return (
       <Fragment>
         <div className="button__content">{children}</div>
-        <div className="button__spinner">{loading ? <Spinner /> : null}</div>
+        <div className="button__spinner">
+          {loading ? (
+            <Progress
+              view="circle"
+              color={
+                disabled
+                  ? theme.components.button.spinnerColorDisabled
+                  : theme.components.button.spinnerColor
+              }
+            />
+          ) : null}
+        </div>
       </Fragment>
     );
-  }, [children, loading]);
+  }, [
+    children,
+    disabled,
+    loading,
+    theme.components.button.spinnerColor,
+    theme.components.button.spinnerColorDisabled,
+  ]);
 
   if (isLink(props)) {
     const { href } = props;

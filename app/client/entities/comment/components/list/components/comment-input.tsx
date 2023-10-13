@@ -1,5 +1,5 @@
 import { Input } from '@client/shared/components/input';
-import { Button } from '@client/shared/components/button';
+import { Button } from '@libs/uikit/components/button';
 import { useForm, useTextField } from '@libs/validate-react';
 
 export interface CommentInputProps {
