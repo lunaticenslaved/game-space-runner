@@ -3,6 +3,7 @@ export type Theme = {
     primaryColor: string;
     primaryColorHover: string;
     onPrimaryColor: string;
+    animationTime: string;
   };
   components: {
     button: {

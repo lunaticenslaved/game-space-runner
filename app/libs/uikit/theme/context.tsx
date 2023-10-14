@@ -32,6 +32,7 @@ export const ThemeContextProvider = ({
     style.setProperty('--primary-color', theme.colors.primaryColor);
     style.setProperty('--on-primary-color', theme.colors.onPrimaryColor);
     style.setProperty('--on-primary-color--hover', theme.colors.primaryColorHover);
+    style.setProperty('--animation-time', theme.colors.animationTime);
 
     // spinner
     style.setProperty('--spinner-color', components.spinner.color);

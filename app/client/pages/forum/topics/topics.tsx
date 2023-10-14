@@ -1,6 +1,6 @@
 import { Button } from '@libs/uikit/components/button';
 import { Grid } from '@client/shared/components/grid';
-import { useDialog } from '@client/shared/components/dialog';
+import { useDialog } from '@libs/uikit/components/dialog';
 import { useAppNavigation } from '@client/shared/navigation';
 import { PostFormDialog } from '@client/features/forum';
 import { PostsList } from '@client/entities/post';

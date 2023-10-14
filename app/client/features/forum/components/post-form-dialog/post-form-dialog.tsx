@@ -1,7 +1,7 @@
-import { ReactNode, useCallback } from 'react';
+import { useCallback } from 'react';
 
 import { Button } from '@libs/uikit/components/button';
-import { Dialog } from '@client/shared/components/dialog';
+import { Dialog, useDialog } from '@libs/uikit/components/dialog';
 import { Input } from '@client/shared/components/input';
 import { useForm, useTextField } from '@libs/validate-react';
 
@@ -15,7 +15,6 @@ export type PostFormDialogValues = {
 };
 
 export interface PostFormDialogProps {
-  caller?: ReactNode;
   isOpen: boolean;
   onSubmit: (post: Post) => void;
   onClose: () => void;
@@ -56,15 +55,24 @@ export const PostFormDialog = ({ isOpen, onSubmit, onClose }: PostFormDialogProp
     fields: [titleField, contentField],
     onSubmit: createPost,
   });
+  const dialog = useDialog({
+    isOpen,
+    beforeClose: onClose,
+  });
 
   return (
-    <Dialog title="Новый пост" isOpen={isOpen} onClose={onClose} contentClass={styles.dialog}>
+    <Dialog dialog={dialog} width={900} maxWidth={900} minWidth={300} contentClass={styles.dialog}>
       <form {...props}>
-        <Input.TextInput {...titleField.props} label="Тема" />
-        <Input.TextArea {...contentField.props} label="Контент" />
-        <Button type="submit" loading={isSubmitting} width="full" disabled={isSubmitting}>
-          Создать
-        </Button>
+        <Dialog.Title dialog={dialog}>Новый пост</Dialog.Title>
+        <Dialog.Body>
+          <Input.TextInput {...titleField.props} label="Тема" />
+          <Input.TextArea {...contentField.props} label="Контент" />
+        </Dialog.Body>
+        <Dialog.Actions>
+          <Button type="submit" loading={isSubmitting} width="full" disabled={isSubmitting}>
+            Создать
+          </Button>
+        </Dialog.Actions>
       </form>
     </Dialog>
   );

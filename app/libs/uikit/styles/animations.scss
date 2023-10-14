@@ -28,7 +28,7 @@
   }
 }
 
-$fadeInAnimation: fade-in 0.5s forwards;
-$fadeOutAnimation: fade-out 0.5s forwards;
-$slideInAnimation: slide-in 0.5s forwards;
-$slideOutAnimation: slide-out 0.5s forwards;
+$fadeInAnimation: fade-in var(--animation-time) forwards;
+$fadeOutAnimation: fade-out var(--animation-time) forwards;
+$slideInAnimation: slide-in var(--animation-time) forwards;
+$slideOutAnimation: slide-out var(--animation-time) forwards;

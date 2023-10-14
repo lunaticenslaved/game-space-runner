@@ -15,6 +15,7 @@ export const baseTheme: Theme = {
     primaryColor: PRIMARY_COLOR,
     primaryColorHover: PRIMARY_COLOR__HOVER,
     onPrimaryColor: ON_PRIMARY_COLOR,
+    animationTime: '0.5s',
   },
   components: {
     button: {

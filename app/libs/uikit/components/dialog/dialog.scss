@@ -1,8 +1,4 @@
-@import '@client/shared/styles/variables.scss';
-@import '@client/shared/styles/animations.scss';
-
-$horPadding: 16px;
-$verPadding: 16px;
+@import '../../styles/animations.scss';
 
 .dialog {
   display: none;
@@ -12,9 +8,6 @@ $verPadding: 16px;
     border: none;
     display: block;
     max-width: 90vw;
-    min-width: $dialogMinWidth;
-    border-radius: $baseBorderRadius;
-    box-shadow: $baseBoxShadow;
     padding: 0;
     margin: 0 auto;
   }
@@ -42,7 +35,7 @@ $verPadding: 16px;
 
 .dialog-overlay {
   display: none;
-  background: rgba($baseBlack, 0.2);
+  background: rgba(#000, 0.2);
   position: absolute;
   width: 100%;
   height: 100%;

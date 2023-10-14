@@ -2,30 +2,36 @@ import { ReactNode, useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import cn from 'classnames';
 
+import { Card, CardProps } from '../card';
+
+import { DialogInterface } from './hooks';
+
 import './dialog.scss';
 
-export type DialogProps = {
-  isOpen: boolean;
+export type DialogProps = Pick<CardProps, 'maxWidth' | 'minWidth' | 'width' | 'loading'> & {
   contentClass?: string;
-  onClose?: () => void;
+  dialog?: DialogInterface;
   children: ReactNode;
 };
 
 const OVERLAY_CLASS = 'dialog-overlay';
+const DIALOG = 'dialog';
+const DIALOG__OPEN = 'dialog--open';
+const DIALOG_CONTENT = 'dialog__content';
 
-export const Dialog = ({ isOpen, onClose, contentClass, children }: DialogProps) => {
-  const [localOpen, setLocalOpen] = useState(isOpen);
+export const Dialog = ({ dialog, contentClass, children, ...cardProps }: DialogProps) => {
+  const { close } = dialog || {};
+  const [localOpen, setLocalOpen] = useState(!!dialog?.isOpen);
 
   useEffect(() => {
-    setLocalOpen(isOpen);
-    return;
-  }, [isOpen]);
+    setLocalOpen(!!dialog?.isOpen);
+  }, [dialog?.isOpen]);
 
   useEffect(() => {
-    if (onClose && !localOpen) {
-      onClose();
+    if (close && !localOpen) {
+      close();
     }
-  }, [localOpen, onClose]);
+  }, [close, localOpen]);
 
   const closeDialogOnOverlayClick: React.MouseEventHandler = useCallback(e => {
     const element = e.target as HTMLElement;
@@ -35,16 +41,20 @@ export const Dialog = ({ isOpen, onClose, contentClass, children }: DialogProps)
     }
   }, []);
 
+  const overlayClass = cn(DIALOG, OVERLAY_CLASS, { [DIALOG__OPEN]: localOpen });
+  const contentClasses = cn(DIALOG_CONTENT, contentClass);
+
   return createPortal(
-    <div
-      onClick={closeDialogOnOverlayClick}
-      className={cn({
-        dialog: true,
-        [OVERLAY_CLASS]: true,
-        'dialog--open': localOpen,
-      })}>
-      <dialog className={cn('dialog__content', contentClass)}>{children}</dialog>
+    <div onClick={closeDialogOnOverlayClick} className={overlayClass}>
+      <Card className={contentClasses} {...cardProps} tag="dialog">
+        {children}
+      </Card>
     </div>,
     document.body,
   );
 };
+
+Dialog.Title = Card.Title;
+Dialog.Subtitle = Card.Subtitle;
+Dialog.Body = Card.Body;
+Dialog.Actions = Card.Actions;

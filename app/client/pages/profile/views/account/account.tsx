@@ -1,5 +1,5 @@
 import { UserComponent } from '@client/entities/user';
-import { useDialog } from '@client/shared/components/dialog';
+import { useDialog } from '@libs/uikit/components/dialog';
 import { InfoEditor } from '@client/features/viewer/edit-info';
 import { PasswordEditor } from '@client/features/viewer/edit-password';
 import { AvatarEditor } from '@client/features/viewer/edit-avatar';
@@ -20,29 +20,15 @@ export const Account = ({ user }: AccountProps) => {
   return (
     <div className={styles.page}>
       {editUserDialog.isOpen && (
-        <InfoEditor
-          user={user}
-          isOpen={editUserDialog.isOpen}
-          onClose={editUserDialog.close}
-          onUpdated={editUserDialog.close}
-        />
+        <InfoEditor user={user} dialog={editUserDialog} onSuccess={editUserDialog.close} />
       )}
 
       {editPasswordDialog.isOpen && (
-        <PasswordEditor
-          isOpen={editPasswordDialog.isOpen}
-          onClose={editPasswordDialog.close}
-          onSubmitSuccess={editPasswordDialog.close}
-          onSubmitError={() => alert('cannot update password')}
-        />
+        <PasswordEditor dialog={editPasswordDialog} onSuccess={editPasswordDialog.close} />
       )}
 
       {editAvatarDialog.isOpen && (
-        <AvatarEditor
-          isOpen={editAvatarDialog.isOpen}
-          onClose={editAvatarDialog.close}
-          onSubmitSuccess={editAvatarDialog.close}
-        />
+        <AvatarEditor dialog={editAvatarDialog} onSuccess={editAvatarDialog.close} />
       )}
 
       <div className={styles.content}>
