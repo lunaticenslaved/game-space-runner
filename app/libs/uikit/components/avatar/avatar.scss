@@ -3,18 +3,18 @@
 .avatar {
   height: 200px;
   width: 200px;
-  border-radius: $baseBorderRadius;
-  box-shadow: $secondaryShadow;
-  background: $gradient;
+  border-radius: var(--avatar-border-radius);
+  background-color: var(--avatar-bg-color);
   margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
-.image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}

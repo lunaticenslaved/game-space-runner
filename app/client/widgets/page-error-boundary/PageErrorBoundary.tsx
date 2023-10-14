@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { Location, useLocation } from 'react-router';
 
 import { routes } from '@client/shared/navigation';
-import { StyledLink } from '@client/shared/components/styled-link';
+import { Anchor } from '@libs/uikit/components/anchor';
 
 import style from './PageErrorBoundary.module.scss';
 
@@ -53,7 +53,7 @@ class PageErrorBoundaryWithRouter extends Component<
     return (
       <div className={style.pageErrorBoundary}>
         <h1>Something went wrong.</h1>
-        <StyledLink to={routes.home.path}>На главную</StyledLink>
+        <Anchor to={routes.home.path}>На главную</Anchor>
       </div>
     );
   }

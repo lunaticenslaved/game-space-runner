@@ -39,5 +39,9 @@ export type Theme = {
       color: string;
       speed: string;
     };
+    avatar: {
+      borderRadius: string;
+      bgColor: string;
+    };
   };
 };

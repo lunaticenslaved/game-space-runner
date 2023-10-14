@@ -5,7 +5,7 @@ import cn from 'classnames';
 
 import { routes } from '@client/shared/navigation';
 import { useViewer } from '@client/features/auth/get-viewer';
-import { Icon } from '@client/shared/components/icon';
+import { Icon } from '@libs/uikit/components/icon';
 import { LogoutButton } from '@client/features/auth/logout';
 import { ToSignInButton } from '@client/features/auth/sign-in';
 

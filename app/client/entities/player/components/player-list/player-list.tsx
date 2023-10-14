@@ -1,4 +1,4 @@
-import { Avatar } from '@client/shared/components/avatar';
+import { Avatar } from '@libs/uikit/components/avatar';
 import { Input } from '@client/shared/components/input';
 import { Player } from '@shared/models';
 import { PlayerIcon } from '@client/entities/player';

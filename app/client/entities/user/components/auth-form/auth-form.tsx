@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 
 import { Button } from '@libs/uikit/components/button';
-import { StyledLink } from '@client/shared/components/styled-link';
+import { Anchor } from '@libs/uikit/components/anchor';
 import { FormItem } from '@libs/validate-react';
 
 import styles from './auth-form.module.scss';
@@ -43,7 +43,7 @@ export const AuthForm = ({
 
         <div className={styles.append}>
           <p>
-            {appendText} <StyledLink to={appendLink}>{appendLinkText}</StyledLink>
+            {appendText} <Anchor to={appendLink}>{appendLinkText}</Anchor>
           </p>
         </div>
       </form>

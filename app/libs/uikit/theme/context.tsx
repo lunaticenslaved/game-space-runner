@@ -8,7 +8,9 @@ interface IThemeContext {
   updateTheme(newTheme: Theme): void;
 }
 
-const ThemeContext = createContext<IThemeContext>({} as IThemeContext);
+const ThemeContext = createContext<IThemeContext>({
+  theme: baseTheme,
+} as IThemeContext);
 
 export type ThemeContextProviderProps = {
   children: ReactNode;
@@ -63,6 +65,10 @@ export const ThemeContextProvider = ({
     // progress
     style.setProperty('--progress-linear-color', components.progressLinear.color);
     style.setProperty('--progress-linear-speed', components.progressLinear.speed);
+
+    // avatar
+    style.setProperty('--avatar-bg-color', components.avatar.bgColor);
+    style.setProperty('--avatar-border-radius', components.avatar.borderRadius);
   }, [theme]);
 
   const value = useMemo(() => {
@@ -77,5 +83,10 @@ export const ThemeContextProvider = ({
 
 export const useTheme = () => {
   const theme = useContext(ThemeContext);
+
+  if (!theme) {
+    throw new Error('Uikit context not found');
+  }
+
   return theme;
 };

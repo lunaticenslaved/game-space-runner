@@ -51,5 +51,9 @@ export const baseTheme: Theme = {
       color: PRIMARY_COLOR,
       speed: '2.2s',
     },
+    avatar: {
+      borderRadius: '12px',
+      bgColor: DISABLED_COLOR,
+    },
   },
 };

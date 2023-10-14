@@ -1,4 +1,4 @@
-import { Avatar, AvatarProps } from '@client/shared/components/avatar';
+import { Avatar, AvatarProps } from '@libs/uikit/components/avatar';
 import { UserIcon } from '../..';
 
 export type UserAvatarProps = Pick<AvatarProps, 'link'>;

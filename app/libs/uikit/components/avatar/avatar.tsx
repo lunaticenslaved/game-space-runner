@@ -1,9 +1,10 @@
 import { ReactNode, useMemo } from 'react';
 import cn from 'classnames';
+import block from 'bem-cn-lite';
 
-import { Icon } from '@client/shared/components/icon';
+import { Icon } from '../icon';
 
-import styles from './avatar.module.scss';
+import './avatar.scss';
 
 export type AvatarProps = {
   link?: string;
@@ -11,6 +12,8 @@ export type AvatarProps = {
   size?: number;
   className?: string;
 };
+
+const bAvatar = block('avatar');
 
 export const Avatar = ({ link, placeholderIcon, className, size = 120 }: AvatarProps) => {
   const style = useMemo(
@@ -21,13 +24,13 @@ export const Avatar = ({ link, placeholderIcon, className, size = 120 }: AvatarP
     [size],
   );
   const classes = useMemo(() => {
-    return cn(className, styles.avatar);
+    return cn(className, bAvatar());
   }, [className]);
 
   if (link) {
     return (
       <div className={classes} style={style}>
-        <img className={styles.image} src={link} />
+        <img className={bAvatar('image')} src={link} />
       </div>
     );
   }
