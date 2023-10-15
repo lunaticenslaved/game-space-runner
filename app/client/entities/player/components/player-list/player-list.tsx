@@ -1,5 +1,5 @@
 import { Avatar } from '@libs/uikit/components/avatar';
-import { Input } from '@client/shared/components/input';
+import { Input } from '@libs/uikit/components/input';
 import { Player } from '@shared/models';
 import { PlayerIcon } from '@client/entities/player';
 

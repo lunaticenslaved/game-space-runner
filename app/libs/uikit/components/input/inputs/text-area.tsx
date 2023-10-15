@@ -1,14 +1,16 @@
 import { useState, ChangeEventHandler, useCallback, TextareaHTMLAttributes } from 'react';
 
-import { InputWrapper, InputWrapperProps } from '../../components';
+import { InputWrapper, InputWrapperElementProps } from '../components/input-wrapper';
+import { bInput } from '../classes';
 
-import styles from './text-area.module.scss';
+type TextAreaOwnProps = Pick<TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange' | 'rows'>;
 
-export type TextAreaProps = {
-  name: string;
-  value?: string;
-} & Omit<InputWrapperProps, 'children'> &
-  Pick<TextareaHTMLAttributes<HTMLTextAreaElement>, 'onChange' | 'rows'>;
+export type TextAreaProps = InputWrapperElementProps<
+  {
+    name: string;
+    value?: string;
+  } & TextAreaOwnProps
+>;
 
 export const TextArea = ({
   error,
@@ -16,6 +18,7 @@ export const TextArea = ({
   name,
   value: valueProp = '',
   onChange,
+  rows,
 }: TextAreaProps) => {
   const [value, setValue] = useState(valueProp);
 
@@ -33,7 +36,13 @@ export const TextArea = ({
 
   return (
     <InputWrapper label={label} error={error}>
-      <textarea name={name} value={value} onChange={handleChange} className={styles.input} />
+      <textarea
+        name={name}
+        value={value}
+        onChange={handleChange}
+        className={bInput()}
+        rows={rows}
+      />
     </InputWrapper>
   );
 };

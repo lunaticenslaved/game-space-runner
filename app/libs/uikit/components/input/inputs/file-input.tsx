@@ -1,14 +1,13 @@
 import { ChangeEventHandler, useCallback, useState } from 'react';
 
-import { InputWrapper, InputWrapperProps } from '../../components';
+import { InputWrapper, InputWrapperElementProps } from '../components/input-wrapper';
+import { bInput } from '../classes';
 
-import styles from './file-input.module.scss';
-
-export type FileInputProps = {
+export type FileInputProps = InputWrapperElementProps<{
   name: string;
   value?: File;
   onChange?: ChangeEventHandler<HTMLInputElement>;
-} & Omit<InputWrapperProps, 'children'>;
+}>;
 
 export const FileInput = ({ error, label, name, value: valueProp, onChange }: FileInputProps) => {
   const [, setValue] = useState(valueProp);
@@ -26,7 +25,7 @@ export const FileInput = ({ error, label, name, value: valueProp, onChange }: Fi
 
   return (
     <InputWrapper label={label} error={error}>
-      <input type="file" name={name} className={styles.input} onChange={handleChange} />
+      <input type="file" name={name} className={bInput()} onChange={handleChange} />
     </InputWrapper>
   );
 };

@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 
 import { Level } from '@client/features/game';
 import { useAppNavigation } from '@client/shared/navigation';
-import { Input } from '@client/shared/components/input';
+import { Input } from '@libs/uikit/components/input';
 
 import { useViewer } from '@client/features/auth/get-viewer';
 import { GameLayout } from '@client/widgets/page-layouts';

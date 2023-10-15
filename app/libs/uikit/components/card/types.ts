@@ -1,6 +1,7 @@
 import { HTMLProps, ReactNode } from 'react';
 
 import { DialogInterface } from '../dialog';
+import { Elevation } from '../../utils';
 
 export type CardProps = HTMLProps<HTMLDivElement> & {
   tag?: 'div' | 'dialog';
@@ -8,6 +9,7 @@ export type CardProps = HTMLProps<HTMLDivElement> & {
   maxWidth?: string | number;
   minWidth?: string | number;
   width?: string | number;
+  elevation?: Elevation;
 };
 
 export type CardTitleProps = {

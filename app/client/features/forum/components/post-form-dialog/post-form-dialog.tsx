@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 
 import { Button } from '@libs/uikit/components/button';
 import { Dialog, useDialog } from '@libs/uikit/components/dialog';
-import { Input } from '@client/shared/components/input';
+import { Input } from '@libs/uikit/components/input';
 import { useForm, useTextField } from '@libs/validate-react';
 
 import styles from './post-form-dialog.module.scss';

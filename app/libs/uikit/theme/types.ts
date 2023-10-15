@@ -1,8 +1,19 @@
 export type Theme = {
   colors: {
+    // colors
     primaryColor: string;
     primaryColorHover: string;
     onPrimaryColor: string;
+    errorColor: string;
+    onErrorColor: string;
+
+    shadowColor: string;
+
+    // surface
+    surfaceColor: string;
+    onSurfaceColor: '#fff';
+
+    // animation
     animationTime: string;
   };
   components: {
@@ -43,6 +54,11 @@ export type Theme = {
     avatar: {
       borderRadius: string;
       bgColor: string;
+    };
+    inputField: {
+      borderRadius: string;
+      paddingX: string;
+      paddingY: string;
     };
   };
 };

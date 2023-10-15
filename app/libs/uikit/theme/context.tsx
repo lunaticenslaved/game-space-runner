@@ -33,6 +33,11 @@ export const ThemeContextProvider = ({
     style.setProperty('--on-primary-color', theme.colors.onPrimaryColor);
     style.setProperty('--on-primary-color--hover', theme.colors.primaryColorHover);
     style.setProperty('--animation-time', theme.colors.animationTime);
+    style.setProperty('--error-color', theme.colors.errorColor);
+    style.setProperty('--on-error-color', theme.colors.onErrorColor);
+    style.setProperty('--surface-color', theme.colors.surfaceColor);
+    style.setProperty('--on-surface-color', theme.colors.onSurfaceColor);
+    style.setProperty('--shadow-color', theme.colors.shadowColor);
 
     // spinner
     style.setProperty('--spinner-color', components.spinner.color);
@@ -70,6 +75,11 @@ export const ThemeContextProvider = ({
     // avatar
     style.setProperty('--avatar-bg-color', components.avatar.bgColor);
     style.setProperty('--avatar-border-radius', components.avatar.borderRadius);
+
+    // input-field
+    style.setProperty('--input-field-border-radius', components.inputField.borderRadius);
+    style.setProperty('--input-field-padding-x', components.inputField.paddingX);
+    style.setProperty('--input-field-padding-y', components.inputField.paddingY);
   }, [theme]);
 
   const value = useMemo(() => {

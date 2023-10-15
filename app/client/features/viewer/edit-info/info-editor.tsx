@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import { Button } from '@libs/uikit/components/button';
-import { Input } from '@client/shared/components/input';
+import { Input } from '@libs/uikit/components/input';
 import { Dialog, DialogInterface } from '@libs/uikit/components/dialog';
 import { User } from '@shared/models/user';
 import { useTextField, useForm } from '@libs/validate-react';

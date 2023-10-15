@@ -1,16 +1,15 @@
 import { ChangeEventHandler, useCallback, useEffect, useState } from 'react';
 
-import { InputWrapper, InputWrapperProps } from '../../components';
+import { InputWrapper, InputWrapperElementProps } from '../components/input-wrapper';
+import { bInput } from '../classes';
 
-import styles from './text-input.module.scss';
-
-export type TextInputProps = {
+export type TextInputProps = InputWrapperElementProps<{
   name: string;
   value?: string;
   placeholder?: string;
   type?: 'text' | 'password';
   onChange?: ChangeEventHandler<HTMLInputElement>;
-} & Omit<InputWrapperProps, 'children'>;
+}>;
 
 export const TextInput = ({
   error,
@@ -41,7 +40,7 @@ export const TextInput = ({
         name={name}
         value={value}
         placeholder={placeholder}
-        className={styles.input}
+        className={bInput()}
         onChange={handleChange}
       />
     </InputWrapper>

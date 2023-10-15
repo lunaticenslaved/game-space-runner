@@ -6,6 +6,7 @@ const ON_PRIMARY_COLOR = '#fff';
 const DISABLED_COLOR = '#aaa';
 const ON_DISABLED_COLOR = '#888';
 const SURFACE_COLOR = '#2a3158';
+const ON_SURFACE_COLOR = '#fff';
 
 const RADIUS_SM = '8px';
 const RADIUS_MD = '16px';
@@ -16,6 +17,14 @@ export const baseTheme: Theme = {
     primaryColorHover: PRIMARY_COLOR__HOVER,
     onPrimaryColor: ON_PRIMARY_COLOR,
     animationTime: '0.5s',
+
+    errorColor: 'red',
+    onErrorColor: '#fff',
+
+    shadowColor: '#000',
+
+    surfaceColor: SURFACE_COLOR,
+    onSurfaceColor: ON_SURFACE_COLOR,
   },
   components: {
     button: {
@@ -55,6 +64,11 @@ export const baseTheme: Theme = {
     avatar: {
       borderRadius: '12px',
       bgColor: DISABLED_COLOR,
+    },
+    inputField: {
+      borderRadius: '4px',
+      paddingX: '16px',
+      paddingY: '16px',
     },
   },
 };
