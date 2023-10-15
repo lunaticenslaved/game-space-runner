@@ -6,7 +6,7 @@ import { FileInput, FileInputProps } from './inputs/file-input';
 import './inputs.scss';
 
 export class Input {
-  public static Select(props: SelectProps) {
+  public static Select<T extends Record<string, unknown>>(props: SelectProps<T>) {
     return <Select {...props} />;
   }
 

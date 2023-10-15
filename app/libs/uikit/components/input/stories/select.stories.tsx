@@ -23,6 +23,8 @@ export const Overview: Story = {
             name="name"
             label="Name"
             error="Error message"
+            itemKey={'id'}
+            itemTitle={'title'}
             items={[
               { id: '1', title: 'Option 1' },
               { id: '2', title: 'Option 2' },

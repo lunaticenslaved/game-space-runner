@@ -3,37 +3,40 @@ import block from 'bem-cn-lite';
 
 import { InputWrapper, InputWrapperElementProps } from '../../components/input-wrapper';
 import { Menu } from '../../../menu';
-import { List } from '../../../list';
+import { List, ListSelectProps } from '../../../list';
 import { bInput } from '../../classes';
 
 import './select.scss';
 
 const bSelect = block('select');
 
-export type SelectItem = { id: string; title: string };
+export type SelectProps<T extends Record<string, unknown>> = ListSelectProps<T> &
+  InputWrapperElementProps<{
+    itemTitle: keyof T;
+    name: string;
+  }>;
 
-export type SelectProps = InputWrapperElementProps<{
-  value?: string;
-  items: SelectItem[];
-  name: string;
-  onChange?: (v?: string) => void;
-}>;
-
-// TODO change it to list item?
 // TODO update radius here
 
-export function Select({ items, value, label, onChange }: SelectProps) {
+export function Select<T extends Record<string, unknown>>({
+  items,
+  itemKey,
+  itemTitle,
+  value,
+  label,
+  onChange,
+}: SelectProps<T>) {
   const ref = useRef(null);
-  const [activeItem, setActiveItem] = useState<SelectItem | undefined>(
-    items.find(item => item.id === value),
+  const [activeItem, setActiveItem] = useState<T | undefined>(
+    items.find(item => value && item[itemKey] === value[itemKey]),
   );
 
   const handleChange = useCallback(
-    (item?: SelectItem) => {
+    (item?: T) => {
       setActiveItem(item);
 
       if (onChange) {
-        onChange(item?.id);
+        onChange(item);
       }
     },
     [onChange],
@@ -45,15 +48,18 @@ export function Select({ items, value, label, onChange }: SelectProps) {
         closeOnClick
         activator={
           <div ref={ref} className={bInput()} tabIndex={1}>
-            {activeItem ? activeItem.title : label}
+            {activeItem ? String(activeItem[itemTitle]) : label}
           </div>
         }>
-        <List<SelectItem>
+        <List<T>
+          value={activeItem}
           items={items}
-          itemKey={'id'}
-          onSelect={handleChange}
+          itemKey={itemKey}
+          onChange={handleChange}
           renderItem={({ item, ...props }) => (
-            <List.Item {...props}>{typeof item === 'string' ? item : item.title}</List.Item>
+            <List.Item {...props}>
+              {typeof item === 'string' ? item : String(item[itemTitle])}
+            </List.Item>
           )}
         />
       </Menu>
