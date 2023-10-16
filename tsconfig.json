@@ -14,7 +14,6 @@
     "composite": false,
     "declaration": false,
     "declarationMap": false,
-    "types": ["vite-plugin-svgr/client"],
 
     /* Bundler mode */
     "useDefineForClassFields": false,
@@ -50,5 +49,5 @@
       "@server/*": ["./app/server/*"]
     }
   },
-  "include": ["./app"]
+  "include": ["./app", "app/libs/uikit/card/__stories__"]
 }

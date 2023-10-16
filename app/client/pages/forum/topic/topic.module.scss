@@ -11,8 +11,15 @@
   color: $onPrimaryColor;
 }
 
+.wrapper {
+  background-color: var(--background-color);
+  padding: 20px;
+  border-radius: 20px;
+}
+
 .comments {
   flex: 1 1 auto;
+  margin-top: 20px;
 }
 
 .postOverview {

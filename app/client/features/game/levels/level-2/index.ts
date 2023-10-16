@@ -13,7 +13,7 @@ export const getLevelConfig = (baseHeight: number): LevelModel => {
   const smPlatform = createImage(platformSmallTallSrc);
 
   return {
-    id: Level.Secord,
+    id: Level.Second,
     finishPoint: 5800,
     items: [
       {

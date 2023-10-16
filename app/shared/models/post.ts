@@ -1,4 +1,4 @@
-import { User } from '@shared/models/user';
+import { User, Comment } from '@shared/models';
 
 export type Post = {
   id: string;
@@ -7,4 +7,8 @@ export type Post = {
   author: User;
   createdAt: string;
   updatedAt: string;
+  count?: {
+    comments: number;
+  };
+  lastComment?: Pick<Comment, 'createdAt'>;
 };

@@ -3,7 +3,7 @@ import { PlayerList } from '@client/entities/player';
 import { API, useQuery } from '@shared/api';
 import { ViewPlaceholder } from '@client/shared/components/view-placeholder';
 
-import styles from './leader-board.module.scss';
+import './leader-board.scss';
 
 const LeaderBoardPage = () => {
   document.title = 'LeaderBoard';
@@ -15,11 +15,9 @@ const LeaderBoardPage = () => {
   }
 
   return (
-    <Grid.Container width={'full'} className={styles.leaderBoard}>
+    <Grid.Container width="full" height="full" className="page-leader-board">
       <Grid.Row justify="center">
-        <Grid.Col width={6}>
-          <h1 className={styles.title}>Лидерборд</h1>
-          <h3 className={styles.subTitle}>Максимальное количество очков за игру</h3>
+        <Grid.Col span={12}>
           <PlayerList players={data.players} />
         </Grid.Col>
       </Grid.Row>

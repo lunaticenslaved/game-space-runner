@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
 
 import { UserComponent } from '@client/entities/user';
-import { Input } from '@client/shared/components/input';
+import { Input } from '@libs/uikit/components/input';
 import { routes, useAppNavigation } from '@client/shared/navigation';
 import { useForm, usePasswordField, useTextField } from '@libs/validate-react';
 import { validationRules } from '@libs/validate';

@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 
-import { PostOverview, CommentsList } from '@client/features/forum';
+import { PostOverview } from '@client/entities/post';
+import { CommentsList } from '@client/entities/comment';
 
 import styles from './topic.module.scss';
 
@@ -13,8 +14,10 @@ export const TopicPage = () => {
 
   return (
     <div className={styles.page}>
-      <PostOverview postId={postId} className={styles.postOverview} />
-      <CommentsList postId={postId} className={styles.comments} />
+      <div className={styles.wrapper}>
+        <PostOverview postId={postId} className={styles.postOverview} />
+        <CommentsList postId={postId} className={styles.comments} />
+      </div>
     </div>
   );
 };

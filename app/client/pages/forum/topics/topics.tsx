@@ -1,9 +1,11 @@
-import { Button } from '@client/shared/components/button';
+import { Button } from '@libs/uikit/components/button';
 import { Grid } from '@client/shared/components/grid';
-import { useDialog } from '@client/shared/components/dialog';
+import { useDialog } from '@libs/uikit/components/dialog';
 import { useAppNavigation } from '@client/shared/navigation';
-import { PostsList, PostFormDialog } from '@client/features/forum';
+import { PostFormDialog } from '@client/features/forum';
+import { PostsList } from '@client/entities/post';
 import { useViewer } from '@client/features/auth/get-viewer';
+import { Card } from '@libs/uikit/components/card';
 
 import styles from './topics.module.scss';
 
@@ -22,19 +24,24 @@ export const ForumPage = () => {
         onClose={topicDialog.close}
       />
 
-      <Grid.Container width={'full'} className={styles.container}>
-        <Grid.Row justify="center">
-          <Grid.Col width={9}>
+      <Grid.Container width={'full'} height="full">
+        <Grid.Row grow={1} align="middle" justify="center">
+          <Grid.Col span={18} align="bottom">
             <div className={styles.header}>
-              <h1 className={styles.title}>Форум</h1>
+              <h1>Форум</h1>
               {isAuthenticated && (
-                <div className={styles.actions}>
-                  <Button children="Создать топик" onClick={topicDialog.open} />
-                </div>
+                <Button children="Создать топик" width="auto" onClick={topicDialog.open} />
               )}
             </div>
-
-            <PostsList onPostClick={appNavigation.forum.toPost} />
+            <Card>
+              <Card.Body>
+                <Grid.Row>
+                  <Grid.Col span={12}>
+                    <PostsList onPostSelect={appNavigation.forum.toPost} />
+                  </Grid.Col>
+                </Grid.Row>
+              </Card.Body>
+            </Card>
           </Grid.Col>
         </Grid.Row>
       </Grid.Container>

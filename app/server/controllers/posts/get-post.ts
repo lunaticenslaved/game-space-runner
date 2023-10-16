@@ -1,12 +1,12 @@
 import { createAction } from '@server/controllers/_utils';
-import { GetPostRequest, GetPostResponse } from '@shared/api';
+import { GetPostResponse } from '@shared/api';
 import { NotFoundError } from '@shared/errors';
 
-export const getPost = createAction<void, GetPostResponse, GetPostRequest>(
+export const getPost = createAction<void, GetPostResponse, { postId: string }>(
   async (request, _, context) => {
     const post = await context.prisma.post.findFirst({
       where: {
-        id: request.params.id,
+        id: request.params.postId,
       },
       select: {
         id: true,

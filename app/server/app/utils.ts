@@ -4,11 +4,11 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import fileUpload from 'express-fileupload';
 import fs from 'fs';
+import { resolve } from 'path';
 
 import { CORS_ORIGIN_WHITELIST } from '@server/shared/constants';
 import { context } from '@server/shared/context';
 import { addHeaders, addUserFromCookie } from '@server/middlewares';
-import { resolve } from 'path';
 
 export function configureApp(app: Express) {
   app.disable('x-powered-by');

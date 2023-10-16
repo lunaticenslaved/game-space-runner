@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
-import { Button } from '@client/shared/components/button';
-import { Card } from '@client/shared/components/card';
+import { Button } from '@libs/uikit/components/button';
+import { Card } from '@libs/uikit/components/card';
 
 import styles from './game-layout.module.scss';
 
@@ -23,12 +23,16 @@ export function GameLayout({
   return (
     <div className={styles.root}>
       <Card>
-        <h3 className={styles.title}>{header}</h3>
-        {!!description && <p className={styles.text}>{description}</p>}
-        {content}
-        <Button className={styles.btn} onClick={onButtonClick}>
-          {buttonText}
-        </Button>
+        <Card.Title>{header}</Card.Title>
+        <Card.Subtitle>
+          {!!description && <p className={styles.text}>{description}</p>}
+        </Card.Subtitle>
+        <Card.Body>{content}</Card.Body>
+        <Card.Actions>
+          <Button width="full" className={styles.btn} onClick={onButtonClick}>
+            {buttonText}
+          </Button>
+        </Card.Actions>
       </Card>
     </div>
   );

@@ -1,0 +1,13 @@
+.field__input {
+  border: none;
+  background: var(--surface-color);
+  color: var(--on-surface-color);
+  border: 1px solid var(--primary-color);
+  padding: var(--input-field-padding-y) var(--input-field-padding-x);
+  min-width: 100%;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+  }
+}

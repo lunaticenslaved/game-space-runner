@@ -1,0 +1,40 @@
+@import '@client/shared/styles/index.scss';
+
+.root {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  color: $onPrimaryColor;
+}
+
+.comment:not(:last-of-type) {
+  margin-bottom: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.content {
+  display: flex;
+  padding: 8px 0;
+}
+
+.footer {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.createdAt {
+  opacity: 0.5;
+  margin-left: 12px;
+}
