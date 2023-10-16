@@ -2,7 +2,7 @@ import { GameObjectProps } from '../logic/game-object';
 
 export enum Level {
   First = 'First',
-  Secord = 'Secord',
+  Second = 'Secord',
   Third = 'Third',
 }
 

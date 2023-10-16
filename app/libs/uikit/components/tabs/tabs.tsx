@@ -1,22 +1,9 @@
-import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { TabsValue } from './types';
-import { bTabItem, bTabs, bTabsList } from './classnames';
+import { TabItem, TabsProps, TabsValue } from './types';
+import { bTabItem, bTabs, bTabsList } from './classes';
 
 import './tabs.scss';
-
-export type TabItem<T extends TabsValue = TabsValue> = {
-  value: T;
-  title: ReactNode;
-  content?: ReactNode;
-};
-
-export type TabsProps<T extends TabsValue = TabsValue> = {
-  tabs: TabItem<T>[];
-  direction?: 'horizontal' | 'vertical';
-  value?: T;
-  onChange?: (value: T) => void;
-};
 
 export function Tabs<T extends TabsValue = TabsValue>({
   direction,

@@ -11,7 +11,7 @@ export const getLevelConfig = (level: Level, baseHeight: number) => {
     return getLevel1Config(baseHeight);
   }
 
-  if (level === Level.Secord) {
+  if (level === Level.Second) {
     return getLevel2Config(baseHeight);
   }
 

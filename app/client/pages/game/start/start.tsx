@@ -2,10 +2,9 @@ import { useCallback, useState } from 'react';
 
 import { Level } from '@client/features/game';
 import { useAppNavigation } from '@client/shared/navigation';
-import { Input } from '@libs/uikit/components/input';
-
 import { useViewer } from '@client/features/auth/get-viewer';
 import { GameLayout } from '@client/widgets/page-layouts';
+import { Input } from '@libs/uikit/components/input';
 
 type LevelItem = {
   id: Level;
@@ -14,7 +13,7 @@ type LevelItem = {
 
 const levels: LevelItem[] = [
   { id: Level.First, title: 'First' },
-  { id: Level.Secord, title: 'Second' },
+  { id: Level.Second, title: 'Second' },
   { id: Level.Third, title: 'Third' },
 ];
 const getLevel = (level: Level) => {

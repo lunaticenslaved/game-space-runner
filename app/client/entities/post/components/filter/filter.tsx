@@ -1,6 +1,6 @@
 import { ReactNode, useMemo, useState } from 'react';
 
-import { TabItem, Tabs } from '@client/shared/components/tabs';
+import { TabItem, Tabs } from '@libs/uikit/components/tabs';
 
 type FavoritesFilter = 'all' | 'favorites';
 
