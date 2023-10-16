@@ -24,7 +24,6 @@ export type Theme = {
       fontColorDisabled: string;
       fontColor: string;
       fontWeight: string;
-      borderRadius: string;
       paddingX: string;
       paddingY: string;
       transition: string;
@@ -43,7 +42,6 @@ export type Theme = {
       subtitleFontColor: string;
       bodyFontColor: string;
       bgColor: string;
-      borderRadius: string;
       shadow: string;
       backdropFilter: string;
     };
@@ -52,11 +50,9 @@ export type Theme = {
       speed: string;
     };
     avatar: {
-      borderRadius: string;
       bgColor: string;
     };
     inputField: {
-      borderRadius: string;
       paddingX: string;
       paddingY: string;
     };

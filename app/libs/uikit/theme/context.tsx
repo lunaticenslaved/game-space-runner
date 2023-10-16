@@ -52,7 +52,6 @@ export const ThemeContextProvider = ({
     style.setProperty('--button-color', components.button.fontColor);
     style.setProperty('--button-font-weight', components.button.fontWeight);
     style.setProperty('--button-font-weight', components.button.fontWeight);
-    style.setProperty('--button-border-radius', components.button.borderRadius);
     style.setProperty('--button-padding-x', components.button.paddingX);
     style.setProperty('--button-padding-y', components.button.paddingY);
     style.setProperty('--button-transition', components.button.transition);
@@ -64,7 +63,6 @@ export const ThemeContextProvider = ({
     style.setProperty('--card-subtitle-font-color', components.card.subtitleFontColor);
     style.setProperty('--card-body-font-color', components.card.bodyFontColor);
     style.setProperty('--card-bg-color', components.card.bgColor);
-    style.setProperty('--card-border-radius', components.card.borderRadius);
     style.setProperty('--card-shadow', components.card.shadow);
     style.setProperty('--card-backdrop-filter', components.card.backdropFilter);
 
@@ -74,10 +72,8 @@ export const ThemeContextProvider = ({
 
     // avatar
     style.setProperty('--avatar-bg-color', components.avatar.bgColor);
-    style.setProperty('--avatar-border-radius', components.avatar.borderRadius);
 
     // input-field
-    style.setProperty('--input-field-border-radius', components.inputField.borderRadius);
     style.setProperty('--input-field-padding-x', components.inputField.paddingX);
     style.setProperty('--input-field-padding-y', components.inputField.paddingY);
   }, [theme]);

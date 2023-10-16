@@ -8,9 +8,6 @@ const ON_DISABLED_COLOR = '#888';
 const SURFACE_COLOR = '#2a3158';
 const ON_SURFACE_COLOR = '#fff';
 
-const RADIUS_SM = '8px';
-const RADIUS_MD = '16px';
-
 export const baseTheme: Theme = {
   colors: {
     primaryColor: PRIMARY_COLOR,
@@ -34,7 +31,6 @@ export const baseTheme: Theme = {
       fontColorDisabled: ON_DISABLED_COLOR,
       fontColor: ON_PRIMARY_COLOR,
       fontWeight: '800',
-      borderRadius: RADIUS_SM,
       paddingX: '16px',
       paddingY: '24px',
       transition: 'background 0.75s ease-out',
@@ -53,7 +49,6 @@ export const baseTheme: Theme = {
       subtitleFontColor: ON_PRIMARY_COLOR,
       bodyFontColor: ON_PRIMARY_COLOR,
       bgColor: SURFACE_COLOR,
-      borderRadius: RADIUS_MD,
       shadow: `0px 0px 8px ${SURFACE_COLOR}`,
       backdropFilter: 'blur(16px)',
     },
@@ -62,11 +57,9 @@ export const baseTheme: Theme = {
       speed: '2.2s',
     },
     avatar: {
-      borderRadius: '12px',
       bgColor: DISABLED_COLOR,
     },
     inputField: {
-      borderRadius: '4px',
       paddingX: '16px',
       paddingY: '16px',
     },

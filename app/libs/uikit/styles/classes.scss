@@ -1,9 +1,11 @@
+// Elevate
 @for $i from 1 through 12 {
     .elevate-#{$i} {
         box-shadow: 0px calc(1px * $i) calc(4px * $i) var(--shadow-color);
     }
 }
 
+// Margin and padding
 @for $i from 1 through 32 {
     .mb-#{$i} { margin-bottom: calc(4px * $i); }
     .pb-#{$i} { padding-bottom: calc(4px * $i); }

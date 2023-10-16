@@ -2,12 +2,13 @@ import { AnchorHTMLAttributes, ButtonHTMLAttributes, Fragment, ReactNode, useMem
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
+import { RadiusProp, rounded } from '../../utils';
 import { useTheme } from '../../theme';
 import { Progress } from '../progress';
 
 import './button.scss';
 
-type OwnButtonProps = {
+type OwnButtonProps = RadiusProp & {
   disabled?: boolean;
   loading?: boolean;
   className?: string;
@@ -37,6 +38,7 @@ export const Button = ({
   className,
   width = 'auto',
   disabled,
+  radius = 'sm',
   ...otherProps
 }: ButtonProps) => {
   const { theme } = useTheme();
@@ -44,14 +46,14 @@ export const Button = ({
     () => ({
       ...otherProps,
       disabled,
-      className: cn('button', className, {
+      className: cn('button', className, rounded(radius), {
         'button--disabled': disabled,
         'button--loading': loading,
         'button--full-width': width === 'full',
         'button--auto-width': width === 'auto',
       }),
     }),
-    [className, disabled, loading, otherProps, width],
+    [className, disabled, loading, otherProps, radius, width],
   );
   const content = useMemo(() => {
     return (

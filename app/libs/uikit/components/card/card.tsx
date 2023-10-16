@@ -3,7 +3,7 @@ import cn from 'classnames';
 import block from 'bem-cn-lite';
 
 import { Progress } from '../progress';
-import { elevate, getSize } from '../../utils';
+import { elevate, getSize, rounded } from '../../utils';
 
 import { Body } from './parts/body';
 import { Title } from './parts/title';
@@ -24,11 +24,12 @@ export const Card = ({
   width,
   tag = 'div',
   elevation = 2,
+  radius = 'lg',
   ...otherProps
 }: CardProps) => {
   const classes = useMemo(() => {
-    return cn(bCard(), className, elevate(elevation));
-  }, [className, elevation]);
+    return cn(bCard(), className, elevate(elevation), rounded(radius));
+  }, [className, elevation, radius]);
   const style = useMemo(() => {
     return {
       maxWidth: getSize(maxWidth),

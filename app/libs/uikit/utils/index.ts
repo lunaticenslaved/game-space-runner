@@ -1,4 +1,5 @@
 export * from './elevation';
+export * from './rounded';
 
 export const getSize = (size: string | number | undefined) => {
   if (size === undefined) {

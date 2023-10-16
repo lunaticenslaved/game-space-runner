@@ -1,16 +1,19 @@
-import { HTMLProps, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import { DialogInterface } from '../dialog';
-import { Elevation } from '../../utils';
+import { ElevationProp, RadiusProp } from '../../utils';
 
-export type CardProps = HTMLProps<HTMLDivElement> & {
-  tag?: 'div' | 'dialog';
-  loading?: boolean;
-  maxWidth?: string | number;
-  minWidth?: string | number;
-  width?: string | number;
-  elevation?: Elevation;
-};
+export type CardProps = RadiusProp &
+  ElevationProp & {
+    tag?: 'div' | 'dialog';
+    loading?: boolean;
+    maxWidth?: string | number;
+    minWidth?: string | number;
+    width?: string | number;
+    className?: string;
+    children?: ReactNode;
+    onClick?(): void;
+  };
 
 export type CardTitleProps = {
   dialog?: DialogInterface;
