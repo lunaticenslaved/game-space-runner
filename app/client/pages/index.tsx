@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { Route, Outlet } from 'react-router-dom';
 import block from 'bem-cn-lite';
 
-import { ViewPlaceholder } from '@client/shared/components/view-placeholder';
+import { Placeholder } from '@libs/uikit/components/placeholder';
 import { TheNavbar } from '@client/widgets/the-navbar';
 import { PageErrorBoundary } from '@client/widgets/page-error-boundary';
 
@@ -24,7 +24,7 @@ const Layout = (
 
     <main className={bPages('content')}>
       <PageErrorBoundary>
-        <Suspense fallback={<ViewPlaceholder />}>
+        <Suspense fallback={<Placeholder />}>
           <Outlet />
         </Suspense>
       </PageErrorBoundary>

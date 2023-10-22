@@ -1,7 +1,7 @@
-import { Grid } from '@client/shared/components/grid';
+import { Grid } from '@libs/uikit/components/grid';
 import { PlayerList } from '@client/entities/player';
 import { API, useQuery } from '@shared/api';
-import { ViewPlaceholder } from '@client/shared/components/view-placeholder';
+import { Placeholder } from '@libs/uikit/components/placeholder';
 
 import './leader-board.scss';
 
@@ -11,17 +11,17 @@ const LeaderBoardPage = () => {
   const { data } = useQuery('get-players', () => API.players.getPlayers.action());
 
   if (!data) {
-    return <ViewPlaceholder />;
+    return <Placeholder />;
   }
 
   return (
-    <Grid.Container width="full" height="full" className="page-leader-board">
-      <Grid.Row justify="center">
+    <Grid height="full" className="page-leader-board">
+      <Grid.Row justifyContent="center">
         <Grid.Col span={12}>
           <PlayerList players={data.players} />
         </Grid.Col>
       </Grid.Row>
-    </Grid.Container>
+    </Grid>
   );
 };
 
