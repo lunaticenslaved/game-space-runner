@@ -5,7 +5,7 @@ import block from 'bem-cn-lite';
 import { API, useMutation, useQuery } from '@shared/api';
 
 import { Empty, List } from './views';
-import { CommentInput } from './components/comment-input';
+import { CommentInput } from '../input/input';
 
 import './list.scss';
 
