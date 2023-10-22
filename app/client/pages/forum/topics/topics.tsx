@@ -1,5 +1,5 @@
 import { Button } from '@libs/uikit/components/button';
-import { Grid } from '@client/shared/components/grid';
+import { Grid } from '@libs/uikit/components/grid';
 import { useDialog } from '@libs/uikit/components/dialog';
 import { useAppNavigation } from '@client/shared/navigation';
 import { PostFormDialog } from '@client/features/forum';
@@ -24,9 +24,9 @@ export const ForumPage = () => {
         onClose={topicDialog.close}
       />
 
-      <Grid.Container width={'full'} height="full">
-        <Grid.Row grow={1} align="middle" justify="center">
-          <Grid.Col span={18} align="bottom">
+      <Grid height="full">
+        <Grid.Row grow={1} alignContent="center" justifyContent="center">
+          <Grid.Col span={18} alignContent="end">
             <div className={styles.header}>
               <h1>Форум</h1>
               {isAuthenticated && (
@@ -44,7 +44,7 @@ export const ForumPage = () => {
             </Card>
           </Grid.Col>
         </Grid.Row>
-      </Grid.Container>
+      </Grid>
     </div>
   );
 };

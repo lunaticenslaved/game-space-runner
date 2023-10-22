@@ -3,7 +3,7 @@ import block from 'bem-cn-lite';
 
 import { Post } from '@shared/models/post';
 import { API, useQuery } from '@shared/api';
-import { ViewPlaceholder } from '@client/shared/components/view-placeholder';
+import { Placeholder } from '@libs/uikit/components/placeholder';
 import { PostItemProps, PostItem } from '@client/entities/post';
 
 import './list.scss';
@@ -25,7 +25,7 @@ export const PostsList = ({ onPostSelect, view = 'list-item' }: PostsListProps) 
   );
 
   if (!data) {
-    return <ViewPlaceholder />;
+    return <Placeholder />;
   }
 
   return (
