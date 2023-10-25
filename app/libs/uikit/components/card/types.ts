@@ -1,15 +1,14 @@
 import { ReactNode } from 'react';
 
 import { DialogInterface } from '../dialog';
-import { ElevationProp, HeightProps, RoundedProps, WidthProps } from '../../utils';
+import { ElevationProp, RoundedProps, ClassNameProp, StyleProp } from '../../utils';
 
 export type CardProps = RoundedProps &
   ElevationProp &
-  WidthProps &
-  HeightProps & {
+  ClassNameProp &
+  StyleProp & {
     tag?: 'div' | 'dialog';
     loading?: boolean;
-    className?: string;
     children?: ReactNode;
     onClick?(): void;
   };

@@ -60,7 +60,7 @@ export const PostFormDialog = ({ isOpen, onSubmit, onClose }: PostFormDialogProp
   });
 
   return (
-    <Dialog dialog={dialog} width={900} maxWidth={900} minWidth={300}>
+    <Dialog dialog={dialog} contentClass="w-[900px] min-w-[900px] max-w-[900px]">
       <form {...props}>
         <Dialog.Title dialog={dialog}>Новый пост</Dialog.Title>
         <Dialog.Body>

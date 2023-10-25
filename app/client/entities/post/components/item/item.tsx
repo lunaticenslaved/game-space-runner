@@ -1,6 +1,6 @@
 import { PostItemProps } from './types';
-import { PostListItem } from './views/list-item/list-item';
-import { PostCard } from './views/card/card';
+import { PostListItem } from './views/list-item';
+import { PostCard } from './views/card';
 
 export type { PostItemProps };
 

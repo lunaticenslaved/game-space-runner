@@ -1,4 +1,10 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import './tailwind.css';
 @import './variables';
+
 
 * {
   margin: 0;
@@ -9,6 +15,7 @@
   text-rendering: optimizeLegibility;
   scrollbar-width: thin;
   scrollbar-color: $scrollbar-color $scrollbar-track-bg;
+  color: white;
 }
 
 *::-webkit-scrollbar {

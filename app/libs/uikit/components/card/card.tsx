@@ -23,11 +23,15 @@ export const Card = ({
   rounded = 'md',
   ...otherProps
 }: CardProps) => {
-  const { classes, styles } = useStyles({ rounded, ...otherProps }, cn(bCard(), className));
+  const { classes, styles } = useStyles({
+    rounded,
+    className: cn(bCard(), className),
+    ...otherProps,
+  });
 
   return createElement(
     tag,
-    { className: classes, style: styles, ...otherProps },
+    { ...otherProps, className: classes, style: styles },
     <>
       {loading && <Progress view="line" className={bCard('loader')} />}
       {children}
