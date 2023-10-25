@@ -2,9 +2,7 @@ import { ChangeEventHandler, useCallback, useMemo, useState } from 'react';
 
 import { Input } from '@libs/uikit/components/input';
 import { Player } from '@shared/models';
-import { PlayerItem } from '../..';
-
-import styles from './player-list.module.scss';
+import { PlayerItem } from './item';
 
 export type PlayerListProps = {
   players: Player[];
@@ -29,8 +27,8 @@ export const PlayerList = ({ players }: PlayerListProps) => {
   }, [players, search]);
 
   return (
-    <>
-      <div className={styles.searchBar}>
+    <div className="flex flex-col">
+      <div className="grow-0">
         <Input.TextInput
           name="search"
           placeholder="Поиск игрока"
@@ -39,11 +37,11 @@ export const PlayerList = ({ players }: PlayerListProps) => {
         />
       </div>
 
-      <div>
+      <div className="overflow-y-auto grow -mx-4">
         {filteredPlayers.map(player => (
           <PlayerItem key={player.id} player={player} />
         ))}
       </div>
-    </>
+    </div>
   );
 };

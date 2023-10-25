@@ -10,7 +10,6 @@ import { Router as HomeRouter } from './home';
 import { Router as AuthRouter } from './auth';
 import { Router as ForumRouter } from './forum';
 import { Router as GameRouter } from './game';
-import { Router as LeaderBoardRouter } from './leader-board';
 import { Router as ProfileRouter } from './profile';
 import { Router as ErrorRouter } from './error';
 
@@ -35,7 +34,6 @@ const Layout = (
 export const Pages = (
   <Route element={Layout}>
     {HomeRouter}
-    {LeaderBoardRouter}
     {ProfileRouter}
     {ForumRouter}
     {AuthRouter}

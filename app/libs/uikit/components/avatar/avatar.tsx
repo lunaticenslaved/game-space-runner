@@ -10,9 +10,9 @@ import './avatar.scss';
 export type AvatarProps = RoundedProps &
   ClassNameProp &
   StyleProp & {
+    iconClassName?: string;
     link?: string;
     placeholderIcon: ReactNode;
-    size?: number;
   };
 
 const bAvatar = block('avatar');
@@ -21,14 +21,12 @@ export const Avatar = ({
   link,
   placeholderIcon,
   className,
-  style,
-  size = 120,
+  iconClassName,
   ...otherProps
 }: AvatarProps) => {
   const { classes, styles } = useStyles({
     ...otherProps,
     className: cn(bAvatar(), className),
-    style: { ...style, width: `${size}px`, height: `${size}px` },
   });
 
   if (link) {
@@ -41,7 +39,7 @@ export const Avatar = ({
 
   return (
     <div className={classes} style={styles}>
-      <Icon icon={placeholderIcon} size={size} />
+      <Icon icon={placeholderIcon} className={iconClassName} />
     </div>
   );
 };

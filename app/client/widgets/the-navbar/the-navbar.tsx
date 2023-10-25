@@ -21,8 +21,7 @@ const bNavbar = block('widgets-the-navbar');
 
 const links = [
   { title: 'Главная', route: routes.home, icon: <HomeSVG /> },
-  { title: 'Игра', route: routes.game.start, icon: <HomeSVG /> },
-  { title: 'Лидерборд', route: routes.leaderBoard, icon: <LeaderBoardSVG /> },
+  { title: 'Игра', route: routes.game.start, icon: <LeaderBoardSVG /> },
   { title: 'Профиль', route: routes.profile.root, icon: <ProfileSVG /> },
   { title: 'Форум', route: routes.forum.root, icon: <SettingsSVG /> },
 ];

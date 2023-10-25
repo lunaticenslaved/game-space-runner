@@ -8,7 +8,7 @@ import { DialogInterface } from './hooks';
 
 import './dialog.scss';
 
-export type DialogProps = Pick<CardProps, 'maxWidth' | 'minWidth' | 'width' | 'loading'> & {
+export type DialogProps = Pick<CardProps, 'loading'> & {
   contentClass?: string;
   dialog?: DialogInterface;
   children: ReactNode;

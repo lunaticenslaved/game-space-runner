@@ -7,6 +7,8 @@ import { MarginAndPaddingProps, marginAndPadding } from './margin-and-padding';
 import { RoundedProps, rounded } from './rounded';
 import { WidthProps, width, HeightProps, height } from './width-and-height';
 
+import './index.css';
+
 export * from './elevation';
 export * from './rounded';
 export * from './flex';

@@ -1,5 +1,5 @@
 import { Button } from '@libs/uikit/components/button';
-import { Grid } from '@libs/uikit/components/grid';
+import { Text } from '@libs/uikit/components/text';
 import { useDialog } from '@libs/uikit/components/dialog';
 import { useAppNavigation } from '@client/shared/navigation';
 import { PostFormDialog } from '@client/features/forum';
@@ -27,46 +27,34 @@ export const ForumPage = () => {
         onClose={topicDialog.close}
       />
 
-      <Container height="100%" width="100%" display="flex" padding={8}>
-        <Grid.Row alignItems="stretch">
-          <Grid.Col cols={12}>
-            <Container height="100%" width="100%" display="flex" flexDirection="column">
-              <Grid.Row grow={0} alignItems="center" justifyContent="center">
-                <Grid.Col cols={24}>
-                  <Container display="flex" justifyContent="space-between">
-                    <h1>Форум</h1>
-                    {isAuthenticated && (
-                      <Button children="Создать топик" width="auto" onClick={topicDialog.open} />
-                    )}
-                  </Container>
-                </Grid.Col>
-              </Grid.Row>
+      <div className="h-full min-h-full flex flex-row items-stretch p-8">
+        <div className="basis-1/2 h-full flex flex-col p-4">
+          <div className="flex justify-between items-center mb-8">
+            <Text as="h2">Форум</Text>
+            {isAuthenticated && (
+              <Button children="Создать топик" width="auto" onClick={topicDialog.open} />
+            )}
+          </div>
 
-              <Grid.Row grow={1} alignItems="stretch" justifyContent="center">
-                <Grid.Col cols={24}>
-                  <Card minHeight="100%" minWidth="100%" rounded="xxl">
-                    <Card.Body>
-                      <PostsList onPostSelect={appNavigation.forum.toPost} />
-                    </Card.Body>
-                  </Card>
-                </Grid.Col>
-              </Grid.Row>
-            </Container>
-          </Grid.Col>
-          <Grid.Col cols={12}>
-            <Card minHeight="100%" minWidth="100%" rounded="xxl">
-              <Card.Title>Leader board</Card.Title>
-              <Card.Body>
-                {!playersResponse ? (
-                  <Placeholder />
-                ) : (
-                  <PlayerList players={playersResponse.players} />
-                )}
-              </Card.Body>
-            </Card>
-          </Grid.Col>
-        </Grid.Row>
-      </Container>
+          <Card className="rounded-2xl grow">
+            <Card.Body>
+              <PostsList onPostSelect={appNavigation.forum.toPost} />
+            </Card.Body>
+          </Card>
+        </div>
+
+        <div className="basis-1/2 h-full flex flex-col p-4">
+          <Card className="min-h-full rounded-2xl">
+            <Card.Body>
+              {!playersResponse ? (
+                <Placeholder />
+              ) : (
+                <PlayerList players={playersResponse.players} />
+              )}
+            </Card.Body>
+          </Card>
+        </div>
+      </div>
     </Container>
   );
 };

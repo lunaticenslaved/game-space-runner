@@ -45,7 +45,7 @@ export const Button = ({
   const { classes } = useStyles({
     ...otherProps,
     rounded,
-    className: cn('button', className, {
+    className: cn('button', 'h-12', className, {
       'button--disabled': disabled,
       'button--loading': loading,
       'button--full-width': width === 'full',
