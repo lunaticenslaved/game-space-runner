@@ -1,5 +1,3 @@
-import { ReactNode } from 'react';
-
 import {
   FlexParentProps,
   HeightProps,
@@ -8,6 +6,9 @@ import {
   BackgroundProps,
   DisplayProps,
   useStyles,
+  ClassNameProp,
+  StyleProp,
+  ChildrenProp,
 } from '../../utils';
 
 export type ContainerProps = FlexParentProps &
@@ -15,13 +16,13 @@ export type ContainerProps = FlexParentProps &
   BackgroundProps &
   HeightProps &
   DisplayProps &
-  WidthProps & {
-    children?: ReactNode;
-    className?: string;
-  };
+  ClassNameProp &
+  StyleProp &
+  WidthProps &
+  ChildrenProp;
 
-export const Container = ({ children, className, ...otherProps }: ContainerProps) => {
-  const { classes, styles } = useStyles(otherProps, className);
+export const Container = ({ children, ...otherProps }: ContainerProps) => {
+  const { classes, styles } = useStyles(otherProps);
 
   return (
     <div style={styles} className={classes}>

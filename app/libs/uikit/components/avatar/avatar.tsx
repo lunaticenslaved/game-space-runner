@@ -1,18 +1,19 @@
-import { ReactNode, useMemo } from 'react';
+import { ReactNode } from 'react';
 import cn from 'classnames';
 import block from 'bem-cn-lite';
 
-import { RoundedProps, useStyles } from '../../utils';
+import { ClassNameProp, RoundedProps, StyleProp, useStyles } from '../../utils';
 import { Icon } from '../icon';
 
 import './avatar.scss';
 
-export type AvatarProps = RoundedProps & {
-  link?: string;
-  placeholderIcon: ReactNode;
-  size?: number;
-  className?: string;
-};
+export type AvatarProps = RoundedProps &
+  ClassNameProp &
+  StyleProp & {
+    link?: string;
+    placeholderIcon: ReactNode;
+    size?: number;
+  };
 
 const bAvatar = block('avatar');
 
@@ -20,14 +21,15 @@ export const Avatar = ({
   link,
   placeholderIcon,
   className,
+  style,
   size = 120,
   ...otherProps
 }: AvatarProps) => {
-  const { classes, styles } = useStyles(
-    otherProps,
-    cn(bAvatar(), className),
-    useMemo(() => ({ width: `${size}px`, height: `${size}px` }), [size]),
-  );
+  const { classes, styles } = useStyles({
+    ...otherProps,
+    className: cn(bAvatar(), className),
+    style: { ...style, width: `${size}px`, height: `${size}px` },
+  });
 
   if (link) {
     return (
@@ -38,7 +40,7 @@ export const Avatar = ({
   }
 
   return (
-    <div className={classes}>
+    <div className={classes} style={styles}>
       <Icon icon={placeholderIcon} size={size} />
     </div>
   );

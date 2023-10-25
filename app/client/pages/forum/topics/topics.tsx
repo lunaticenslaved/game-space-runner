@@ -46,11 +46,7 @@ export const ForumPage = () => {
                 <Grid.Col cols={24}>
                   <Card minHeight="100%" minWidth="100%" rounded="xxl">
                     <Card.Body>
-                      <Grid.Row>
-                        <Grid.Col cols={12}>
-                          <PostsList onPostSelect={appNavigation.forum.toPost} />
-                        </Grid.Col>
-                      </Grid.Row>
+                      <PostsList onPostSelect={appNavigation.forum.toPost} />
                     </Card.Body>
                   </Card>
                 </Grid.Col>

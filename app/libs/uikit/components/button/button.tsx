@@ -42,16 +42,16 @@ export const Button = ({
   ...otherProps
 }: ButtonProps) => {
   const { theme } = useTheme();
-  const { classes } = useStyles(
-    { ...otherProps, rounded },
-    cn('button', className, {
+  const { classes } = useStyles({
+    ...otherProps,
+    rounded,
+    className: cn('button', className, {
       'button--disabled': disabled,
       'button--loading': loading,
       'button--full-width': width === 'full',
       'button--auto-width': width === 'auto',
     }),
-  );
-  console.log(classes);
+  });
   const props: ButtonProps = useMemo(
     () => ({ ...otherProps, disabled, className: classes }),
     [classes, disabled, otherProps],

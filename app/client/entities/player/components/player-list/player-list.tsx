@@ -1,10 +1,10 @@
-import { Avatar } from '@libs/uikit/components/avatar';
+import { ChangeEventHandler, useCallback, useMemo, useState } from 'react';
+
 import { Input } from '@libs/uikit/components/input';
 import { Player } from '@shared/models';
-import { PlayerIcon } from '@client/entities/player';
+import { PlayerItem } from '../..';
 
 import styles from './player-list.module.scss';
-import { ChangeEventHandler, useCallback, useMemo, useState } from 'react';
 
 export type PlayerListProps = {
   players: Player[];
@@ -38,19 +38,10 @@ export const PlayerList = ({ players }: PlayerListProps) => {
           onChange={updateSearch}
         />
       </div>
-      <div className={styles.playListBody}>
-        {filteredPlayers.map(({ id, user, score }) => (
-          <div key={id} className={styles.playerCard}>
-            <div className={styles.playerInfo}>
-              <Avatar
-                link={user.avatars[0]?.link}
-                size={64}
-                placeholderIcon={<PlayerIcon.Placeholder />}
-              />
-              <div className={styles.playerName}>{user.login}</div>
-            </div>
-            <div className={styles.playerScore}>{score} points</div>
-          </div>
+
+      <div>
+        {filteredPlayers.map(player => (
+          <PlayerItem key={player.id} player={player} />
         ))}
       </div>
     </>

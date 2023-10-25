@@ -15,6 +15,7 @@ export * from './margin-and-padding';
 export * from './color';
 export * from './background';
 export * from './display';
+export * from './types';
 
 export const getSize = (size: string | number | undefined) => {
   if (size === undefined) {
@@ -36,19 +37,17 @@ export type UseStylesProps = BackgroundProps &
   MarginAndPaddingProps &
   RoundedProps &
   WidthProps &
-  HeightProps;
+  HeightProps & {
+    className?: string;
+    style?: CSSProperties;
+  };
 
 export type UseStylesReturn = {
   classes: string;
   styles: CSSProperties;
 };
 
-export type GetStylesProps = UseStylesProps & {
-  classes?: string;
-  styles?: CSSProperties;
-};
-
-export const getStyles = (props: GetStylesProps) => {
+export const getStyles = (props: UseStylesProps): UseStylesReturn => {
   const arr: Array<string | undefined | CSSProperties> = [
     background(props),
     display(props),
@@ -60,7 +59,7 @@ export const getStyles = (props: GetStylesProps) => {
     height(props),
   ];
 
-  return arr.reduce<UseStylesReturn>(
+  const obj = arr.reduce<UseStylesReturn>(
     (acc, item) => {
       if (item && typeof item === 'string') {
         acc.classes += ' ' + item;
@@ -71,20 +70,20 @@ export const getStyles = (props: GetStylesProps) => {
       return acc;
     },
     {
-      classes: props.classes || '',
-      styles: props.styles || {},
+      classes: props.className || '',
+      styles: {},
     },
   );
+
+  return {
+    ...obj,
+    styles: {
+      ...obj.styles,
+      ...props.style,
+    },
+  };
 };
 
-export const useStyles = (props: UseStylesProps, classes?: string, styles?: CSSProperties) => {
-  return useMemo(
-    () =>
-      getStyles({
-        ...props,
-        classes,
-        styles,
-      }),
-    [classes, props, styles],
-  );
+export const useStyles = (props: UseStylesProps) => {
+  return useMemo(() => getStyles(props), [props]);
 };
