@@ -1,12 +1,12 @@
 import { useCallback, useMemo, useState } from 'react';
 
 import { UserComponent } from '@client/entities/user';
-import { Input } from '@libs/uikit/components/input';
 import { routes, useAppNavigation } from '@client/shared/navigation';
 import { useForm, usePasswordField, useTextField } from '@libs/validate-react';
 import { validationRules } from '@libs/validate';
 import { setViewer, useAppDispatch } from '@shared/store';
 import { API, useMutation } from '@shared/api';
+import { TextField } from '@mui/material';
 
 export const SignUpForm = () => {
   const mutation = useMutation('sign-up', API.auth.signUp.action);
@@ -66,9 +66,13 @@ export const SignUpForm = () => {
       appendText="Уже есть аккаунт?"
       appendLinkText="Войти"
       form={form}>
-      <Input.TextInput label="Логин" {...loginField.props} />
-      <Input.TextInput label="Пароль" {...passwordField.props} />
-      <Input.TextInput label="Повторите пароль" {...passwordConfirmField.props} />
+      <TextField label="Логин" {...loginField.props} error={!!loginField.props} />
+      <TextField label="Пароль" {...passwordField.props} error={!!passwordField.props} />
+      <TextField
+        label="Повторите пароль"
+        {...passwordConfirmField.props}
+        error={!!passwordConfirmField.props}
+      />
     </UserComponent.AuthForm>
   );
 };

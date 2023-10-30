@@ -1,4 +1,4 @@
-import { AuthLayout } from '@client/widgets/page-layouts/auth';
+import { AuthLayout } from '@client/widgets/page-layouts';
 import { SignInForm } from '@client/features/auth/sign-in';
 
 export const SignInPage = () => {

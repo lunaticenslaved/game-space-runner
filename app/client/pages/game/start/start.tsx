@@ -4,7 +4,7 @@ import { Level } from '@client/features/game';
 import { useAppNavigation } from '@client/shared/navigation';
 import { useViewer } from '@client/features/auth/get-viewer';
 import { GameLayout } from '@client/widgets/page-layouts';
-import { Input } from '@libs/uikit/components/input';
+import { Autocomplete, TextField } from '@mui/material';
 
 type LevelItem = {
   id: Level;
@@ -39,12 +39,14 @@ export function Start() {
   }, [appNavigation.game, level]);
 
   const updateActive = useCallback(
-    (value?: LevelItem) => {
+    (_?: unknown, value?: LevelItem | null) => {
       const newLevel = value || level;
 
-      setLevel(newLevel);
-      document.body.dataset.level = newLevel.id;
-      sessionStorage.setItem('level', newLevel.id);
+      if (typeof newLevel !== 'string') {
+        setLevel(newLevel);
+        document.body.dataset.level = newLevel.id;
+        sessionStorage.setItem('level', newLevel.id);
+      }
     },
     [level],
   );
@@ -58,14 +60,11 @@ export function Start() {
       header={`Привет, ${viewer.login}`}
       description="Выбери уровень и начни игру"
       content={
-        <Input.Select
-          label="Уровень"
-          name="level"
-          itemKey="id"
-          itemTitle="title"
-          items={levels}
+        <Autocomplete<LevelItem>
+          options={levels}
           value={level}
           onChange={updateActive}
+          renderInput={params => <TextField name="level" {...params} label="Уровень" />}
         />
       }
       buttonText="Начать"

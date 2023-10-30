@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 
-import { Button } from '@libs/uikit/components/button';
-import { Dialog, DialogInterface } from '@libs/uikit/components/dialog';
-import { Input } from '@libs/uikit/components/input';
 import { useFileField, useForm } from '@libs/validate-react';
 import { API, useMutation } from '@shared/api';
+import { DialogInterface } from '@client/shared/hooks';
+import { Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 
 export type AvatarEditorForm = {
   file: File;
@@ -44,21 +44,21 @@ export const AvatarEditor = ({ dialog, onSuccess }: AvatarEditorProps) => {
   });
 
   return (
-    <Dialog dialog={dialog}>
+    <Dialog open={dialog.isOpen}>
       <form {...form.props}>
-        <Dialog.Title dialog={dialog}>Редактировать аватар</Dialog.Title>
-        <Dialog.Body>
-          <Input.File {...fileField.props} label="Новый аватар" />
-        </Dialog.Body>
-        <Dialog.Actions>
-          <Button
+        <DialogTitle>Редактировать аватар</DialogTitle>
+        <DialogContent>
+          <TextField {...fileField.props} error={!!fileField.props} label="Новый аватар" />
+        </DialogContent>
+        <DialogActions>
+          <LoadingButton
             type="submit"
-            width="full"
+            className="w-full"
             loading={form.isSubmitting}
             disabled={form.isSubmitting}>
             Редактировать
-          </Button>
-        </Dialog.Actions>
+          </LoadingButton>
+        </DialogActions>
       </form>
     </Dialog>
   );

@@ -1,6 +1,8 @@
 import { useCallback } from 'react';
 
-import { Button } from '@libs/uikit/components/button';
+import { LoadingButton } from '@mui/lab';
+import { Logout } from '@mui/icons-material';
+
 import { useAppNavigation } from '@client/shared/navigation';
 import { setViewer, useAppDispatch } from '@shared/store';
 import { API, useMutation } from '@shared/api';
@@ -23,8 +25,12 @@ export const LogoutButton = () => {
   }, [appNavigation.home, dispatch, mutation]);
 
   return (
-    <Button onClick={logout} disabled={mutation.isLoading} loading={mutation.isLoading}>
-      Выйти
-    </Button>
+    <LoadingButton
+      variant="text"
+      onClick={logout}
+      disabled={mutation.isLoading}
+      loading={mutation.isLoading}>
+      <Logout />
+    </LoadingButton>
   );
 };

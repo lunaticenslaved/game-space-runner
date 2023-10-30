@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 
 import { Post } from '@shared/models/post';
 import { API, useQuery } from '@shared/api';
-import { Placeholder } from '@libs/uikit/components/placeholder';
+import { Placeholder } from '@client/shared/components/placeholder';
 import { PostItemProps, PostItem } from '@client/entities/post';
 
 import { List } from '@mui/material';

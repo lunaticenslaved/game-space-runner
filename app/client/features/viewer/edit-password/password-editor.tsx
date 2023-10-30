@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 
-import { Button } from '@libs/uikit/components/button';
-import { Dialog, DialogInterface } from '@libs/uikit/components/dialog';
-import { Input } from '@libs/uikit/components/input';
 import { useForm, usePasswordField, useTextField } from '@libs/validate-react';
 import { API, useMutation } from '@shared/api';
+import { DialogInterface } from '@client/shared/hooks';
+import { Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 
 export type PasswordEditorProps = {
   dialog: DialogInterface;
@@ -52,23 +52,27 @@ export const PasswordEditor = ({ dialog, onSuccess }: PasswordEditorProps) => {
   });
 
   return (
-    <Dialog dialog={dialog}>
+    <Dialog open={dialog.isOpen}>
       <form {...form.props}>
-        <Dialog.Title dialog={dialog}>Редактировать пароль</Dialog.Title>
-        <Dialog.Body>
-          <Input.TextInput {...oldPassField.props} label="Старый пароль" />
-          <Input.TextInput {...newPassField.props} label="Новый пароль" />
-          <Input.TextInput {...repeatPassField.props} label="Повторите пароль" />
-        </Dialog.Body>
-        <Dialog.Actions>
-          <Button
+        <DialogTitle>Редактировать пароль</DialogTitle>
+        <DialogContent>
+          <TextField {...oldPassField.props} error={!!oldPassField.props} label="Старый пароль" />
+          <TextField {...newPassField.props} error={!!newPassField.props} label="Новый пароль" />
+          <TextField
+            {...repeatPassField.props}
+            error={!!repeatPassField.props}
+            label="Повторите пароль"
+          />
+        </DialogContent>
+        <DialogActions>
+          <LoadingButton
             type="submit"
-            width="full"
+            className="w-full"
             loading={form.isSubmitting}
             disabled={form.isSubmitting}>
             Редактировать
-          </Button>
-        </Dialog.Actions>
+          </LoadingButton>
+        </DialogActions>
       </form>
     </Dialog>
   );

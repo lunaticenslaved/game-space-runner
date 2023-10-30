@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
 
 import { UserComponent } from '@client/entities/user';
-import { Input } from '@libs/uikit/components/input';
 import { routes, useAppNavigation } from '@client/shared/navigation';
 import { useForm, usePasswordField, useTextField } from '@libs/validate-react';
 import { setViewer, useAppDispatch } from '@shared/store';
 import { API, useMutation } from '@shared/api';
+import { TextField } from '@mui/material';
 
 export const SignInForm = () => {
   const mutation = useMutation('sign-in', API.auth.signIn.action);
@@ -55,8 +55,8 @@ export const SignInForm = () => {
       appendLink={routes.auth.signUp.path}
       appendText="Нет аккаунта?"
       appendLinkText="Зарегистрироваться">
-      <Input.TextInput label="Login" {...loginField.props} />
-      <Input.TextInput label="Password" {...passwordField.props} />
+      <TextField label="Login" {...loginField.props} error={!!loginField.props.error} />
+      <TextField label="Password" {...passwordField.props} error={!!passwordField.props.error} />
     </UserComponent.AuthForm>
   );
 };

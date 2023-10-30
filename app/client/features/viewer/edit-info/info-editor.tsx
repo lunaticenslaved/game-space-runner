@@ -1,12 +1,12 @@
 import { useCallback } from 'react';
 
-import { Button } from '@libs/uikit/components/button';
-import { Input } from '@libs/uikit/components/input';
-import { Dialog, DialogInterface } from '@libs/uikit/components/dialog';
 import { User } from '@shared/models/user';
 import { useTextField, useForm } from '@libs/validate-react';
 import { setViewer, useAppDispatch } from '@shared/store';
 import { API, useMutation } from '@shared/api';
+import { Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import { DialogInterface } from '@client/shared/hooks';
 
 export type InfoEditorFormValue = {
   email: string;
@@ -56,17 +56,21 @@ export const InfoEditor = ({ user, dialog, onSuccess }: InfoEditorProps) => {
   });
 
   return (
-    <Dialog dialog={dialog}>
+    <Dialog open={dialog.isOpen}>
       <form {...props}>
-        <Dialog.Title dialog={dialog}>Редактировать данные</Dialog.Title>
-        <Dialog.Body>
-          <Input.TextInput {...loginField.props} label="Логин" />
-        </Dialog.Body>
-        <Dialog.Actions>
-          <Button type="submit" width="full" loading={isSubmitting} disabled={isSubmitting}>
+        <DialogTitle>Редактировать данные</DialogTitle>
+        <DialogContent>
+          <TextField {...loginField.props} error={!!loginField.props} label="Логин" />
+        </DialogContent>
+        <DialogActions>
+          <LoadingButton
+            className="w-full"
+            type="submit"
+            loading={isSubmitting}
+            disabled={isSubmitting}>
             Редактировать
-          </Button>
-        </Dialog.Actions>
+          </LoadingButton>
+        </DialogActions>
       </form>
     </Dialog>
   );

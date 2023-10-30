@@ -6,7 +6,7 @@ export type ValidationResult = string | null;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface FormFieldState<T = any, THtmlProps = any> {
-  props: THtmlProps;
+  props: THtmlProps & { name: string };
   value: T;
   error?: string | null;
   isValid: () => Promise<boolean>;

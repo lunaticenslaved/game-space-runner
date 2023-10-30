@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 
 import { useViewer } from '@client/features/auth/get-viewer';
 
-import { Account, Loading } from './views';
-import style from './profile.module.scss';
+import { Account } from './views/account';
+import { Loading } from './views/loading';
 
 const ProfilePage = () => {
   document.title = 'Профиль';
@@ -17,7 +17,7 @@ const ProfilePage = () => {
     return <Account user={viewer} />;
   }, [viewer]);
 
-  return <div className={style.page}>{content}</div>;
+  return <div>{content}</div>;
 };
 
 export default ProfilePage;

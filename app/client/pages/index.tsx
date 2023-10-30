@@ -2,7 +2,6 @@ import { Suspense } from 'react';
 import { Route, Outlet } from 'react-router-dom';
 import block from 'bem-cn-lite';
 
-import { Placeholder } from '@libs/uikit/components/placeholder';
 import { TheNavbar } from '@client/widgets/the-navbar';
 import { PageErrorBoundary } from '@client/widgets/page-error-boundary';
 
@@ -14,6 +13,7 @@ import { Router as ProfileRouter } from './profile';
 import { Router as ErrorRouter } from './error';
 
 import './index.scss';
+import { Placeholder } from '@client/shared/components/placeholder';
 
 const bPages = block('pages-index');
 

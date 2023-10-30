@@ -1,3 +1,3 @@
-export * from './auth';
-export * from './error';
-export * from './game';
+export * from './auth-layout';
+export * from './error-layout';
+export * from './game-layout';

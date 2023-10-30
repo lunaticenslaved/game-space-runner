@@ -1,6 +1,8 @@
 import { BrowserRouter } from 'react-router-dom';
 
-import { ThemeContextProvider } from '@libs/uikit/theme';
+import { ThemeProvider } from '@mui/material';
+
+import { theme } from '@client/app/theme';
 
 import { App as AppBase, AppProps } from './app.base';
 
@@ -8,11 +10,11 @@ import '@client/shared/styles/index.scss';
 
 export function App(props: AppProps) {
   return (
-    <ThemeContextProvider>
+    <ThemeProvider theme={theme}>
       <BrowserRouter>
         <AppBase {...props} />
       </BrowserRouter>
-    </ThemeContextProvider>
+    </ThemeProvider>
   );
 }
 

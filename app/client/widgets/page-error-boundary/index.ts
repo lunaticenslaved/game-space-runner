@@ -1,1 +1,1 @@
-export * from './PageErrorBoundary';
+export * from './page-error-boundary';
