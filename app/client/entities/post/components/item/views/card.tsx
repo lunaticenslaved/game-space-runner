@@ -1,10 +1,11 @@
 import { PostItemProps } from '@client/entities/post/components/item/types';
-import { Card } from '@libs/uikit/components/card';
+
+import { Card, CardContent } from '@mui/material';
 
 export function PostCard({ post }: PostItemProps) {
   return (
     <Card>
-      <Card.Body>{post.title}</Card.Body>
+      <CardContent>{post.title}</CardContent>
     </Card>
   );
 }

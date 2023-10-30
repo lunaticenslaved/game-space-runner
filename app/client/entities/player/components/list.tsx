@@ -1,8 +1,17 @@
 import { ChangeEventHandler, useCallback, useMemo, useState } from 'react';
+import {
+  Avatar,
+  Grid,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  TextField,
+} from '@mui/material';
 
-import { Input } from '@libs/uikit/components/input';
 import { Player } from '@shared/models';
-import { PlayerItem } from './item';
+
+import { PlayerIcon } from '..';
 
 export type PlayerListProps = {
   players: Player[];
@@ -27,21 +36,37 @@ export const PlayerList = ({ players }: PlayerListProps) => {
   }, [players, search]);
 
   return (
-    <div className="flex flex-col">
-      <div className="grow-0">
-        <Input.TextInput
+    <Grid container direction="column">
+      <Grid flexGrow={0} className="mb-4">
+        <TextField
+          className="w-full"
           name="search"
           placeholder="Поиск игрока"
           value={search}
           onChange={updateSearch}
         />
-      </div>
+      </Grid>
 
-      <div className="overflow-y-auto grow -mx-4">
-        {filteredPlayers.map(player => (
-          <PlayerItem key={player.id} player={player} />
-        ))}
-      </div>
-    </div>
+      <Grid flexGrow={1}>
+        <List>
+          {filteredPlayers.map(player => {
+            const { user, score } = player;
+
+            return (
+              <ListItem key={player.id} disablePadding>
+                <ListItemAvatar>
+                  <Avatar src={user.avatars[0]?.link}>
+                    <PlayerIcon.Placeholder />
+                  </Avatar>
+                </ListItemAvatar>
+
+                <ListItemText primary={user.login} />
+                <ListItemText className="!grow-0" primary={`${score} points`} />
+              </ListItem>
+            );
+          })}
+        </List>
+      </Grid>
+    </Grid>
   );
 };

@@ -1,5 +1,6 @@
-import { Input } from '@libs/uikit/components/input';
-import { Button } from '@libs/uikit/components/button';
+import { TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+
 import { useForm, useTextField } from '@libs/validate-react';
 
 export interface CommentInputProps {
@@ -24,10 +25,16 @@ export const CommentInput = ({ onSubmit }: CommentInputProps) => {
 
   return (
     <form {...form.props}>
-      <Input.TextArea {...textField.props} label="Текст комментария" rows={5} />
-      <Button type="submit" loading={form.isSubmitting} disabled={form.isSubmitting}>
+      <TextField label="Текст комментария" className="w-full" multiline rows={5} />
+      <LoadingButton
+        type="submit"
+        fullWidth
+        variant="contained"
+        loading={form.isSubmitting}
+        disabled={form.isSubmitting}
+        className="mt-4">
         Отправить
-      </Button>
+      </LoadingButton>
     </form>
   );
 };

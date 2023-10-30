@@ -1,17 +1,11 @@
 import { useCallback } from 'react';
-import cn from 'classnames';
-import block from 'bem-cn-lite';
+import { Grid, Typography } from '@mui/material';
 
 import { API, useMutation, useQuery } from '@shared/api';
 
-import { Empty, List } from './views';
+import { List } from './views/list';
+import { Empty } from './views/empty';
 import { CommentInput } from '../input/input';
-
-import './list.scss';
-
-const bList = block('entities-comment-list');
-const bHeader = block('entities-comment-list__header');
-const bContent = block('entities-comment-list__content');
 
 export interface CommentsListProps {
   postId: string;
@@ -50,19 +44,18 @@ export const CommentsList = ({ postId, className }: CommentsListProps) => {
   const { comments } = data;
 
   return (
-    <section className={cn(bList(), className)}>
-      <div className={bHeader()}>
-        <h4>Комментарии</h4>
-      </div>
+    <Grid container component="section" direction="column" className={className}>
+      <Grid>
+        <Typography variant="h5" gutterBottom>
+          Комментарии
+        </Typography>
+      </Grid>
 
-      {comments.length === 0 && <Empty />}
-      {comments.length > 0 && (
-        <div className={bContent()}>
-          <List comments={comments} />
-        </div>
-      )}
+      <Grid flexGrow={1}>{comments.length === 0 ? <Empty /> : <List comments={comments} />}</Grid>
 
-      <CommentInput onSubmit={createComment} />
-    </section>
+      <Grid className="mt-4">
+        <CommentInput onSubmit={createComment} />
+      </Grid>
+    </Grid>
   );
 };
