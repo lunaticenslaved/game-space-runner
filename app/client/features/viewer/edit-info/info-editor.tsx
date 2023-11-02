@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useId } from 'react';
 
 import { User } from '@shared/models/user';
 import { useTextField, useForm } from '@libs/validate-react';
@@ -55,23 +55,26 @@ export const InfoEditor = ({ user, dialog, onSuccess }: InfoEditorProps) => {
     onSubmit,
   });
 
+  const formId = useId();
+
   return (
     <Dialog open={dialog.isOpen}>
-      <form {...props}>
-        <DialogTitle>Редактировать данные</DialogTitle>
-        <DialogContent>
+      <DialogTitle>Редактировать данные</DialogTitle>
+      <DialogContent>
+        <form {...props} id={formId} className="pt-4">
           <TextField {...loginField.props} error={!!loginField.props} label="Логин" />
-        </DialogContent>
-        <DialogActions>
-          <LoadingButton
-            className="w-full"
-            type="submit"
-            loading={isSubmitting}
-            disabled={isSubmitting}>
-            Редактировать
-          </LoadingButton>
-        </DialogActions>
-      </form>
+        </form>
+      </DialogContent>
+      <DialogActions>
+        <LoadingButton
+          className="w-full"
+          type="submit"
+          form={formId}
+          loading={isSubmitting}
+          disabled={isSubmitting}>
+          Редактировать
+        </LoadingButton>
+      </DialogActions>
     </Dialog>
   );
 };

@@ -1,5 +1,3 @@
-import { useMemo } from 'react';
-
 import { useViewer } from '@client/features/auth/get-viewer';
 
 import { Account } from './views/account';
@@ -9,15 +7,12 @@ const ProfilePage = () => {
   document.title = 'Профиль';
 
   const { viewer } = useViewer();
-  const content = useMemo(() => {
-    if (!viewer) {
-      return <Loading />;
-    }
 
-    return <Account user={viewer} />;
-  }, [viewer]);
+  if (!viewer) {
+    return <Loading />;
+  }
 
-  return <div>{content}</div>;
+  return <Account user={viewer} />;
 };
 
 export default ProfilePage;

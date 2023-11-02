@@ -1,18 +1,22 @@
 import { useMemo } from 'react';
+import cn from 'classnames';
 
 import { User } from '@shared/models/user';
 import { Typography } from '@mui/material';
 
-export type InfoListProps = User;
+export type InfoListProps = {
+  className?: string;
+  user: User;
+};
 
-export const InfoList = ({ login }: InfoListProps) => {
-  const items = useMemo(() => [{ title: 'Логин', value: login }], [login]);
+export const InfoList = ({ className }: InfoListProps) => {
+  const items = useMemo(() => [], []);
 
   return (
-    <ul className="list-none">
+    <ul className={cn('list-none', className)}>
       {items.map(({ title, value }) => (
         <li key={title} className="flex justify-between">
-          <Typography variant="body1" className="bold">
+          <Typography variant="body1" className="font-bold">
             {title}
           </Typography>
           <Typography variant="body1" align="right">

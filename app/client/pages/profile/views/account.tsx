@@ -5,7 +5,7 @@ import { User } from '@shared/models/user';
 
 import { useDialog } from '@client/shared/hooks';
 import { InfoEditor } from '@client/features/viewer/edit-info';
-import { Button, Typography } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 
 export interface AccountProps {
   user: User;
@@ -17,7 +17,7 @@ export const Account = ({ user }: AccountProps) => {
   const editAvatarDialog = useDialog();
 
   return (
-    <div>
+    <>
       {editUserDialog.isOpen && (
         <InfoEditor user={user} dialog={editUserDialog} onSuccess={editUserDialog.close} />
       )}
@@ -30,26 +30,31 @@ export const Account = ({ user }: AccountProps) => {
         <AvatarEditor dialog={editAvatarDialog} onSuccess={editAvatarDialog.close} />
       )}
 
-      <div>
-        <UserComponent.Avatar src={user.avatars[0]?.link} />
-        <Typography variant="h4" component="h4">
+      <Grid
+        container
+        alignItems="center"
+        justifyContent="center"
+        direction="column"
+        className="h-full w-full">
+        <UserComponent.Avatar className="h-64 w-64" src={user.avatars[0]?.link} alt={user.login} />
+        <Typography variant="h4" component="h4" className="mt-8">
           {user.login}
         </Typography>
 
-        <UserComponent.InfoList {...user} />
+        <UserComponent.InfoList user={user} className="mt-12 w-96" />
 
-        <div>
-          <Button className="w-full" onClick={editUserDialog.open}>
+        <div className="mt-12">
+          <Button className="w-full mt-4" variant="contained" onClick={editUserDialog.open}>
             Изменить данные
           </Button>
-          <Button className="w-full" onClick={editPasswordDialog.open}>
+          <Button className="w-full mt-4" variant="contained" onClick={editPasswordDialog.open}>
             Изменить пароль
           </Button>
-          <Button className="w-full" onClick={editAvatarDialog.open}>
+          <Button className="w-full mt-4" variant="contained" onClick={editAvatarDialog.open}>
             Изменить аватар
           </Button>
         </div>
-      </div>
-    </div>
+      </Grid>
+    </>
   );
 };
